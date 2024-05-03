@@ -141,7 +141,7 @@ $mysqli->close();
    <?php include 'Navbar.php' ?>
     <?php include 'Footer.php' ?>
     <div class="restaurant-info">
-        <div class="restaurant-name">Name of the restaurant</div>
+        <div class="restaurant-name">Name of the Restaurant</div>
         <div class="rating">Rating: 4.5 / 5</div>
         <div class="delivery-minimum">Minimum order amount: 10€</div>
         <div class="waiting-time">Delivery time: 30 Minuten</div>
