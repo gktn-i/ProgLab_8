@@ -29,7 +29,11 @@ $menuItems = [
     ['sku' => 'PZ001', 'name' => 'Margherita Pizza'],
     ['sku' => 'PZ002', 'name' => 'Gericht 2'],
     ['sku' => 'PZ003', 'name' => 'Gericht 3'],
-    ['sku' => 'PZ004', 'name' => 'Gericht 4']
+    ['sku' => 'PZ004', 'name' => 'Gericht 4'],
+    ['sku' => 'PZ005', 'name' => 'Gericht 5'],
+    ['sku' => 'PZ006', 'name' => 'Gericht 6'],
+    ['sku' => 'PZ007', 'name' => 'Gericht 7'],
+    ['sku' => 'PZ008', 'name' => 'Gericht 8']
 ];
 
 $menuData = [];
