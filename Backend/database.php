@@ -1,4 +1,8 @@
 <?php
+# Datenbank Name login_db
+# folgende CSV Dateien sind in der DB:
+# customers, products, stores, user
+# user für Login, und registrieren mit folgender Struktur id, name, email, password_hash
 
 $host = "localhost";
 $dbname = "login_db";
