@@ -2,23 +2,32 @@
 session_start();
 $user = [];
 $email = [];
+$password_hash = [];
 
 if (isset($_SESSION["user_id"])) {
     $mysqli = require __DIR__ . "/Backend/database.php";
 
-
+    // Benutzerinformationen abrufen
     $user_sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
     $user_result = $mysqli->query($user_sql);
     if ($user_result && $user_result->num_rows > 0) {
         $user = $user_result->fetch_assoc();
     }
 
-
+    // E-Mail-Adresse abrufen
     $email_sql = "SELECT email FROM user WHERE id = {$_SESSION["user_id"]}";
     $email_result = $mysqli->query($email_sql);
     if ($email_result && $email_result->num_rows > 0) {
         $email_row = $email_result->fetch_assoc();
         $email = $email_row["email"];
+    }
+
+    // Passwort abrufen
+    $password_hash_sql = "SELECT password_hash FROM user WHERE id = {$_SESSION["user_id"]}";
+    $password_hash_result = $mysqli->query($password_hash_sql);
+    if ($password_hash_result && $password_hash_result->num_rows > 0) {
+        $password_hash_row = $password_hash_result->fetch_assoc();
+        $password_hash = $password_hash_row["password_hash"];
     }
 }
 
@@ -139,6 +148,12 @@ if (isset($_SESSION["user_id"])) {
                                 <input type="email" class="form-control" id="email"
                                     value="<?php echo isset($_SESSION["user_id"]) ? htmlspecialchars($email) : ''; ?>"
                                     readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                    value="<?php echo isset($_SESSION["user_id"]) ? htmlspecialchars($password_hash) : ''; ?>"
+                                    disabled>
                             </div>
                             <div class="mb-3">
                                 <label for="tel" class="form-label">Phone number</label>
