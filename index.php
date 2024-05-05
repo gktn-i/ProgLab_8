@@ -112,7 +112,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 1</h5>
+                                        <h5 class="card-title">Restaurant 1</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 2</h5>
+                                        <h5 class="card-title">Restaurant 2</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 3</h5>
+                                        <h5 class="card-title">Restaurant 3</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 4</h5>
+                                        <h5 class="card-title">Restaurant 4</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 5</h5>
+                                        <h5 class="card-title">Restaurant 5</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@ session_start();
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Resturant 6</h5>
+                                        <h5 class="card-title">Restaurant 6</h5>
                                         <p class="card-text">Kleine Beschreibung</p>
                                     </div>
                                 </div>

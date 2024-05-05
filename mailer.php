@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ ."/vendor/autoload.php";
+require __DIR__ . "/vendor/autoload.php";
 
 $mail = new PHPMailer(true);
 
@@ -12,12 +12,12 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->SMTPAuth = true;
 
-$mail -> Host = "smtp.gmail.com";
-$mail-> SMTPSecure = PHPMailer:: ENCRYPTION_STARTTLS;
-$mail-> Port = 587;
-$mail -> Username = "ssinesaan@gmail.com";
+$mail->Host = "smtp.gmail.com";
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port = 587;
+$mail->Username = "ssinesaan@gmail.com";
 $mail->Password = "ntyzcraapesfkusc";
-
-$mail-> isHTML(true);
+/* $mail->setFrom("noreply@food-Order.com"); */
+$mail->isHTML(true);
 
 return $mail;
