@@ -14,6 +14,7 @@
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
+            
 
 
         }

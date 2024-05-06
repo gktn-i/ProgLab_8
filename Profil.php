@@ -60,7 +60,9 @@ if (isset($_SESSION["user_id"])) {
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 10px;
-            height: 420px
+            height: 420px;
+            box-shadow: 8px 13px 40px rgba(71, 71, 71, 0.2);
+
         }
 
         .sidebar-header {
