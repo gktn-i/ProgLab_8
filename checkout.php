@@ -127,7 +127,7 @@
         </form>
     </main>
 
-    <?php include 'Footer.php'; ?>
+    
 </body>
 
 </html>
