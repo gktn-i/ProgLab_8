@@ -96,7 +96,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Statics</h5>
-                        <button class="btn-close" id="close-btn"><i class="fas fa-times"></i></button>
+                        <a href="index.php" class="btn-close"><i class="fas fa-times"></i></a>
                     </div>
                     <div class="card-body">
                         <div class="row">
