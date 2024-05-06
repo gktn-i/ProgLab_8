@@ -22,7 +22,7 @@
  
     </style>
     <footer class="footer">
-        <div class="container">
+        <div class="containerFooter">
             <p>Group 8</p>
         </div>
     </footer>

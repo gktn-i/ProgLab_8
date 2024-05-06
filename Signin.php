@@ -6,7 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $mysqli = require __DIR__ . "/Backend/database.php";
 
-    $sql = sprintf("SELECT * FROM user 
+    $sql = sprintf(
+        "SELECT * FROM user 
                      WHERE email = '%s'",
         $mysqli->real_escape_string($_POST["email"])
     );
@@ -14,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = $mysqli->query($sql);
     $user = $result->fetch_assoc();
 
-    if ($user) { 
-        if (password_verify($_POST["password"], $user["password_hash"])) { 
+    if ($user) {
+        if (password_verify($_POST["password"], $user["password_hash"])) {
             session_start();
 
             $_SESSION["user_id"] = $user["id"];
@@ -43,6 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             height: 100vh;
             margin-top: 20px;
+            align-items: center;
+
 
         }
 
@@ -55,9 +58,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-top: 50px;
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+
 
         }
 
+        .container2 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+
+            align-items: center;
+        }
 
         .form-group {
             margin-bottom: 10px;
@@ -94,9 +106,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             transition: all 0.3s ease;
         }
 
-        .btn-login:hover{
+        .btn-login:hover {
             background-color: white;
             color: darkgreen;
+            border-radius: 5px;
             border: 2px solid darkgreen;
 
         }
@@ -106,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .signin {
-            background-color: darkgrey;
+            background-color: #ee8f00;
             color: white;
             border: none;
             border-radius: 5px;
@@ -114,29 +127,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             cursor: pointer;
             width: 20%;
             margin-top: 5px;
-            margin-left: 750px;
             text-align: center;
             font-weight: bold;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition: all 0.3s ease;
+            font-size: large;
+        }
+
+        .signin:hover {
+            transform: scale(1.05);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
     </style>
 </head>
 
 <body>
     <?php include 'Navbar.php' ?>
-    <?php include 'Footer.php' ?>
 
-    <?php if ($is_invalid): ?>
+
+    <?php if ($is_invalid) : ?>
         <em> Invalid Login</em>
-     <?php endif; ?>
+    <?php endif; ?>
 
     <form method="post">
-    
+
         <div class="container">
             <div class="form-group">
-               
+
                 <label for="exampleFormControlInput1">Email adress</label>
-                <input type="email" id="email" name="email" placeholder="name@example.com"
-                        value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
+                <input type="email" id="email" name="email" placeholder="name@example.com" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
@@ -148,9 +167,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <a href="forgot_password.php">Forgot password?</a>
         </div>
     </form>
-    <a href="createaccount.php" class="text-decoration-none text-dark1">
-        <button class="signin">CREATE Account</button>
-    </a>
+
+    <div class="container2">
+        <a href="createaccount.php" class="text-decoration-none text-dark1">
+            <button class="signin">CREATE Account</button>
+        </a>
+    </div>
+
 </body>
+<?php include 'Footer.php' ?>
 
 </html>
