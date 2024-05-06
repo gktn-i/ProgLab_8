@@ -34,9 +34,8 @@
 
         .sidebar-menu {
             list-style-type: none;
-            padding: 0;
+            padding: 20px;
         }
-
         .sidebar-menu li {
             margin-bottom: 10px;
         }
@@ -46,6 +45,7 @@
             align-items: center;
             color: #333;
             text-decoration: none;
+            
         }
 
         .sidebar-menu li a:hover {

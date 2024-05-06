@@ -45,6 +45,7 @@ if (isset($_SESSION["user_id"])) {
         border-radius: 10px;
         padding: 10px;
         height: 420px
+        
     }
 
     .sidebar-header {
@@ -53,9 +54,9 @@ if (isset($_SESSION["user_id"])) {
     }
 
     .sidebar-menu {
-        list-style-type: none;
-        padding: 0;
-    }
+            list-style-type: none;
+            padding: 20px;
+        }
 
     .sidebar-menu li {
         margin-bottom: 10px;

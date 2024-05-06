@@ -72,7 +72,7 @@ if (isset($_SESSION["user_id"])) {
 
         .sidebar-menu {
             list-style-type: none;
-            padding: 0;
+            padding: 20px;
         }
 
         .sidebar-menu li {
