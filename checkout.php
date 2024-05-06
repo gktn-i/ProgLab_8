@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,8 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
         }
 
@@ -64,8 +66,10 @@
         }
     </style>
 </head>
+
 <body>
     <?php include 'Navbar.php'; ?>
+    <?php include 'Footer.php'; ?>
 
     <main>
         <h1>Checkout</h1>
@@ -123,6 +127,7 @@
         </form>
     </main>
 
-    <?php include 'Footer.php'; ?> 
+    <?php include 'Footer.php'; ?>
 </body>
+
 </html>
