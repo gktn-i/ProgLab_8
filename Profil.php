@@ -122,7 +122,7 @@ if (isset($_SESSION["user_id"])) {
     <div class="container">
     <aside class="sidebar">
                 <div class="sidebar-header">
-                    <h3>Menu</h3>
+                    <h4>Menu</h4>
                 </div>
                 <ul class="sidebar-menu">
                 <li><a href="Profil.php?page=Profil" id="profil-tab">Profil<span class="Profil"><i class="fas fa-arrow-right"></i></span></a></li>
