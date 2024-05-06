@@ -76,7 +76,7 @@
 
         <section>
             <h2>Delivery Address</h2>
-            <form action="process_checkout.php" method="post">
+            <form action="process_checkout.php" method="post"> <!-- weiter -->
                 <div class="form-group">
                     <label for="street_name">Street Name:</label>
                     <input type="text" id="street_name" name="street_name" required>

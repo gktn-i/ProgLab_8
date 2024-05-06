@@ -105,8 +105,8 @@
             <div class="d-flex align-items-center">
                 <?php if (isset($_SESSION["user_id"])): ?>
 
-                    <a class="navbar-sign" href="Backend/logout.php">
-                    <i class='bx bx-log-in' ></i>
+                    <a class="navbar-icon" href="Backend/logout.php">
+                    <i class='bx bx-log-out' style='font-size: 50px;'></i>
                     </a>
                 <?php else: ?>
 
@@ -114,11 +114,11 @@
                     <i class='bx bx-log-in' ></i>
                     </a>
                 <?php endif; ?>
-                <a class="navbar-icon" href="Order.php?page=Warenkorb">
+                <a class="navbar-icon" href="Order.php?page=Warenkorb" style="margin-left : 10px ;">
                 <i class='bx bx-cart' ></i>
                     <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
-                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px;"><i class='bx bxs-user'></i>
+                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i class='bx bxs-user'></i>
                    
                     
                     
