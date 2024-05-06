@@ -27,6 +27,12 @@ session_start();
             margin-left: px;
             padding-top: 30px;
         }
+
+       /*
+        .mb-3:hover{
+            transform: scale(1.05);     #bei bedarf von hover effect
+        }
+        */
     </style>
 </head>
 
