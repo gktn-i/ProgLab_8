@@ -18,10 +18,15 @@ if (isset($_SESSION["user_id"])) {
         $iban = isset($_POST["iban"]) ? $_POST["iban"] : '';
         $securityCode = isset($_POST["security_code"]) ? $_POST["security_code"] : '';
 
-
         $update_sql = "UPDATE user SET iban = '{$iban}', SecurityCode = '{$securityCode}' WHERE id = {$_SESSION["user_id"]}";
         $update_result = $mysqli->query($update_sql);
 
+
+        $user_sql = "SELECT * FROM user WHERE id = {$_SESSION["user_id"]}";
+        $user_result = $mysqli->query($user_sql);
+        if ($user_result && $user_result->num_rows > 0) {
+            $user = $user_result->fetch_assoc();
+        }
     }
 }
 ?>
