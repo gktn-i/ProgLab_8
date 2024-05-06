@@ -60,6 +60,7 @@
             margin-right: 20px; 
             margin-top: 5px; 
             text-decoration: none;
+            fon
         }
     </style>
 </head>
@@ -93,7 +94,7 @@
                 <?php endif; ?>
                 <a class="navbar" href="Order.php?page=Warenkorb">
                     <img src="Frontend/img/cart.svg" alt="" class="white-img">
-                    <span class="badge bg-white text-dark">1</span>
+                    <span class="badge bg-white text-dark">2</span>
                 </a>
                 <a class="navbar-brand" href="Profil.php?page=Log In " style="margin-top: 5px;">
                     <img src="Frontend/img/profil.svg" alt="" class="white-img">
