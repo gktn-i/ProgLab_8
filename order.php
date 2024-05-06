@@ -119,9 +119,6 @@ session_start();
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
-
-   
-
     <div class="container">
         <h1>Orders</h1>
 
