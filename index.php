@@ -28,11 +28,11 @@ session_start();
             padding-top: 30px;
         }
 
-       /*
-        .mb-3:hover{
-            transform: scale(1.05);     #bei bedarf von hover effect
+       
+        .mb-4:hover{
+            transform: scale(1.05);     
         }
-        */
+        
     </style>
 </head>
 
@@ -112,7 +112,7 @@ session_start();
             <!-- Main Content -->
             <section class="col-md-9 custom-main-content">
                 <div class="white-bg">
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -127,7 +127,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -142,7 +142,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -157,7 +157,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -172,7 +172,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
@@ -187,7 +187,7 @@ session_start();
                             </div>
                         </a>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-4">
                         <a href="restaurant1.php" class="text-decoration-none text-dark">
                             <div class="row g-0">
                                 <div class="col-md-4">
