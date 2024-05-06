@@ -7,6 +7,7 @@
     <title>Food Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         .navbar {
             background-color: #3C5131;
@@ -70,6 +71,18 @@
             
         }
 
+        .navbar-icon {
+            font-size: 50px;
+            color: white;
+            transition: all 0.3s ease;
+            margin:12px;
+        }
+
+        .navbar-icon:hover{
+            color: hsl(140, 100%, 20%);
+            transition: opacity 0.3s;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+        }
         
     </style>
 </head>
@@ -93,20 +106,22 @@
                 <?php if (isset($_SESSION["user_id"])): ?>
 
                     <a class="navbar-sign" href="Backend/logout.php">
-                        <img src="Frontend/img/login.svg" alt="" class="Sign-img">
+                    <i class='bx bx-log-in' ></i>
                     </a>
                 <?php else: ?>
 
-                    <a class="navbar-sign" href="Signin.php?page=Anmelden">
-                        <img src="Frontend/img/einloggen.svg" alt="" class="Sign-img">
+                    <a class="navbar-icon" href="Signin.php?page=Anmelden">
+                    <i class='bx bx-log-in' ></i>
                     </a>
                 <?php endif; ?>
-                <a class="navbar" href="Order.php?page=Warenkorb">
-                    <img src="Frontend/img/cart.svg" alt="" class="white-img">
-                    <span class="badge bg-white text-dark">2</span>
+                <a class="navbar-icon" href="Order.php?page=Warenkorb">
+                <i class='bx bx-cart' ></i>
+                    <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
-                <a class="navbar-brand" href="Profil.php?page=Log In " style="margin-top: 5px;">
-                    <img src="Frontend/img/profil.svg" alt="" class="white-img">
+                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 5px;"><i class='bx bxs-user'></i>
+                   
+                    
+                    
                 </a>
             </div>
         </div>

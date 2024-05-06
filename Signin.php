@@ -91,6 +91,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-weight: bold;
             text-align: center;
             font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover{
+            background-color: white;
+            color: darkgreen;
+            border: 2px solid darkgreen;
+
         }
 
         .btn-close {
