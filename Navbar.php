@@ -10,6 +10,12 @@
     <style>
         .navbar {
             background-color: #3C5131;
+            box-shadow: 10px 13px 40px rgba(71, 71, 71, 0.658);
+            border-radius: 5px;
+            margin: 20px;
+            backdrop-filter: blur(200px);
+
+
         }
 
         .navbar-dark .navbar-nav .nav-link {
@@ -62,6 +68,8 @@
             text-decoration: none;
             fon
         }
+
+        
     </style>
 </head>
 

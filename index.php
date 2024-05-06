@@ -17,12 +17,14 @@ session_start();
 
     <style>
         .custom-sidebar {
-            margin-left: -130px;
+            margin-left: 0px;
             padding-top: 40px;
+           
+
         }
 
         .custom-main-content {
-            margin-left: 130px;
+            margin-left: px;
             padding-top: 30px;
         }
     </style>
