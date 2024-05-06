@@ -22,7 +22,6 @@ if (isset($_SESSION["user_id"])) {
         $update_sql = "UPDATE user SET iban = '{$iban}', SecurityCode = '{$securityCode}' WHERE id = {$_SESSION["user_id"]}";
         $update_result = $mysqli->query($update_sql);
 
-
     }
 }
 ?>
