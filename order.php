@@ -157,7 +157,7 @@ session_start();
 
 
 
-        <a href="checkout.php" class="btn-buy">Buy</a>
+        <a href="checkout.php" class="btn-buy">Checkout</a>
     </div>
 </body>
 
