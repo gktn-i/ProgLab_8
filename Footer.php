@@ -9,23 +9,21 @@
 
 <body>
     <style>
-        .footer {
-         
-            background-color: #3C5131;
-            padding: 20px 0;
-            text-align: center;
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-            color: white;
-            height: 10px;
-
-        }
+    .footer {
+  text-align: center;
+  width: 100%;
+  color: darkgreen;
+  padding: 10px;
+  bottom: 0;
+  position: absolute;
+  font-size: large;
+  
+}
  
     </style>
     <footer class="footer">
         <div class="container">
-            <p> </p>
+            <p>Group 8</p>
         </div>
     </footer>
 </body>
