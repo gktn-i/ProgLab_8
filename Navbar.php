@@ -50,6 +50,17 @@
         .btn.btn-outline-primary.white-button {
             background-color: #3C5131;
         }
+
+        .badge {
+            border-radius: 8px; 
+            padding: 8px 12px; 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            color: green; 
+            margin-right: 20px; 
+            margin-top: 5px; 
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -82,6 +93,7 @@
                 <?php endif; ?>
                 <a class="navbar" href="Order.php?page=Warenkorb">
                     <img src="Frontend/img/cart.svg" alt="" class="white-img">
+                    <span class="badge bg-white text-dark">1</span>
                 </a>
                 <a class="navbar-brand" href="Profil.php?page=Log In " style="margin-top: 5px;">
                     <img src="Frontend/img/profil.svg" alt="" class="white-img">
