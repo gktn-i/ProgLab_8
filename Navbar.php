@@ -118,7 +118,7 @@
                 <i class='bx bx-cart' ></i>
                     <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
-                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 1px;"><i class='bx bxs-user'></i>
+                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i class='bx bxs-user'></i>
                    
                     
                     
