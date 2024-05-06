@@ -13,7 +13,7 @@ function createOrder($mysqli){
         return;
     }
 
-    
+    //Zurzeit noch hard code bsp pizza_id
     $user_id = $_SESSION['user_id'];
     $restaurant_id = isset($_POST['restaurant_id']) ? intval($_POST['restaurant_id']) : 0;
     $pizza_id = isset($_POST['pizza_id']) ? intval($_POST['pizza_id']) : 0;
