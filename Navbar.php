@@ -67,7 +67,7 @@
             margin-right: 20px; 
             margin-top: 5px; 
             text-decoration: none;
-            fon
+            
         }
 
         
