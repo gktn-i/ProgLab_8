@@ -55,8 +55,8 @@
             border-radius: 8px; 
             padding: 8px 12px; 
             font-weight: bold; 
-            font-size: 1.2rem; 
-            color: green; 
+            font-size: 24px; 
+            color: #3C5131; 
             margin-right: 20px; 
             margin-top: 5px; 
             text-decoration: none;
