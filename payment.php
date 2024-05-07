@@ -179,12 +179,12 @@ if (isset($_SESSION["user_id"])) {
                                             readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="iban" class="form-label">IBAN</label>
+                                        <label for="iban" class="form-label">Card Number</label>
                                         <input type="text" class="form-control" id="iban" name="iban"
                                             value="<?php echo isset($user["iban"]) ? htmlspecialchars($user["iban"]) : ''; ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="securityCode" class="form-label">Securitycode</label>
+                                        <label for="securityCode" class="form-label">CVV</label>
                                         <input type="text" class="form-control" id="securityCode" name="security_code"
                                             value="<?php echo isset($user["SecurityCode"]) ? htmlspecialchars($user["SecurityCode"]) : ''; ?>">
                                     </div>

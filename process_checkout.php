@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $card_number = $_POST["card_number"];
         $expiration_date = $_POST["expiration_date"];
         $cvv = $_POST["cvv"];
-        $user_id = $_SESSION["user_id"]; // Benutzer-ID aus der Session erhalten
+        $user_id = $_SESSION["user_id"];
 
         $stmt = $mysqli->prepare("INSERT INTO payments (user_id, card_number, expiration_date, cvv) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isss", $user_id, $card_number, $expiration_date, $cvv);
