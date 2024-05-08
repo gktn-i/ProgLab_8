@@ -114,7 +114,7 @@
                     <i class='bx bx-log-in' ></i>
                     </a>
                 <?php endif; ?>
-                <a class="navbar-icon" href="Order.php?page=Warenkorb" style="margin-left : 10px ;">
+                <a class="navbar-icon" href="index.php?page=Warenkorb" style="margin-left : 10px ;">
                 <i class='bx bx-cart' ></i>
                     <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
