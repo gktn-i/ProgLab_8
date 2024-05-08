@@ -206,7 +206,7 @@ $mysqli->close();
 
         <div class="right-section">
             <h2>Order Summary</h2>
-            <!-- Hier kannst du die Zusammenfassung der Bestellung anzeigen -->
+            <!-- Bestellung anzeigen -->
         </div>
     </div>
 </body>
