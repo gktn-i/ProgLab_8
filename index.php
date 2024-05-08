@@ -55,8 +55,26 @@ session_start();
             margin-bottom: 5px;
         }
 
-        .form-group textarea {
-            height: 100px;
+   
+        #filter_options {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            font-size: 16px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#000" fill-rule="evenodd" d="M10 12L3 6h14l-7 6z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 12px) center;
+            background-size: 16px;
+        }
+
+     
+        #filter_options:hover {
+            border-color: #999;
         }
     </style>
 </head>
@@ -73,7 +91,7 @@ session_start();
 
 
             <div class="form-group">
-                <label for="filter_options">Filter Options:</label>
+                <label for="filter_options">Select Time Range</label>
                 <select id="filter_options" name="filter_options">
                     <option value="all">ALL</option>
                     <option value="week">Week</option>
