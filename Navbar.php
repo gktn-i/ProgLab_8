@@ -97,10 +97,7 @@
                     <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 80px; width: 80px;">
                 </a>
             </b>
-            <form class="search-bar d-flex">
-                <input class="form-control me-2" type="search" placeholder="Suchen" aria-label="Search">
-                <button class="btn btn-outline-primary white-button" type="submit">Suchen</button>
-            </form>
+          
 
             <div class="d-flex align-items-center">
                 <?php if (isset($_SESSION["user_id"])): ?>

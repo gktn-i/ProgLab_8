@@ -23,7 +23,7 @@
     </style>
     <footer class="footer">
         <div class="containerFooter">
-            <p>Group 8</p>
+           <!--  <p>Group 8</p> -->
         </div>
     </footer>
 </body>

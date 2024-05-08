@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -9,165 +8,110 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza8</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-
-
-
+    <title>Dashboard</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0
+            padding: 0;
+            background-color: #f5f5f5;
         }
-
-        .custom-sidebar {
-            margin-left: 0px;
-            padding-top: 40px;
-            border: 2px solid darkgreen;
-            border-radius: 5px;
-
-
-        }
-
 
         .container {
+            display: flex;
             max-width: 1200px;
-            margin: 0;
+            margin: 20px auto;
+        }
+
+        .left-section {
+            flex-basis: 30%;
             padding: 20px;
-            padding-top: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
         }
 
-        .custom-main-content {
-            margin-left: px;
-            padding-top: 30px;
+        .right-section {
+            flex-basis: 70%;
+            height: 700px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .mb-4 {
-            transition: transform 0.3s ease;
+        h1,
+        h2 {
+            text-align: center;
         }
 
-        .mb-4:hover {
-            transform: scale(1.02);
-            box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group textarea {
+            height: 100px;
         }
     </style>
 </head>
 
-
-
 <body>
-    <!-- <?php if (isset($_SESSION["user_id"])): ?>
-   
-    <p><a href="Backend\logout.php">Log out</a></p>
+    <?php include 'Navbar.php'; ?>
+    <?php include 'Footer.php'; ?>
 
-    <?php else: ?>
-        <p><a href = "Signin.php">Log in </a> or <a href="createaccount.php">sign up</a></p>
-
-
-        <?php endif;
-    ?>  -->
-
-    <?php include 'Navbar.php' ?>
-    <?php include 'Footer.php' ?>
-
-    <main class="container">
-        <div class="row mt-3">
-            <!-- Sidebar -->
-            <aside class="col-md-3 custom-sidebar">
-                <div class="mb-3 custom-card">
-                    <h5>Now open</h5>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="openstatus" Default>
-                        <label class="form-check-label" for="openstatus">now open</label>
-                    </div>
-                </div>
-
-                <div class="mb-3 custom-card">
-                    <h5>Free delivery</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="freeDelivery">
-                        <label class="form-check-label" for="freeDelivery">Free delivery</label>
-                    </div>
-                </div>
-                <div class="mb-3 custom-card">
-                    <div class="mb-3">
-                        <h5>Minimum order</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="displayyall">
-                            <label class="form-check-label" for="displayall">View all</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="underten">
-                            <label class="form-check-label" for="underten">Under 10€</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="undertwenty">
-                            <label class="form-check-label" for="undertwenty">Under 20€</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3 custom-card">
-                    <h5>Rating</h5>
-                    <div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="displayyall">
-                            <label class="form-check-label" for="displayall">View all</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="underten">
-                            <label class="form-check-label" for="underten">Over 4 stars</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="undertwenty">
-                            <label class="form-check-label" for="undertwenty">over 3 stars</label>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+    <div class="container">
+        <div class="left-section">
+            <?php if (isset($error_message)): ?>
+                <p style="color: red;"><?php echo $error_message; ?></p>
+            <?php endif; ?>
 
 
-            <!-- Main Content -->
-            <section class="col-md-9 custom-main-content">
-                <div class="white-bg">
-                    <div class="card mb-4">
-                        <a href="restaurant1.php" class="text-decoration-none text-dark">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Stats 1</h5>
-                                        <p class="card-text">Kleine Beschreibung</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="card mb-4">
-                        <a href="restaurant1.php" class="text-decoration-none text-dark">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Stats 2</h5>
-                                        <p class="card-text">Kleine Beschreibung</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+            <div class="form-group">
+                <label for="filter_options">Filter Options:</label>
+                <select id="filter_options" name="filter_options">
+                    <option value="all">ALL</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
+            </div>
 
-                </div>
-            </section>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
+                        checked>
+                    <label class="form-check-label" for="firstRadio">Best selling products</label>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
+                    <label class="form-check-label" for="secondRadio">Turnover</label>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
+                    <label class="form-check-label" for="thirdRadio">Customer Count</label>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
+                    <label class="form-check-label" for="fourthRadio">Product Count</label>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
+                    <label class="form-check-label" for="fifthRadio">Order Count</label>
+                </li>
+            </ul>
         </div>
-    </main>
 
-
+        <div class="right-section">
+            <h1>Stats</h1>
+            <!-- Placeholder für Statistik -->
+        </div>
+    </div>
 </body>
 
 </html>
