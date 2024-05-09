@@ -139,9 +139,9 @@ session_start();
         </div>
 
         <div class="right-section">
-            <h1>Stats</h1>
+            <h1>Statics</h1>
             <ul class="list-group" id="dataList">
-                <!-- Hier werden die Daten dynamisch eingefügt -->
+                <!--  Daten dynamisch  -->
             </ul>
         </div>
     </div>
