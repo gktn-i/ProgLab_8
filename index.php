@@ -181,37 +181,39 @@
             }
 
             function createBarChart(labels, orderCounts) {
-                var ctx = document.getElementById('myChart').getContext('2d');
-                if (myChart) {
-                    myChart.destroy();
-                }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    if (myChart) {
+        myChart.destroy();
+    }
 
-                myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Order Count',
-                            data: orderCounts,
-                            backgroundColor: 'rgba(60, 81, 49, 0.2)',
-                            borderColor: 'rgb(60, 81, 49, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels.map((label, index) => {
+                return label + " (" + requestData[index].Size + ")";
+            }),
+            datasets: [{
+                label: 'Order Count',
+                data: orderCounts,
+                backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                borderColor: 'rgb(60, 81, 49, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
                     }
-                });
-
-                $('#myChart').show();
-                $('#dataList').hide();
+                }]
             }
+        }
+    });
+
+    $('#myChart').show();
+    $('#dataList').hide();
+}
 
             function fetchData() {
                 $.ajax({
