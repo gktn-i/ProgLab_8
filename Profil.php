@@ -126,7 +126,7 @@ if (isset($_SESSION["user_id"])) {
                 </div>
                 <ul class="sidebar-menu">
                 <li><a href="Profil.php?page=Profil" id="profil-tab">Profil<span class="Profil"><i class="fas fa-arrow-right"></i></span></a></li>
-                    <li><a href="payment.php?page=Payment" id="zahlung-tab" class="zahlungsmoeglichkeiten">Payment<span class="arrow"><i class="fas fa-arrow-right"></i></span></a></li>
+                   
                     <li><a href="bestellungen.php?page=Bestellungen" id="bestellung-tab" class="ordering">Orders<span class="arrow"><i class="fas fa-arrow-right"></i></span></a></li>
                 </ul>
             </aside>

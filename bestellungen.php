@@ -9,8 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-HGSIs4Jxxz+TcNHkzjQ2vsP+T7KwL5lV0Tvz4IvNh7p7bFPU7EsPtcsZYD6GoO5j"
-        crossorigin="anonymous">
+        integrity="sha384-HGSIs4Jxxz+TcNHkzjQ2vsP+T7KwL5lV0Tvz4IvNh7p7bFPU7EsPtcsZYD6GoO5j" crossorigin="anonymous">
     <style>
         .container {
             display: flex;
@@ -36,6 +35,7 @@
             list-style-type: none;
             padding: 20px;
         }
+
         .sidebar-menu li {
             margin-bottom: 10px;
         }
@@ -45,7 +45,7 @@
             align-items: center;
             color: #333;
             text-decoration: none;
-            
+
         }
 
         .sidebar-menu li a:hover {
@@ -55,7 +55,7 @@
         }
 
         .sidebar-menu li a.ordering {
-            background-color: #c0c0c0; 
+            background-color: #c0c0c0;
             font-weight: bold;
             border-radius: 5px;
             padding: 5px;
@@ -84,9 +84,11 @@
                     <h3>Menu</h3>
                 </div>
                 <ul class="sidebar-menu">
-                    <li><a href="Profil.php?page=Profil" id="profil-tab">Profil<span class="Profil"><i class="fas fa-arrow-right"></i></span></a></li>
-                    <li><a href="payment.php?page=Payment" id="zahlung-tab" class="zahlungsmoeglichkeiten">Payment<span class="arrow"><i class="fas fa-arrow-right"></i></span></a></li>
-                    <li><a href="bestellungen.php?page=Bestellungen" id="bestellung-tab" class="ordering">Orders<span class="arrow"><i class="fas fa-arrow-right"></i></span></a></li>
+                    <li><a href="Profil.php?page=Profil" id="profil-tab">Profil<span class="Profil"><i
+                                    class="fas fa-arrow-right"></i></span></a></li>
+
+                    <li><a href="bestellungen.php?page=Bestellungen" id="bestellung-tab" class="ordering">Orders<span
+                                class="arrow"><i class="fas fa-arrow-right"></i></span></a></li>
                 </ul>
             </aside>
 
@@ -100,13 +102,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                       
-                                
-                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </main>
     </div>
 
