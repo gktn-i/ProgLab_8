@@ -160,7 +160,7 @@
         $(document).ready(function () {
     var myChart;
     var requestData = null;
-    var selectedRadio = 'firstRadio'; // Standardmäßig auf 'Best Selling Product' gesetzt
+    var selectedRadio = 'firstRadio'; 
 
     function showListData(data) {
         var listItems = "";
