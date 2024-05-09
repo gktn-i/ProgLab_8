@@ -166,7 +166,7 @@
         var listItems = "";
         $.each(data, function (index, item) {
             listItems += '<li class="list-group-item">' +
-                '<label>Name: ' + item.Name + '</label><br>' +
+                '<label>Gericht: ' + item.Name + '</label><br>' +
                 '<span>Size: ' + item.Size + '</span><br>' +
                 '<span>Order Count: ' + item.orderCount + '</span>' +
                 '</li>';
