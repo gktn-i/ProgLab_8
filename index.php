@@ -127,7 +127,7 @@
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
                         checked>
-                    <label class="form-check-label" for="firstRadio">Best selling product</label>
+                    <label class="form-check-label" for="firstRadio">Best seller product</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
