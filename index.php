@@ -34,7 +34,6 @@ session_start();
 
         .right-section {
             flex-basis: 70%;
-            height: 700px;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
@@ -46,35 +45,21 @@ session_start();
             text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .list-group {
+            padding: 0;
+            list-style: none;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-   
-        #filter_options {
+        .list-group-item {
+            margin-bottom: 10px;
             padding: 10px;
-            border: 1px solid #ccc;
+            background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            font-size: 16px;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#000" fill-rule="evenodd" d="M10 12L3 6h14l-7 6z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: calc(100% - 12px) center;
-            background-size: 16px;
         }
 
-     
-        #filter_options:hover {
-            border-color: #999;
+        .list-group-item label {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -88,7 +73,6 @@ session_start();
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-
 
             <div class="form-group">
                 <label for="filter_options">Select Time Range</label>
@@ -127,9 +111,37 @@ session_start();
 
         <div class="right-section">
             <h1>Stats</h1>
-            <!-- Placeholder für Statistik -->
+            <ul class="list-group" id="dataList">
+                <!-- Hier werden die Daten dynamisch eingefügt -->
+            </ul>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "Backend/get_product_count_data.php",
+                dataType: "json",
+                success: function (data) {
+                    var listItems = "";
+                    $.each(data, function (index, item) {
+                        listItems += '<li class="list-group-item">' +
+                            '<label>SKU: ' + item.SKU + '</label><br>' +
+                            '<span>Name: ' + item.Name + '</span><br>' +
+                            '<span>Size: ' + item.Size + '</span><br>' +
+                            '<span>Order Count: ' + item.orderCount + '</span>' +
+                            '</li>';
+                    });
+                    $('#dataList').html(listItems);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
