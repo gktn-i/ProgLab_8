@@ -28,6 +28,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+    
 
         .right-section {
             flex-basis: 70%;
@@ -56,6 +57,7 @@
             margin-top: 5%px;
         }
 
+      
         .list-group-item label {
             font-weight: bold;
         }
@@ -69,6 +71,10 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+        .list-group-item:hover {
+            background-color: #e9e9e9; 
+        }
+      
 
         .form-group2 {
             margin-bottom: 20px;
@@ -78,6 +84,15 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-size: 16px; 
+            appearance: none; 
         }
     </style>
 </head>
