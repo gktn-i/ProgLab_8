@@ -117,31 +117,49 @@ session_start();
         </div>
     </div>
 
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "Backend/get_product_count_data.php",
-                dataType: "json",
-                success: function (data) {
-                    var listItems = "";
-                    $.each(data, function (index, item) {
-                        listItems += '<li class="list-group-item">' +
-                            '<label>SKU: ' + item.SKU + '</label><br>' +
-                            '<span>Name: ' + item.Name + '</span><br>' +
-                            '<span>Size: ' + item.Size + '</span><br>' +
-                            '<span>Order Count: ' + item.orderCount + '</span>' +
-                            '</li>';
-                    });
-                    $('#dataList').html(listItems);
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
+
+            function showProductCountData() {
+                $.ajax({
+                    type: "GET",
+                    url: "Backend/get_product_count_data.php",
+                    dataType: "json",
+                    success: function (data) {
+                        var listItems = "";
+                        $.each(data, function (index, item) {
+                            listItems += '<li class="list-group-item">' +
+
+                                '<label>Name: ' + item.Name + '</label><br>' +
+                                '<span>Size: ' + item.Size + '</span><br>' +
+                                '<span>Order Count: ' + item.orderCount + '</span>' +
+                                '</li>';
+                        });
+                        $('#dataList').html(listItems);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+
+            showProductCountData();
+
+            $('input[name="listGroupRadio"]').change(function () {
+
+                if ($(this).attr("id") === "fourthRadio") {
+                    showProductCountData();
+                } else {
+
+                    $('#dataList').empty();
                 }
             });
         });
     </script>
+
 </body>
 
 </html>
