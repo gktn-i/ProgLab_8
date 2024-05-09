@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,13 @@
             padding: 0;
             background-color: #f5f5f5;
         }
+
         .container {
             display: flex;
             max-width: 1200px;
             margin: 20px auto;
         }
+
         .left-section {
             flex-basis: 30%;
             padding: 20px;
@@ -25,6 +28,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+
         .right-section {
             flex-basis: 70%;
             padding: 20px;
@@ -32,13 +36,17 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
+
+        h1,
+        h2 {
             text-align: center;
         }
+
         .list-group {
             padding: 0;
             list-style: none;
         }
+
         .list-group-item {
             margin-bottom: 10px;
             padding: 10px;
@@ -47,9 +55,11 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-top: 5%px;
         }
+
         .list-group-item label {
             font-weight: bold;
         }
+
         .form-group {
             margin-bottom: 20px;
             flex-basis: 30%;
@@ -59,6 +69,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
+
         .form-group2 {
             margin-bottom: 20px;
             flex-basis: 30%;
@@ -70,6 +81,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
@@ -96,7 +108,8 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
+                        checked>
                     <label class="form-check-label" for="firstRadio">Best selling product</label>
                 </li>
                 <li class="list-group-item">
@@ -129,91 +142,101 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-$(document).ready(function () {
-    var myChart; 
+        $(document).ready(function () {
+            var myChart;
 
-    function showListData(data) {
-        var listItems = "";
-        $.each(data, function (index, item) {
-            listItems += '<li class="list-group-item">' +
-                '<label>Name: ' + item.Name + '</label><br>' +
-                '<span>Size: ' + item.Size + '</span><br>' +
-                '<span>Order Count: ' + item.orderCount + '</span>' +
-                '</li>';
-        });
-        $('#dataList').html(listItems);
-    }
+            function showListData(data) {
+                var listItems = "";
+                $.each(data, function (index, item) {
+                    listItems += '<li class="list-group-item">' +
+                        '<label>Name: ' + item.Name + '</label><br>' +
+                        '<span>Size: ' + item.Size + '</span><br>' +
+                        '<span>Order Count: ' + item.orderCount + '</span>' +
+                        '</li>';
+                });
+                $('#dataList').html(listItems);
+            }
 
-    function createBarChart(labels, orderCounts) {
-        var ctx = document.getElementById('myChart').getContext('2d');
+            function createBarChart(labels, orderCounts) {
+                var ctx = document.getElementById('myChart').getContext('2d');
 
-       
-        if (myChart) {
-            myChart.destroy();
-        }
 
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Order Count',
-                    data: orderCounts,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Order Count',
+                            data: orderCounts,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
                         }
-                    }]
-                }
+                    }
+                });
             }
-        });
-    }
 
-    function fetchDataAndDisplay(displayType) {
-        $.ajax({
-            type: "GET",
-            url: "Backend/get_product_count_data.php",
-            dataType: "json",
-            success: function (data) {
-                if (displayType === 'list') {
-                    showListData(data);
-                    $('#dataList').show();
-                    $('#myChart').hide();
-                } else if (displayType === 'chart') {
-                    var labels = [];
-                    var orderCounts = [];
-                    $.each(data, function (index, item) {
-                        labels.push(item.Name);
-                        orderCounts.push(item.orderCount);
-                    });
-                    createBarChart(labels, orderCounts);
-                    $('#dataList').hide();
-                    $('#myChart').show();
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
+            function fetchDataAndDisplay(displayType) {
+                $.ajax({
+                    type: "GET",
+                    url: "Backend/get_product_count_data.php",
+                    dataType: "json",
+                    success: function (data) {
+                        if ((displayType === 'list' && $('input[name=listGroupRadio]:checked').attr('id') === 'firstRadio') ||
+                            (displayType === 'chart' && $('input[name=listGroupRadio]:checked').attr('id') === 'firstRadio')) {
+                            if (displayType === 'list') {
+                                showListData(data);
+                                $('#dataList').show();
+                                $('#myChart').hide();
+                            } else if (displayType === 'chart') {
+                                var labels = [];
+                                var orderCounts = [];
+                                $.each(data, function (index, item) {
+                                    labels.push(item.Name);
+                                    orderCounts.push(item.orderCount);
+                                });
+                                createBarChart(labels, orderCounts);
+                                $('#dataList').hide();
+                                $('#myChart').show();
+                            }
+                        } else {
+                            $('#dataList').hide();
+                            $('#myChart').hide();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
             }
+
+            var defaultTheme = $('#filter_options1').val();
+            fetchDataAndDisplay(defaultTheme);
+
+           
+            $('input[name=listGroupRadio]').change(function () {
+                fetchDataAndDisplay($('#filter_options1').val()); 
+            });
+
+            $('#filter_options1').change(function () {
+                var selectedTheme = $(this).val();
+                fetchDataAndDisplay(selectedTheme);
+            });
         });
-    }
-
-    
-    var defaultTheme = $('#filter_options1').val();
-    fetchDataAndDisplay(defaultTheme);
-
- 
-    $('#filter_options1').change(function () {
-        var selectedTheme = $(this).val();
-        fetchDataAndDisplay(selectedTheme); 
-    });
-});
     </script>
 </body>
+
 </html>
