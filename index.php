@@ -88,7 +88,7 @@ session_start();
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
                         checked>
-                    <label class="form-check-label" for="firstRadio">Best selling products</label>
+                    <label class="form-check-label" for="firstRadio">Product Count</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
@@ -100,7 +100,7 @@ session_start();
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
-                    <label class="form-check-label" for="fourthRadio">Product Count</label>
+                    <label class="form-check-label" for="fourthRadio">Best selling Product</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
@@ -150,7 +150,7 @@ session_start();
 
             $('input[name="listGroupRadio"]').change(function () {
 
-                if ($(this).attr("id") === "fourthRadio") {
+                if ($(this).attr("id") === "firstRadio") {
                     showProductCountData();
                 } else {
 
