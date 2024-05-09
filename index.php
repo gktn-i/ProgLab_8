@@ -56,10 +56,30 @@ session_start();
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 5%px;
         }
 
         .list-group-item label {
             font-weight: bold;
+        }
+        .form-group{
+            margin-bottom: 20px;
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .form-group2{
+            margin-bottom: 20px;
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
         }
     </style>
 </head>
@@ -83,12 +103,21 @@ session_start();
                     <option value="year">Year</option>
                 </select>
             </div>
+            <div class="form-group2">
+                <label for="filter_options">Theme</label>
+                <select id="filter_options1" name="filter_options1">
+                    <option value="all">List</option>
+                    <option value="week">Chart</option>
+                  
+                    
+                </select>
+            </div>
 
             <ul class="list-group">
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
                         checked>
-                    <label class="form-check-label" for="firstRadio">Product Count</label>
+                    <label class="form-check-label" for="firstRadio">Best selling product</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
@@ -100,7 +129,7 @@ session_start();
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
-                    <label class="form-check-label" for="fourthRadio">Best selling Product</label>
+                    <label class="form-check-label" for="fourthRadio">Best ?</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
