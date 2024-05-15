@@ -106,6 +106,8 @@ $(document).ready(function () {
 
     //Cusotmer count
 
+    
+
     function showCustomerOrders(data) {
         
         
@@ -114,6 +116,7 @@ $(document).ready(function () {
             listItems += '<li class="list-group-item">' +
                 '<label>Kunde: ' + item.customerID + '</label><br>' +
                 '<span>Orders: ' + item.Summe + '</span><br>' +
+                '<span>Orders: ' + item.customerCount + '</span><br>' +
                 '</li>';
         });
         $('#dataList').html(listItems);
