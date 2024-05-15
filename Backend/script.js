@@ -153,7 +153,7 @@ $(document).ready(function () {
                     var labels = [];
                     var customerCounts = [];
                     $.each(requestDataCustomers, function (index, item) {
-                        labels.push("Kunde " + item.customerID);
+                        labels.push("Customer " + item.customerID);
                         customerCounts.push(item.customerCount);
                     });
                     createCustomerBarChart(labels, customerCounts);
