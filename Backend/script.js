@@ -112,8 +112,8 @@ $(document).ready(function () {
         var listItems = "";
         $.each(data, function (index, item) {
             listItems += '<li class="list-group-item">' +
-                '<label>Name: ' + item.customerName + '</label><br>' +
-                '<span>Orders: ' + item.totalOrders + '</span><br>' +
+                '<label>Kunde: ' + item.customerID + '</label><br>' +
+                '<span>Orders: ' + item.Summe + '</span><br>' +
                 '</li>';
         });
         $('#dataList').html(listItems);
