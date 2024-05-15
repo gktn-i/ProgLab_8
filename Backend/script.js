@@ -103,4 +103,45 @@ $(document).ready(function () {
         selectedRadio = $(this).attr('id');
         updateDisplay($('#filter_options1').val(), selectedRadio);
     });
+
+    //Cusotmer count
+
+    function showCustomerOrders(data) {
+        
+        data.sort((a, b) => b.totalOrders - a.totalOrders);
+    
+        var listItems = "";
+        $.each(data, function (index, item) {
+            listItems += '<li class="list-group-item">' +
+                '<label>Name: ' + item.customerName + '</label><br>' +
+                '<span>Orders: ' + item.totalOrders + '</span><br>' +
+                '</li>';
+        });
+        $('#dataList').html(listItems);
+        $('#dataList').show();
+        $('#myChart').hide();
+    }
+    
+    function fetchDataCustomerOrders() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_customer_orders_data.php",
+            dataType: "json",
+            success: function (data) {
+                showCustomerOrders(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+    
+    $('input[name=listGroupRadio]').change(function () {
+        selectedRadio = $(this).attr('id');
+        if (selectedRadio === 'thirdRadio') {
+            fetchDataCustomerOrders();
+        } else {
+            updateDisplay($('#filter_options1').val(), selectedRadio);
+        }
+    });
 });
