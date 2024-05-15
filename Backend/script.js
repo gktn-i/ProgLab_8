@@ -108,8 +108,7 @@ $(document).ready(function () {
 
     function showCustomerOrders(data) {
         
-        data.sort((a, b) => b.totalOrders - a.totalOrders);
-    
+        
         var listItems = "";
         $.each(data, function (index, item) {
             listItems += '<li class="list-group-item">' +
