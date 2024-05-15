@@ -1,4 +1,3 @@
-src="https://code.jquery.com/jquery-3.6.0.min.js"
 $(document).ready(function () {
     var myChart;
     var requestData = null;
@@ -27,9 +26,7 @@ $(document).ready(function () {
         myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: labels.map((label, index) => {
-                    return label + " (" + requestData[index].Size + ")";
-                }),
+                labels: labels,
                 datasets: [{
                     label: 'Order Count',
                     data: orderCounts,
@@ -68,6 +65,90 @@ $(document).ready(function () {
         });
     }
 
+    function fetchDataCustomerOrders() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_customer_orders_data.php",
+            dataType: "json",
+            success: function (data) {
+                showCustomerOrders(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function showCustomerOrders(data) {
+        var listItems = "";
+        $.each(data, function (index, item) {
+            listItems += '<li class="list-group-item">' +
+                '<label>Kunde: ' + item.customerID + '</label><br>' +
+                '<span>Orders: ' + item.Summe + '</span><br>' +
+                '<span>Orders: ' + item.customerCount + '</span><br>' +
+                '</li>';
+        });
+        $('#dataList').html(listItems);
+        $('#dataList').show();
+        $('#myChart').hide();
+    }
+
+    function CustomercreateBarChart(labels, Summe) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Customer',
+                    data: Summe,
+                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                    borderColor: 'rgb(60, 81, 49, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        $('#myChart').show();
+        $('#dataList').hide();
+    }
+
+    var defaultTheme = $('#filter_options1').val();
+    fetchData();
+    updateDisplay(defaultTheme, selectedRadio);
+
+    $('#filter_options1').change(function () {
+        var selectedTheme = $(this).val();
+        updateDisplay(selectedTheme, selectedRadio);
+    });
+
+    $('input[name=listGroupRadio]').change(function () {
+        selectedRadio = $(this).attr('id');
+        updateDisplay($('#filter_options1').val(), selectedRadio);
+    });
+
+    $('input[name=listGroupRadio]').change(function () {
+        selectedRadio = $(this).attr('id');
+        if (selectedRadio === 'thirdRadio') {
+            fetchDataCustomerOrders();
+        } else {
+            updateDisplay($('#filter_options1').val(), selectedRadio);
+        }
+    });
+
     function updateDisplay(displayType, selectedRadio) {
         if (requestData === null) {
             return;
@@ -83,67 +164,19 @@ $(document).ready(function () {
                 orderCounts.push(item.orderCount);
             });
             createBarChart(labels, orderCounts);
+        } else if (displayType === 'list' && selectedRadio === 'thirdRadio') {
+            showCustomerOrders(requestData);
+        } else if (displayType === 'chart' && selectedRadio === 'thirdRadio') {
+            var labels = [];
+            var Summe = [];
+            $.each(requestData, function (index, item) {
+                labels.push(item.customerID);
+                Summe.push(item.Summe);
+            });
+            CustomercreateBarChart(labels, Summe);
         } else {
             $('#dataList').hide();
             $('#myChart').hide();
         }
     }
-
-    var defaultTheme = $('#filter_options1').val();
-    fetchData();
-    updateDisplay(defaultTheme, selectedRadio);
-
-
-    $('#filter_options1').change(function () {
-        var selectedTheme = $(this).val();
-        updateDisplay(selectedTheme, selectedRadio);
-    });
-
-    $('input[name=listGroupRadio]').change(function () {
-        selectedRadio = $(this).attr('id');
-        updateDisplay($('#filter_options1').val(), selectedRadio);
-    });
-
-    //Cusotmer count
-
-    
-
-    function showCustomerOrders(data) {
-        
-        
-        var listItems = "";
-        $.each(data, function (index, item) {
-            listItems += '<li class="list-group-item">' +
-                '<label>Kunde: ' + item.customerID + '</label><br>' +
-                '<span>Orders: ' + item.Summe + '</span><br>' +
-                '<span>Orders: ' + item.customerCount + '</span><br>' +
-                '</li>';
-        });
-        $('#dataList').html(listItems);
-        $('#dataList').show();
-        $('#myChart').hide();
-    }
-    
-    function fetchDataCustomerOrders() {
-        $.ajax({
-            type: "GET",
-            url: "Backend/get_customer_orders_data.php",
-            dataType: "json",
-            success: function (data) {
-                showCustomerOrders(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    }
-    
-    $('input[name=listGroupRadio]').change(function () {
-        selectedRadio = $(this).attr('id');
-        if (selectedRadio === 'thirdRadio') {
-            fetchDataCustomerOrders();
-        } else {
-            updateDisplay($('#filter_options1').val(), selectedRadio);
-        }
-    });
 });
