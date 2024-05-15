@@ -193,7 +193,7 @@
                             return label + " (" + requestData[index].Size + ")";
                         }),
                         datasets: [{
-                            label: 'Order Count',
+                            label: 'Best seller product',
                             data: orderCounts,
                             backgroundColor: 'rgba(60, 81, 49, 0.2)',
                             borderColor: 'rgb(60, 81, 49, 1)',
