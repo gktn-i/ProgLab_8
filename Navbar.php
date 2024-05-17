@@ -111,9 +111,9 @@
                     </a>
                 <?php endif; ?>
                 <a class="navbar-icon" href="index.php?page=Warenkorb" style="margin-left : 10px ;">
-                    <i class='bx bx-cart'></i>
+                    <i class='bx bx-map'></i>
 
-                    <!-- Bitte das icon ändern vom Warenkorb auf zb Maps, dann können wir eine Seite mit Maps erstellen, die dann alle Stores anzeigt mit Pins -->
+                  
                     <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
                 <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i
