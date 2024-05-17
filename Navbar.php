@@ -7,7 +7,7 @@
     <title>Food Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         .navbar {
             background-color: #3C5131;
@@ -15,7 +15,7 @@
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
-            
+
 
 
         }
@@ -60,30 +60,29 @@
         }
 
         .badge {
-            border-radius: 8px; 
-            padding: 8px 12px; 
-            font-weight: bold; 
-            font-size: 24px; 
-            color: #3C5131; 
-            margin-right: 20px; 
-            margin-top: 5px; 
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 24px;
+            color: #3C5131;
+            margin-right: 20px;
+            margin-top: 5px;
             text-decoration: none;
-            
+
         }
 
         .navbar-icon {
             font-size: 50px;
             color: white;
             transition: all 0.3s ease;
-            margin:12px;
+            margin: 12px;
         }
 
-        .navbar-icon:hover{
+        .navbar-icon:hover {
             color: hsl(140, 100%, 20%);
             transition: opacity 0.3s;
             text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
         }
-        
     </style>
 </head>
 
@@ -97,28 +96,31 @@
                     <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 80px; width: 80px;">
                 </a>
             </b>
-          
+
 
             <div class="d-flex align-items-center">
                 <?php if (isset($_SESSION["user_id"])): ?>
 
                     <a class="navbar-icon" href="Backend/logout.php">
-                    <i class='bx bx-log-out' style='font-size: 50px;'></i>
+                        <i class='bx bx-log-out' style='font-size: 50px;'></i>
                     </a>
                 <?php else: ?>
 
                     <a class="navbar-icon" href="Signin.php?page=Anmelden">
-                    <i class='bx bx-log-in' ></i>
+                        <i class='bx bx-log-in'></i>
                     </a>
                 <?php endif; ?>
                 <a class="navbar-icon" href="index.php?page=Warenkorb" style="margin-left : 10px ;">
-                <i class='bx bx-cart' ></i>
+                    <i class='bx bx-cart'></i>
+
+                    <!-- Bitte das icon ändern vom Warenkorb auf zb Maps, dann können wir eine Seite mit Maps erstellen, die dann alle Stores anzeigt mit Pins -->
                     <!-- <span class="badge bg-white text-dark">2</span> -->
                 </a>
-                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i class='bx bxs-user'></i>
-                   
-                    
-                    
+                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i
+                        class='bx bxs-user'></i>
+
+
+
                 </a>
             </div>
         </div>
