@@ -110,7 +110,7 @@
                         <i class='bx bx-log-in'></i>
                     </a>
                 <?php endif; ?>
-                <a class="navbar-icon" href="index.php?page=Warenkorb" style="margin-left : 10px ;">
+                <a class="navbar-icon" href="mappage.php?page=Warenkorb" style="margin-left : 10px ;">
                     <i class='bx bx-map'></i>
 
                   
