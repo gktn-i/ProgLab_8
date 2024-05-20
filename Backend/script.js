@@ -80,7 +80,7 @@ function createBarChart(labels, data) {
         },
         options: {
             scales: {
-                yAxes: [{
+                yAxes: [{   
                     ticks: {
                         beginAtZero: true
                     }
@@ -89,6 +89,7 @@ function createBarChart(labels, data) {
         }
     });
 }
+
 
 function createCustomerBarChart(labels, data) {
     var ctx = document.getElementById('myChart').getContext('2d');
