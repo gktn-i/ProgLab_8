@@ -184,7 +184,19 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetchBestStore();
+    const radioButtons = document.querySelectorAll('input[name="listGroupRadio"]');
+    const bestStoreCard = document.getElementById('best-store-card');
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function () {
+            if (this.id === 'secondRadio' && this.checked) {
+                fetchBestStore();
+                bestStoreCard.classList.remove('hidden');
+            } else {
+                bestStoreCard.classList.add('hidden');
+            }
+        });
+    });
 
     function fetchBestStore() {
         fetch('get_best_store.php')
@@ -221,4 +233,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
