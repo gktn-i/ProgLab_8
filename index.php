@@ -53,6 +53,8 @@
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+
         }
 
         .list-group-item label {
@@ -71,6 +73,7 @@
 
         .list-group-item:hover {
             background-color: #e9e9e9;
+            transition: opacity 0.3s;
         }
 
         select {
