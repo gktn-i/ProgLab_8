@@ -37,7 +37,8 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
         }
 
@@ -136,20 +137,6 @@
         </div>
         <div class="right-section">
             <h1>Statistics</h1>
-
-
-            <div class="card hidden" id="best-store-card">
-                <div class="card-header">
-                    Best Store with Highest Turnover
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" id="best-store-name"></h5>
-                    <p class="card-text" id="best-store-turnover"></p>
-                    <canvas id="turnoverChart"></canvas>
-                </div>
-            </div>
-
-           
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
