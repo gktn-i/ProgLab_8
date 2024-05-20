@@ -278,6 +278,7 @@ $(document).ready(function () {
 });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         }
         
@@ -385,6 +386,8 @@ $(document).ready(function () {
         });
         
 >>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
+=======
+>>>>>>> parent of 5fb6587 (implementing AJAX call and Chart.js integration)
 =======
 >>>>>>> parent of 5fb6587 (implementing AJAX call and Chart.js integration)
 =======
