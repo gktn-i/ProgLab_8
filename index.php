@@ -140,6 +140,21 @@
         </div>
         <div class="right-section">
             <h1>Statistics</h1>
+<<<<<<< HEAD
+=======
+            
+            <div class="card" id="best-store-card">
+                <div class="card-header">
+                    Best Store with Highest Turnover
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" id="best-store-name"></h5>
+                    <p class="card-text" id="best-store-turnover"></p>
+                    <canvas id="turnoverChart"></canvas>
+                </div>
+            </div>
+
+>>>>>>> parent of 247bea6 (update hidden)
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
