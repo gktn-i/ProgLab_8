@@ -141,7 +141,10 @@
         <div class="right-section">
             <h1>Statistics</h1>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 247bea6 (update hidden)
             
             <div class="card" id="best-store-card">
                 <div class="card-header">
@@ -154,6 +157,9 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
+>>>>>>> parent of 247bea6 (update hidden)
+=======
 >>>>>>> parent of 247bea6 (update hidden)
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
