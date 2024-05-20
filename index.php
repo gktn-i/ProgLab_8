@@ -142,7 +142,10 @@
             <h1>Statistics</h1>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 247bea6 (update hidden)
 =======
 >>>>>>> parent of 247bea6 (update hidden)
             
@@ -158,6 +161,9 @@
             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 247bea6 (update hidden)
+=======
 >>>>>>> parent of 247bea6 (update hidden)
 =======
 >>>>>>> parent of 247bea6 (update hidden)
