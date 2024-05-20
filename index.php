@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +30,7 @@
             margin-right: 20px;
         }
 
+
         .right-section {
             flex-basis: 70%;
             padding: 20px;
@@ -37,7 +39,8 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-align: center;
         }
 
@@ -52,15 +55,15 @@
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-
+            margin-top: 5%px;
         }
+
 
         .list-group-item label {
             font-weight: bold;
         }
 
-        .form-group, .form-group2 {
+        .form-group {
             margin-bottom: 20px;
             flex-basis: 30%;
             padding: 20px;
@@ -72,7 +75,17 @@
 
         .list-group-item:hover {
             background-color: #e9e9e9;
-            transition: opacity 0.3s;
+        }
+
+
+        .form-group2 {
+            margin-bottom: 20px;
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
         }
 
         select {
@@ -84,12 +97,9 @@
             font-size: 16px;
             appearance: none;
         }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
+
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
@@ -108,7 +118,7 @@
                 </select>
             </div>
             <div class="form-group2">
-                <label for="filter_options1">Theme</label>
+                <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
                     <option value="list">List</option>
                     <option value="chart">Chart</option>
@@ -116,7 +126,8 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
+                        checked>
                     <label class="form-check-label" for="firstRadio">Best seller product</label>
                 </li>
                 <li class="list-group-item">
@@ -139,43 +150,9 @@
         </div>
         <div class="right-section">
             <h1>Statistics</h1>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 247bea6 (update hidden)
-=======
->>>>>>> parent of 247bea6 (update hidden)
             
-            <div class="card" id="best-store-card">
-=======
-
-
-            <div class="card hidden" id="best-store-card">
->>>>>>> parent of af38307 (removed card)
-                <div class="card-header">
-                    Best Store with Highest Turnover
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" id="best-store-name"></h5>
-                    <p class="card-text" id="best-store-turnover"></p>
-                    <canvas id="turnoverChart"></canvas>
-                </div>
-            </div>
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 247bea6 (update hidden)
-=======
->>>>>>> parent of 247bea6 (update hidden)
-=======
->>>>>>> parent of 247bea6 (update hidden)
-=======
            
->>>>>>> parent of af38307 (removed card)
+
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
@@ -185,5 +162,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
+
 </html>

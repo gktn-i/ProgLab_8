@@ -1,7 +1,7 @@
-var requestDataProducts = null; // Data for products
-var requestDataCustomers = null; // Data for customer count
-var myChart = null; // Variable for the chart object
-var selectedRadio = 'firstRadio'; // Default selected radio button
+
+var requestDataProducts = null; // Daten für die Gerichte
+var requestDataCustomers = null; // Daten für die Kundenzählung
+var myChart = null; // Variable für das Chart-Objekt
 
 function fetchData() {
     $.ajax({
@@ -33,41 +33,6 @@ function fetchDataCustomerOrders() {
     });
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-function fetchGeneralStatistics() {
-    $.ajax({
-        type: "GET",
-        url: "Backend/get_general_statistics.php",
-        dataType: "json",
-        success: function (data) {
-            $('#totalOrders').text(data.totalOrders);
-            $('#totalRevenue').text(`$${data.totalRevenue.toFixed(2)}`);
-            $('#totalCustomers').text(data.totalCustomers);
-            $('#totalProducts').text(data.totalProducts);
-        },
-        error: function (xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-=======
-function fetchBestStore() {
-    fetch('get_best_store.php')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('best-store-name').innerText = data.store_name;
-            document.getElementById('best-store-turnover').innerText = `Turnover: $${data.turnover.toFixed(2)}`;
-            renderTurnoverChart(data);
-        })
-        .catch(error => console.error('Error fetching best store data:', error));
->>>>>>> parent of 73e6807 (added ajax chart function)
-}
-
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
 function showListData(data) {
     var listItems = "";
     $.each(data, function (index, item) {
@@ -87,9 +52,9 @@ function showCustomerOrders(data) {
     $.each(data, function (index, item) {
         listItems += '<li class="list-group-item">' +
             '<label>Customer: ' + item.customerID + '</label><br>' +
-            '<span>Total: ' + item.Summe + '€</span><br>' +
-            '<span>Numbers of Orders: ' + item.customerCount + '</span><br>' +
-            '</li>';
+            '<span>Total: ' + item.Summe + '€'; '</span><br>' +
+                '<span>Numbers of Orders: ' + item.customerCount + '</span><br>' +
+                '</li>';
     });
     $('#dataList').html(listItems);
     $('#dataList').show();
@@ -117,6 +82,7 @@ function createBarChart(labels, data) {
         options: {
             scales: {
                 yAxes: [{
+
                     ticks: {
                         beginAtZero: true
                     }
@@ -125,6 +91,7 @@ function createBarChart(labels, data) {
         }
     });
 }
+
 
 function createCustomerBarChart(labels, data) {
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -153,49 +120,16 @@ function createCustomerBarChart(labels, data) {
                 }]
             }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
     });
 
     $('#myChart').show();
     $('#dataList').hide();
 }
 
-<<<<<<< HEAD
-=======
-function renderTurnoverChart(data) {
-    var ctx = document.getElementById('turnoverChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [data.store_name],
-            datasets: [{
-                label: 'Turnover',
-                data: [data.turnover],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-}
-
->>>>>>> parent of 73e6807 (added ajax chart function)
 $(document).ready(function () {
     var selectedRadio = 'firstRadio';
 
     function updateDisplay(displayType, selectedRadio) {
-<<<<<<< HEAD
-=======
-        $('#best-store-card').addClass('hidden'); // Hide the best store card by default
->>>>>>> parent of 73e6807 (added ajax chart function)
         if (selectedRadio === 'firstRadio') {
             if (displayType === 'list') {
                 if (requestDataProducts) {
@@ -228,43 +162,9 @@ $(document).ready(function () {
                     createCustomerBarChart(labels, customerCounts);
                 }
             }
-        } else if (selectedRadio === 'secondRadio') {
-<<<<<<< HEAD
-=======
-            $('#best-store-card').removeClass('hidden');
->>>>>>> parent of 73e6807 (added ajax chart function)
-            fetchBestStore();
         }
     }
 
-<<<<<<< HEAD
-    function fetchBestStore() {
-        $.ajax({
-            type: "GET",
-            url: "Backend/get_best_store.php",
-            dataType: "json",
-            success: function (data) {
-                var labels = [data.store_name];
-                var turnoverData = [data.turnover];
-                createTurnoverChart(labels, turnoverData);
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-        });
-        
-        $('#myChart').show();
-        $('#dataList').hide();
-<<<<<<< HEAD
-<<<<<<< HEAD
-    }
-
-=======
->>>>>>> parent of 73e6807 (added ajax chart function)
     $('#filter_options1').change(function () {
         var selectedTheme = $(this).val();
         updateDisplay(selectedTheme, selectedRadio);
@@ -275,181 +175,12 @@ $(document).ready(function () {
         updateDisplay($('#filter_options1').val(), selectedRadio);
     });
 
-    // Initial fetch
-    fetchData();
-    fetchDataCustomerOrders();
-<<<<<<< HEAD
-    fetchGeneralStatistics(); // Fetch and display general statistics
-=======
->>>>>>> parent of 73e6807 (added ajax chart function)
+    $('input[name=listGroupRadio]').change(function () {
+        selectedRadio = $(this).attr('id');
+        if (selectedRadio === 'thirdRadio') {
+            fetchDataCustomerOrders();
+        } else {
+            fetchData();
+        }
+    });
 });
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-        }
-        
-        $(document).ready(function () {
-        var selectedRadio = 'firstRadio';
-        
-        function updateDisplay(displayType, selectedRadio) {
-            if (selectedRadio === 'firstRadio') {
-                if (displayType === 'list') {
-                    if (requestDataProducts) {
-                        showListData(requestDataProducts);
-                    }
-                } else if (displayType === 'chart') {
-                    if (requestDataProducts) {
-                        var labels = [];
-                        var orderCounts = [];
-                        $.each(requestDataProducts, function (index, item) {
-                            labels.push(item.Name);
-                            orderCounts.push(item.orderCount);
-                        });
-                        createBarChart(labels, orderCounts);
-<<<<<<< HEAD
-=======
-
-document.addEventListener('DOMContentLoaded', function () {
-    fetchBestStore();
-
-    function fetchBestStore() {
-        fetch('get_best_store.php')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('best-store-name').innerText = data.store_name;
-                document.getElementById('best-store-turnover').innerText = `Turnover: $${data.turnover.toFixed(2)}`;
-                renderChart(data);
-            })
-            .catch(error => console.error('Error fetching best store data:', error));
-    }
-
-    function renderChart(data) {
-        var ctx = document.getElementById('turnoverChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [data.store_name],
-                datasets: [{
-                    label: 'Turnover',
-                    data: [data.turnover],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
->>>>>>> parent of ae095ee (update ajax)
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-                    }
-                }
-            } else if (selectedRadio === 'thirdRadio') {
-                if (displayType === 'list') {
-                    if (requestDataCustomers) {
-                        showCustomerOrders(requestDataCustomers);
-                    }
-                } else if (displayType === 'chart') {
-                    if (requestDataCustomers) {
-                        var labels = [];
-                        var customerCounts = [];
-                        $.each(requestDataCustomers, function (index, item) {
-                            labels.push("Customer " + item.customerID);
-                            customerCounts.push(item.customerCount);
-                        });
-                        createCustomerBarChart(labels, customerCounts);
-                    }
-                }
-            } else if (selectedRadio === 'secondRadio') {
-                fetchBestStore();
-            }
-        }
-        
-        function fetchBestStore() {
-            $.ajax({
-                type: "GET",
-                url: "Backend/get_best_store.php",
-                dataType: "json",
-                success: function (data) {
-                    var labels = [data.store_name];
-                    var turnoverData = [data.turnover];
-                    createTurnoverChart(labels, turnoverData);
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-        
-        function createTurnoverChart(labels, data) {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            if (myChart) {
-                myChart.destroy();
-            }
-        
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Turnover',
-                        data: data,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        
-            $('#myChart').show();
-            $('#dataList').hide();
-        }
-        
-        $('#filter_options1').change(function () {
-            var selectedTheme = $(this).val();
-            updateDisplay(selectedTheme, selectedRadio);
-        });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-        
-        $('input[name=listGroupRadio]').change(function () {
-            selectedRadio = $(this).attr('id');
-            updateDisplay($('#filter_options1').val(), selectedRadio);
-        });
-        
-        // Initial fetch
-        fetchData();
-        fetchDataCustomerOrders();
-        });
-<<<<<<< HEAD
-        
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
-=======
->>>>>>> parent of 5fb6587 (implementing AJAX call and Chart.js integration)
-=======
->>>>>>> parent of 5fb6587 (implementing AJAX call and Chart.js integration)
-=======
->>>>>>> parent of 5fb6587 (implementing AJAX call and Chart.js integration)
-=======
-    }
-});
-
->>>>>>> parent of ae095ee (update ajax)
-=======
-        
->>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
