@@ -33,6 +33,23 @@ function fetchDataCustomerOrders() {
     });
 }
 
+function fetchGeneralStatistics() {
+    $.ajax({
+        type: "GET",
+        url: "Backend/get_general_statistics.php",
+        dataType: "json",
+        success: function (data) {
+            $('#totalOrders').text(data.totalOrders);
+            $('#totalRevenue').text(`$${data.totalRevenue.toFixed(2)}`);
+            $('#totalCustomers').text(data.totalCustomers);
+            $('#totalProducts').text(data.totalProducts);
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
 function showListData(data) {
     var listItems = "";
     $.each(data, function (index, item) {
@@ -118,112 +135,112 @@ function createCustomerBarChart(labels, data) {
                 }]
             }
         }
+    });
+
+    $('#myChart').show();
+    $('#dataList').hide();
+}
+
+$(document).ready(function () {
+    var selectedRadio = 'firstRadio';
+
+    function updateDisplay(displayType, selectedRadio) {
+        if (selectedRadio === 'firstRadio') {
+            if (displayType === 'list') {
+                if (requestDataProducts) {
+                    showListData(requestDataProducts);
+                }
+            } else if (displayType === 'chart') {
+                if (requestDataProducts) {
+                    var labels = [];
+                    var orderCounts = [];
+                    $.each(requestDataProducts, function (index, item) {
+                        labels.push(item.Name);
+                        orderCounts.push(item.orderCount);
+                    });
+                    createBarChart(labels, orderCounts);
+                }
+            }
+        } else if (selectedRadio === 'thirdRadio') {
+            if (displayType === 'list') {
+                if (requestDataCustomers) {
+                    showCustomerOrders(requestDataCustomers);
+                }
+            } else if (displayType === 'chart') {
+                if (requestDataCustomers) {
+                    var labels = [];
+                    var customerCounts = [];
+                    $.each(requestDataCustomers, function (index, item) {
+                        labels.push("Customer " + item.customerID);
+                        customerCounts.push(item.customerCount);
+                    });
+                    createCustomerBarChart(labels, customerCounts);
+                }
+            }
+        } else if (selectedRadio === 'secondRadio') {
+            fetchBestStore();
+        }
+    }
+
+    function fetchBestStore() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_best_store.php",
+            dataType: "json",
+            success: function (data) {
+                var labels = [data.store_name];
+                var turnoverData = [data.turnover];
+                createTurnoverChart(labels, turnoverData);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
         });
-        
+    }
+
+    function createTurnoverChart(labels, data) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Turnover',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
         $('#myChart').show();
         $('#dataList').hide();
-        }
-        
-        $(document).ready(function () {
-        var selectedRadio = 'firstRadio';
-        
-        function updateDisplay(displayType, selectedRadio) {
-            if (selectedRadio === 'firstRadio') {
-                if (displayType === 'list') {
-                    if (requestDataProducts) {
-                        showListData(requestDataProducts);
-                    }
-                } else if (displayType === 'chart') {
-                    if (requestDataProducts) {
-                        var labels = [];
-                        var orderCounts = [];
-                        $.each(requestDataProducts, function (index, item) {
-                            labels.push(item.Name);
-                            orderCounts.push(item.orderCount);
-                        });
-                        createBarChart(labels, orderCounts);
-                    }
-                }
-            } else if (selectedRadio === 'thirdRadio') {
-                if (displayType === 'list') {
-                    if (requestDataCustomers) {
-                        showCustomerOrders(requestDataCustomers);
-                    }
-                } else if (displayType === 'chart') {
-                    if (requestDataCustomers) {
-                        var labels = [];
-                        var customerCounts = [];
-                        $.each(requestDataCustomers, function (index, item) {
-                            labels.push("Customer " + item.customerID);
-                            customerCounts.push(item.customerCount);
-                        });
-                        createCustomerBarChart(labels, customerCounts);
-                    }
-                }
-            } else if (selectedRadio === 'secondRadio') {
-                fetchBestStore();
-            }
-        }
-        
-        function fetchBestStore() {
-            $.ajax({
-                type: "GET",
-                url: "Backend/get_best_store.php",
-                dataType: "json",
-                success: function (data) {
-                    var labels = [data.store_name];
-                    var turnoverData = [data.turnover];
-                    createTurnoverChart(labels, turnoverData);
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-        
-        function createTurnoverChart(labels, data) {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            if (myChart) {
-                myChart.destroy();
-            }
-        
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Turnover',
-                        data: data,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        
-            $('#myChart').show();
-            $('#dataList').hide();
-        }
-        
-        $('#filter_options1').change(function () {
-            var selectedTheme = $(this).val();
-            updateDisplay(selectedTheme, selectedRadio);
-        });
-        
-        $('input[name=listGroupRadio]').change(function () {
-            selectedRadio = $(this).attr('id');
-            updateDisplay($('#filter_options1').val(), selectedRadio);
-        });
-        
-        // Initial fetch
-        fetchData();
-        fetchDataCustomerOrders();
-        });
-        
+    }
+
+    $('#filter_options1').change(function () {
+        var selectedTheme = $(this).val();
+        updateDisplay(selectedTheme, selectedRadio);
+    });
+
+    $('input[name=listGroupRadio]').change(function () {
+        selectedRadio = $(this).attr('id');
+        updateDisplay($('#filter_options1').val(), selectedRadio);
+    });
+
+    // Initial fetch
+    fetchData();
+    fetchDataCustomerOrders();
+    fetchGeneralStatistics(); // Fetch and display general statistics
+});
