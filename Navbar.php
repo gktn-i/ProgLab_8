@@ -93,7 +93,7 @@
         <div class="container-fluid">
             <b>
                 <a href="index.php?page=start">
-                    <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 80px; width: 80px;">
+                    <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 80px; width: 80px;">
                 </a>
             </b>
 
