@@ -37,8 +37,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             text-align: center;
         }
 
@@ -143,6 +142,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 247bea6 (update hidden)
@@ -150,6 +150,11 @@
 >>>>>>> parent of 247bea6 (update hidden)
             
             <div class="card" id="best-store-card">
+=======
+
+
+            <div class="card hidden" id="best-store-card">
+>>>>>>> parent of af38307 (removed card)
                 <div class="card-header">
                     Best Store with Highest Turnover
                 </div>
@@ -162,11 +167,15 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 247bea6 (update hidden)
 =======
 >>>>>>> parent of 247bea6 (update hidden)
 =======
 >>>>>>> parent of 247bea6 (update hidden)
+=======
+           
+>>>>>>> parent of af38307 (removed card)
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
