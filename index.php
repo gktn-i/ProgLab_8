@@ -1,7 +1,5 @@
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +29,6 @@
             margin-right: 20px;
         }
 
-
         .right-section {
             flex-basis: 70%;
             padding: 20px;
@@ -40,8 +37,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             text-align: center;
         }
 
@@ -56,15 +52,13 @@
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 5%px;
         }
-
 
         .list-group-item label {
             font-weight: bold;
         }
 
-        .form-group {
+        .form-group, .form-group2 {
             margin-bottom: 20px;
             flex-basis: 30%;
             padding: 20px;
@@ -78,17 +72,6 @@
             background-color: #e9e9e9;
         }
 
-
-        .form-group2 {
-            margin-bottom: 20px;
-            flex-basis: 30%;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-right: 20px;
-        }
-
         select {
             width: 100%;
             padding: 10px;
@@ -98,9 +81,12 @@
             font-size: 16px;
             appearance: none;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
-
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
@@ -119,7 +105,7 @@
                 </select>
             </div>
             <div class="form-group2">
-                <label for="filter_options">Theme</label>
+                <label for="filter_options1">Theme</label>
                 <select id="filter_options1" name="filter_options1">
                     <option value="list">List</option>
                     <option value="chart">Chart</option>
@@ -127,8 +113,7 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
-                        checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
                     <label class="form-check-label" for="firstRadio">Best seller product</label>
                 </li>
                 <li class="list-group-item">
@@ -152,6 +137,7 @@
         <div class="right-section">
             <h1>Statistics</h1>
 
+
             <div class="card hidden" id="best-store-card">
                 <div class="card-header">
                     Best Store with Highest Turnover
@@ -173,7 +159,5 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </body>
-
 </html>
