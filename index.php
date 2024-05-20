@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,35 +12,6 @@
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
-        }
-
-        .statistics {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px auto;
-            max-width: 1200px;
-        }
-
-        .stat-box {
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .stat-box h2 {
-            margin: 0;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .stat-box p {
-            margin: 10px 0 0;
-            font-size: 18px;
-            color: #666;
         }
 
         .container {
@@ -91,8 +61,7 @@
             font-weight: bold;
         }
 
-        .form-group,
-        .form-group2 {
+        .form-group, .form-group2 {
             margin-bottom: 20px;
             flex-basis: 30%;
             padding: 20px;
@@ -122,27 +91,9 @@
         }
     </style>
 </head>
-
 <body>
     <?php include 'Navbar.php'; ?>
-    <div class="statistics">
-        <div class="stat-box">
-            <h2 id="totalOrders">0</h2>
-            <p>Total Orders</p>
-        </div>
-        <div class="stat-box">
-            <h2 id="totalRevenue">$0.00</h2>
-            <p>Total Revenue</p>
-        </div>
-        <div class="stat-box">
-            <h2 id="totalCustomers">0</h2>
-            <p>Total Customers</p>
-        </div>
-        <div class="stat-box">
-            <h2 id="totalProducts">0</h2>
-            <p>Total Products</p>
-        </div>
-    </div>
+    <?php include 'Footer.php'; ?>
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
@@ -199,5 +150,4 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
 </html>
