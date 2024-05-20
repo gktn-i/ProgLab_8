@@ -182,3 +182,43 @@ $(document).ready(function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetchBestStore();
+
+    function fetchBestStore() {
+        fetch('get_best_store.php')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('best-store-name').innerText = data.store_name;
+                document.getElementById('best-store-turnover').innerText = `Turnover: $${data.turnover.toFixed(2)}`;
+                renderChart(data);
+            })
+            .catch(error => console.error('Error fetching best store data:', error));
+    }
+
+    function renderChart(data) {
+        var ctx = document.getElementById('turnoverChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [data.store_name],
+                datasets: [{
+                    label: 'Turnover',
+                    data: [data.turnover],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+});
+
