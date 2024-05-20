@@ -151,8 +151,8 @@
         </div>
         <div class="right-section">
             <h1>Statistics</h1>
-            
-            <div class="card" id="best-store-card">
+
+            <div class="card hidden" id="best-store-card">
                 <div class="card-header">
                     Best Store with Highest Turnover
                 </div>
@@ -163,6 +163,7 @@
                 </div>
             </div>
 
+           
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
