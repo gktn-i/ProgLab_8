@@ -33,6 +33,7 @@ function fetchDataCustomerOrders() {
     });
 }
 
+<<<<<<< HEAD
 function fetchGeneralStatistics() {
     $.ajax({
         type: "GET",
@@ -48,6 +49,17 @@ function fetchGeneralStatistics() {
             console.error(xhr.responseText);
         }
     });
+=======
+function fetchBestStore() {
+    fetch('get_best_store.php')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('best-store-name').innerText = data.store_name;
+            document.getElementById('best-store-turnover').innerText = `Turnover: $${data.turnover.toFixed(2)}`;
+            renderTurnoverChart(data);
+        })
+        .catch(error => console.error('Error fetching best store data:', error));
+>>>>>>> parent of 73e6807 (added ajax chart function)
 }
 
 function showListData(data) {
@@ -141,10 +153,41 @@ function createCustomerBarChart(labels, data) {
     $('#dataList').hide();
 }
 
+<<<<<<< HEAD
+=======
+function renderTurnoverChart(data) {
+    var ctx = document.getElementById('turnoverChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [data.store_name],
+            datasets: [{
+                label: 'Turnover',
+                data: [data.turnover],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+>>>>>>> parent of 73e6807 (added ajax chart function)
 $(document).ready(function () {
     var selectedRadio = 'firstRadio';
 
     function updateDisplay(displayType, selectedRadio) {
+<<<<<<< HEAD
+=======
+        $('#best-store-card').addClass('hidden'); // Hide the best store card by default
+>>>>>>> parent of 73e6807 (added ajax chart function)
         if (selectedRadio === 'firstRadio') {
             if (displayType === 'list') {
                 if (requestDataProducts) {
@@ -178,10 +221,15 @@ $(document).ready(function () {
                 }
             }
         } else if (selectedRadio === 'secondRadio') {
+<<<<<<< HEAD
+=======
+            $('#best-store-card').removeClass('hidden');
+>>>>>>> parent of 73e6807 (added ajax chart function)
             fetchBestStore();
         }
     }
 
+<<<<<<< HEAD
     function fetchBestStore() {
         $.ajax({
             type: "GET",
@@ -229,6 +277,8 @@ $(document).ready(function () {
         $('#dataList').hide();
     }
 
+=======
+>>>>>>> parent of 73e6807 (added ajax chart function)
     $('#filter_options1').change(function () {
         var selectedTheme = $(this).val();
         updateDisplay(selectedTheme, selectedRadio);
@@ -242,5 +292,8 @@ $(document).ready(function () {
     // Initial fetch
     fetchData();
     fetchDataCustomerOrders();
+<<<<<<< HEAD
     fetchGeneralStatistics(); // Fetch and display general statistics
+=======
+>>>>>>> parent of 73e6807 (added ajax chart function)
 });
