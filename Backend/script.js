@@ -35,6 +35,7 @@ function fetchDataCustomerOrders() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 function fetchGeneralStatistics() {
     $.ajax({
         type: "GET",
@@ -63,6 +64,8 @@ function fetchBestStore() {
 >>>>>>> parent of 73e6807 (added ajax chart function)
 }
 
+=======
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
 =======
 >>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
 function showListData(data) {
@@ -150,6 +153,7 @@ function createCustomerBarChart(labels, data) {
                 }]
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
     });
 
@@ -249,10 +253,13 @@ $(document).ready(function () {
             }
 =======
 >>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
+=======
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
         });
         
         $('#myChart').show();
         $('#dataList').hide();
+<<<<<<< HEAD
 <<<<<<< HEAD
     }
 
@@ -281,6 +288,8 @@ $(document).ready(function () {
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
         }
         
         $(document).ready(function () {
@@ -301,6 +310,7 @@ $(document).ready(function () {
                             orderCounts.push(item.orderCount);
                         });
                         createBarChart(labels, orderCounts);
+<<<<<<< HEAD
 =======
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -336,6 +346,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     y: {
                         beginAtZero: true
 >>>>>>> parent of ae095ee (update ajax)
+=======
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
                     }
                 }
             } else if (selectedRadio === 'thirdRadio') {
@@ -411,6 +423,9 @@ document.addEventListener('DOMContentLoaded', function () {
             updateDisplay(selectedTheme, selectedRadio);
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
         
         $('input[name=listGroupRadio]').change(function () {
             selectedRadio = $(this).attr('id');
@@ -421,6 +436,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchData();
         fetchDataCustomerOrders();
         });
+<<<<<<< HEAD
         
 >>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
 =======
@@ -434,3 +450,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 >>>>>>> parent of ae095ee (update ajax)
+=======
+        
+>>>>>>> parent of 6ce508a (Merge pull request #10 from goktan1/create-shortview)
