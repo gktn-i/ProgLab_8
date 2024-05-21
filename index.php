@@ -15,6 +15,38 @@
             background-color: #f5f5f5;
         }
 
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .stat-box {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-box h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            
+        }
+
+        .stat-box p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+        }
+
+
         .container {
             display: flex;
             max-width: 1200px;
@@ -103,6 +135,26 @@
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
+
+    <div class="statistics">
+        <div class="stat-box">
+            <h2 id="totalOrders">0</h2>
+            <p>Total Orders</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="totalRevenue">$0.00</h2>
+            <p>Total Revenue</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="totalCustomers">0</h2>
+            <p>Total Customers</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="totalProducts">0</h2>
+            <p>Total Products</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
