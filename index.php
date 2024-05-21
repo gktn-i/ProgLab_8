@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
     <style>
@@ -24,6 +25,15 @@
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .stat-box.dark-mode {
+            background-color: #1e1e1e;
         }
 
 
@@ -46,11 +56,23 @@
             animation: fadeIn 1s ease-in;
         }
 
+        .stat-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-content i {
+            font-size: 24px;
+            margin-right: 10px;
+            color: darkgreen;
+        }
+
         .stat-box h2 {
             margin: 0;
             font-size: 24px;
             color: darkgreen;
-            
+
 
         }
 
@@ -147,28 +169,42 @@
     </style>
 </head>
 
+
 <body>
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
 
     <div class="statistics">
         <div class="stat-box">
-            <h2 id="totalOrders">0</h2>
+            <div class="stat-content">
+                <i class='bx bxs-package'></i>
+                <h2 id="totalOrders">0</h2>
+            </div>
             <p>Total Orders</p>
         </div>
         <div class="stat-box">
-            <h2 id="totalRevenue">$0.00</h2>
+            <div class="stat-content">
+                <i class='bx bx-money-withdraw'></i>
+                <h2 id="totalRevenue">$0.00</h2>
+            </div>
             <p>Total Revenue</p>
         </div>
         <div class="stat-box">
-            <h2 id="totalCustomers">0</h2>
+            <div class="stat-content">
+                <i class='bx bxs-user-detail'></i>
+                <h2 id="totalCustomers">0</h2>
+            </div>
             <p>Total Customers</p>
         </div>
         <div class="stat-box">
-            <h2 id="totalProducts">0</h2>
+            <div class="stat-content">
+                <i class='bx bx-list-ul'></i>
+                <h2 id="totalProducts">0</h2>
+            </div>
             <p>Total Products</p>
         </div>
     </div>
+
 
     <div class="container">
         <div class="left-section">
