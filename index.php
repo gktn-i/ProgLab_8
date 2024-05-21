@@ -1,4 +1,5 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!DOCTYPE html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,6 +9,16 @@
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -15,11 +26,13 @@
             background-color: #f5f5f5;
         }
 
+
         .statistics {
             display: flex;
             justify-content: space-around;
             margin: 20px auto;
             max-width: 1200px;
+            margin-top: 50px;
         }
 
         .stat-box {
@@ -30,13 +43,15 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            animation: fadeIn 1s ease-in;
         }
 
         .stat-box h2 {
             margin: 0;
             font-size: 24px;
-            color: #333;
+            color: darkgreen;
             
+
         }
 
         .stat-box p {
@@ -157,7 +172,7 @@
 
     <div class="container">
         <div class="left-section">
-            <?php if (isset($error_message)): ?>
+            <?php if (isset($error_message)) : ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
             <div class="form-group">
@@ -178,8 +193,7 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
-                        checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
                     <label class="form-check-label" for="firstRadio">Best seller product</label>
                 </li>
                 <li class="list-group-item">
@@ -202,8 +216,8 @@
         </div>
         <div class="right-section">
             <h1>Statistics</h1>
-            
-           
+
+
 
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
