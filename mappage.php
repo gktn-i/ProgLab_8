@@ -25,7 +25,6 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
         }
 
         h1 {
@@ -43,31 +42,35 @@
         <div class="map-section">
             <h1 style="margin-bottom: 40px;">Maps</h1>
 
-                <div id="map"></div>
-                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-                <script>
-                    // AJAX-Anfrage, um die Standortdaten von map.php zu erhalten
-                    fetch('/Backend/map.php')
-                        .then(response => response.json())
-                        .then(locations => {
-                            var map = L.map('map').setView([51.505, -0.09], 2);
+            <div id="map"></div>
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script>
+                // AJAX request to get location data from map.php
+                fetch('/Backend/map.php')
+                    .then(response => response.json())
+                    .then(locations => {
+                        var map = L.map('map');
 
-                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            }).addTo(map);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
 
-                            locations.forEach(function(location) {
-                                var marker = L.marker([location.latitude, location.longitude]).addTo(map);
-                                marker.bindPopup(
-                                    '<b>Store ID:</b> ' + location.storeID + '<br>' +
-                                    '<b>City:</b> ' + location.city + '<br>' +
-                                    '<b>Zip Code:</b> ' + location.zipcode + '<br>' +
-                                    '<b>State:</b> ' + location.state + ' (' + location.state_abbr + ')'
-                                );
-                            });
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
-                </script>
+                        var markers = locations.map(function(location) {
+                            var marker = L.marker([location.latitude, location.longitude]);
+                            marker.bindPopup(
+                                '<b>Store ID:</b> ' + location.storeID + '<br>' +
+                                '<b>City:</b> ' + location.city + '<br>' +
+                                '<b>Zip Code:</b> ' + location.zipcode + '<br>' +
+                                '<b>State:</b> ' + location.state + ' (' + location.state_abbr + ')'
+                            );
+                            return marker;
+                        });
+
+                        var featureGroup = L.featureGroup(markers).addTo(map);
+                        map.fitBounds(featureGroup.getBounds());
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            </script>
         </div>
     </div>
 </body>
