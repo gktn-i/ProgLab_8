@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
     <style>
@@ -88,6 +91,7 @@
             display: flex;
             max-width: 1200px;
             margin: 20px auto;
+            
         }
 
         .left-section {
@@ -174,6 +178,13 @@
         .filter_options{
             margin-bottom: 10px;
         }
+
+        #map {
+        height: 400px;
+        margin: 20px auto;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-color: #121212;
+    }
     </style>
 </head>
 
@@ -183,96 +194,114 @@
  
 
     <div class="statistics">
-        <div class="stat-box">
-            <div class="stat-content">
-                <i class='bx bxs-package'></i>
-                <h2 id="totalOrders">0</h2>
-            </div>
-            <p>Total Orders</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-content">
-                <i class='bx bx-money-withdraw'></i>
-                <h2 id="totalRevenue">$0.00</h2>
-            </div>
-            <p>Total Revenue</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-content">
-                <i class='bx bxs-user-detail'></i>
-                <h2 id="totalCustomers">0</h2>
-            </div>
-            <p>Total Customers</p>
-        </div>
-        <div class="stat-box">
-            <div class="stat-content">
-                <i class='bx bx-list-ul'></i>
-                <h2 id="totalProducts">0</h2>
-            </div>
-            <p>Total Products</p>
-        </div>
+    <div class="stat-box">
+        <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
+        <p>Total Orders</p>
     </div>
-
-
-    <div class="container">
-        <div class="left-section">
-            <?php if (isset($error_message)) : ?>
-                <p style="color: red;"><?php echo $error_message; ?></p>
-            <?php endif; ?>
-            <div class="form-group">
-                <label for="filter_options">Select Time Range</label>
-                <select id="filter_options" name="filter_options">
-                    <option value="all">ALL</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                    <option value="year">Year</option>
-                </select>
-            </div>
-            <div class="form-group2">
-                <label for="filter_options">Theme</label>
-                <select id="filter_options1" name="filter_options1">
-                    <option value="list">List</option>
-                    <option value="chart">Chart</option>
-                </select>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                    <label class="form-check-label" for="firstRadio">Best seller product</label>
-                </li>
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
-                    <label class="form-check-label" for="secondRadio">Turnover</label>
-                </li>
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
-                    <label class="form-check-label" for="thirdRadio">Customer Count</label>
-                </li>
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
-                    <label class="form-check-label" for="fourthRadio">Best ?</label>
-                </li>
-                <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
-                    <label class="form-check-label" for="fifthRadio">Order Count</label>
-                </li>
-            </ul>
-        </div>
-        <div class="right-section">
-            <h1>Statistics</h1>
-
-
-
-            <div id="chartContainer">
-                <canvas id="myChart"></canvas>
-            </div>
-            <ul class="list-group" id="dataList">
-                <!-- Placeholder for list data -->
-            </ul>
-        </div>
+    <div class="stat-box">
+        <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
+        <p>Total Revenue</p>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="stat-box">
+        <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
+        <p>Total Customers</p>
+    </div>
+    <div class="stat-box">
+        <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
+        <p>Total Products</p>
+    </div>
+</div>
+
+<div id="map"></div>
+
+<div class="container">
+    <div class="left-section">
+        <?php if (isset($error_message)): ?>
+            <p style="color: red;"><?php echo $error_message; ?></p>
+        <?php endif; ?>
+        <div class="form-group">
+            <label for="filter_options">Select Time Range</label>
+            <select id="filter_options" name="filter_options">
+                <option value="all">ALL</option>
+                <option value="week">Week</option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
+            </select>
+        </div>
+        <div class="form-group2">
+            <label for="filter_options">Theme</label>
+            <select id="filter_options1" name="filter_options1">
+                <option value="list">List</option>
+                <option value="chart">Chart</option>
+            </select>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
+                    checked>
+                <label class="form-check-label" for="firstRadio">Best seller product</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
+                <label class="form-check-label" for="secondRadio">Turnover</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
+                <label class="form-check-label" for="thirdRadio">Customer Count</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
+                <label class="form-check-label" for="fourthRadio">Best ?</label>
+            </li>
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
+                <label class="form-check-label" for="fifthRadio">Order Count</label>
+            </li>
+        </ul>
+    </div>
+    <div class="right-section">
+        <h1>Statistics</h1>
+        <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+        </div>
+        <ul class="list-group" id="dataList">
+            <!-- Placeholder for list data -->
+        </ul>
+    </div>
+</div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script>
+                // AJAX request to get location data from map.php
+                fetch('/Backend/map.php')
+                    .then(response => response.json())
+                    .then(locations => {
+                        var map = L.map('map');
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+
+                        var markers = locations.map(function(location) {
+                            var marker = L.marker([location.latitude, location.longitude]);
+                            marker.bindPopup(
+                                '<b>Store ID:</b> ' + location.storeID + '<br>' +
+                                '<b>City:</b> ' + location.city + '<br>' +
+                                '<b>Zip Code:</b> ' + location.zipcode + '<br>' +
+                                '<b>State:</b> ' + location.state + ' (' + location.state_abbr + ')'
+                            );
+                            return marker;
+                        });
+
+                        var featureGroup = L.featureGroup(markers).addTo(map);
+                        map.fitBounds(featureGroup.getBounds());
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            </script>
+
 
 </body>
+
+
+
 
 </html>
