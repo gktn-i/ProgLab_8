@@ -180,7 +180,7 @@
 
 <body>
     <?php include 'Navbar.php'; ?>
-    <?php include 'Footer.php'; ?>
+ 
 
     <div class="statistics">
         <div class="stat-box">
