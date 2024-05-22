@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-   
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     
     <title>Dashboard</title>
@@ -90,7 +90,8 @@
         .container {
             display: flex;
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 50px auto;
+            margin-bottom: 10%;
             
         }
 
@@ -101,6 +102,7 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
+            
         }
 
 
@@ -120,6 +122,8 @@
         .list-group {
             padding: 0;
             list-style: none;
+            max-height: 500px;
+            overflow-y: auto;
         }
 
         .list-group-item {
@@ -185,6 +189,7 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         border-color: #121212;
     }
+
     </style>
 </head>
 
@@ -283,6 +288,7 @@
 
                         var markers = locations.map(function(location) {
                             var marker = L.marker([location.latitude, location.longitude]);
+                            
                             marker.bindPopup(
                                 '<b>Store ID:</b> ' + location.storeID + '<br>' +
                                 '<b>City:</b> ' + location.city + '<br>' +

@@ -31,6 +31,8 @@ $(document).ready(function () {
         });
     }
 
+    
+
     function fetchData() {
         $.ajax({
             type: "GET",
@@ -288,3 +290,4 @@ $(document).ready(function () {
     fetchDataCustomerOrders();
     fetchGeneralStatistics();
 });
+
