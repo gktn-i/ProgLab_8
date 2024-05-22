@@ -64,7 +64,7 @@ $(document).ready(function () {
     function fetchDataTurnover() {
         $.ajax({
             type: "GET",
-            url: "Backend/get_turnover_data.php", // Ensure this URL is correct
+            url: "Backend/get_store_turnover_data.php", // Ensure this URL is correct
             dataType: "json",
             success: function (data) {
                 requestDataTurnover = data;
@@ -192,8 +192,8 @@ $(document).ready(function () {
                 datasets: [{
                     label: 'Total Revenue',
                     data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                    borderColor: 'rgb(60, 81, 49, 1)',
                     borderWidth: 1
                 }]
             },
