@@ -64,7 +64,7 @@ $(document).ready(function () {
     function fetchDataTurnover() {
         $.ajax({
             type: "GET",
-            url: "Backend/get_turnover_data.php",
+            url: "Backend/get_turnover_data.php", // Ensure this URL is correct
             dataType: "json",
             success: function (data) {
                 requestDataTurnover = data;
@@ -148,6 +148,37 @@ $(document).ready(function () {
         $('#dataList').hide();
     }
 
+    function createCustomerBarChart(labels, data) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Customer Count',
+                    data: data,
+                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                    borderColor: 'rgb(60, 81, 49, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        $('#myChart').show();
+        $('#dataList').hide();
+    }
+
     function createTurnoverBarChart(labels, data) {
         var ctx = document.getElementById('myChart').getContext('2d');
         if (myChart) {
@@ -161,8 +192,8 @@ $(document).ready(function () {
                 datasets: [{
                     label: 'Total Revenue',
                     data: data,
-                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
-                    borderColor: 'rgb(60, 81, 49, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
             },
