@@ -125,6 +125,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-top: 5%px;
+            transition: all 0.3s ease;
         }
 
 
@@ -144,6 +145,8 @@
 
         .list-group-item:hover {
             background-color: #e9e9e9;
+            transition: opacity 0.3s;
+           
         }
 
 
@@ -157,6 +160,7 @@
             margin-right: 20px;
         }
 
+      
         select {
             width: 100%;
             padding: 10px;
@@ -165,6 +169,10 @@
             background-color: #f9f9f9;
             font-size: 16px;
             appearance: none;
+        }
+
+        .filter_options{
+            margin-bottom: 10px;
         }
     </style>
 </head>
