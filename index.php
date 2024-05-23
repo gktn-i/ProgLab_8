@@ -94,7 +94,7 @@
             max-width: 1200px;
             margin: 50px auto;
             margin-bottom: 10%;
-
+            height: 600;
         }
 
         .left-section {
@@ -218,7 +218,7 @@
 
 <body>
 
-<div id="particles-js" class="hintergrund"></div>
+<div id="particles-js"></div>
 
 
 
