@@ -192,8 +192,10 @@
         #map {
             height: 400px;
             margin: 20px auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-color: #121212;
+            width: 1290px;
+            border-radius: 3px;
         }
 
         #particles-js {
