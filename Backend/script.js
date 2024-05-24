@@ -31,7 +31,7 @@ $(document).ready(function () {
         });
     }
 
-    
+
 
     function fetchData() {
         $.ajax({
@@ -77,14 +77,28 @@ $(document).ready(function () {
             }
         });
     }
+    function fetchorderbyresturant() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_orders_by_resturant.php",
+            dataType: "json",
+            success: function (data) {
+                requestOrdersByRestaurant = data;
+                updateDisplay($('#filter_options1').val(), selectedRadio);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching orders by restaurant data: ", xhr.responseText);
+            }
+        });
+    }
 
     function showListData(data) {
         var listItems = "";
         $.each(data, function (index, item) {
             listItems += '<li class="list-group-item">' +
-                '<label>Gericht: ' + item.Name + '</label><br>' +
+                '<label>Food: ' + item.Name + '</label><br>' +
                 '<span>Size: ' + item.Size + '</span><br>' +
-                '<span>Order Count: ' + item.orderCount + '</span>' +
+                '<span>Number of orders: ' + item.orderCount + '</span>' +
                 '</li>';
         });
         $('#dataList').html(listItems);
@@ -112,6 +126,18 @@ $(document).ready(function () {
             listItems += '<li class="list-group-item">' +
                 '<label>Store: ' + item.store_name + '</label><br>' +
                 '<span>Total Revenue: $' + parseFloat(item.total_revenue).toFixed(2) + '</span>' +
+                '</li>';
+        });
+        $('#dataList').html(listItems);
+        $('#dataList').show();
+        $('#myChart').hide();
+    }
+    function showOrdersByRestaurant(data) {
+        var listItems = "";
+        $.each(data, function (index, item) {
+            listItems += '<li class="list-group-item">' +
+                '<label>Store: ' + item.storeID + '</label><br>' +
+                '<span>Order Count: ' + item.order_count + '</span>' +
                 '</li>';
         });
         $('#dataList').html(listItems);
@@ -211,6 +237,36 @@ $(document).ready(function () {
         $('#myChart').show();
         $('#dataList').hide();
     }
+    function createOrdersByRestaurantBarChart(labels, data) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of orders',
+                    data: data,
+                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                    borderColor: 'rgb(60, 81, 49, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        $('#myChart').show();
+        $('#dataList').hide();
+    }
 
     function updateDisplay(displayType, selectedRadio) {
         if (selectedRadio === 'firstRadio') {
@@ -261,7 +317,23 @@ $(document).ready(function () {
                     createTurnoverBarChart(labels, turnoverAmounts);
                 }
             }
-        }
+        }else if (selectedRadio === 'fifthRadio') {
+            if (displayType === 'list') {
+                if (requestOrdersByRestaurant) {
+                    showOrdersByRestaurant(requestOrdersByRestaurant);
+                }
+            } else if (displayType === 'chart') {
+                if (requestOrdersByRestaurant) {
+                    var labels = [];
+                    var orderCounts = [];
+                    $.each(requestOrdersByRestaurant, function (index, item) {
+                        labels.push(item.storeID);
+                        orderCounts.push(item.order_count);
+                    });
+                    createOrdersByRestaurantBarChart(labels, orderCounts);
+                }
+            }
+        } 
     }
 
     $('#filter_options1').change(function () {
@@ -280,7 +352,10 @@ $(document).ready(function () {
             fetchDataTurnover();
         } else if (selectedRadio === 'thirdRadio') {
             fetchDataCustomerOrders();
-        } else {
+        } else if (selectedRadio === 'fifthRadio') {
+            fetchorderbyresturant();
+        } 
+        else {
             fetchData();
         }
     });
@@ -289,5 +364,6 @@ $(document).ready(function () {
     fetchData();
     fetchDataCustomerOrders();
     fetchGeneralStatistics();
+    fetchorderbyresturant();
 });
 

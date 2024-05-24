@@ -290,7 +290,7 @@
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
-                    <label class="form-check-label" for="fifthRadio">all orders sorted by restaurant</label>
+                    <label class="form-check-label" for="fifthRadio">Orders sorted by Stores</label>
                 </li>
             </ul>
         </div>
