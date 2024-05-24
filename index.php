@@ -45,10 +45,12 @@
             justify-content: space-around;
             margin: 20px auto;
             max-width: 1200px;
-            margin-top: 50px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .stat-box {
+            min-width: fit-content;
             flex: 1;
             margin: 10px;
             padding: 20px;
@@ -94,7 +96,7 @@
             max-width: 1200px;
             margin: 50px auto;
             margin-bottom: 10%;
-
+            height: 600;
         }
 
         .left-section {
@@ -196,6 +198,8 @@
             border-color: #121212;
             width: 1290px;
             border-radius: 3px;
+            border: solid 1px;
+            border-color: #666;
         }
 
         #particles-js {
@@ -218,7 +222,7 @@
 
 <body>
 
-<div id="particles-js" class="hintergrund"></div>
+<div id="particles-js"></div>
 
 
 
@@ -329,6 +333,22 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     </script>
+
+<div class="modal fade" id="storeStatisticsModal" tabindex="-1" aria-labelledby="storeStatisticsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="storeStatisticsModalLabel">Store Statistics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <canvas id="storeChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script type="text/javascript " src="particles.js "></script>
     <script src="app.js "></script>
 

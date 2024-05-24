@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         .navbar {
-            background-color: #3C5131;
-            box-shadow: 10px 13px 40px rgba(71, 71, 71, 0.658);
+            
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
+            justify-content: center;
+        }
 
-
-
+        .navbar-brand{
+            margin: 0;
         }
 
         .navbar-dark .navbar-nav .nav-link {
@@ -36,7 +37,7 @@
 
         .navbar img {
             width: 40px;
-            margin-right: 20px;
+            
         }
 
         .white-img {
@@ -51,8 +52,10 @@
         }
 
         .navimg {
-            height: 70px;
-            margin-left: 20px;
+            height: 80px;
+            width: 80px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
         }
 
         .btn.btn-outline-primary.white-button {
@@ -68,7 +71,6 @@
             margin-right: 20px;
             margin-top: 5px;
             text-decoration: none;
-
         }
 
         .navbar-icon {
@@ -90,21 +92,22 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <b>
-                <a href="index.php?page=start">
-                    <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 80px; width: 80px;">
-                </a>
-            </b>
+    <div class="container-fluid d-flex justify-content-center">
+            <a href="index.php?page=start" class="navbar-brand">
+                <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 90px; width: 90px;">
+            </a>
+        
+            
+            <!-- Remove comments to show icons: -->
 
 
-            <div class="d-flex align-items-center">
-                <?php if (isset($_SESSION["user_id"])): ?>
+            <!--  <div class="d-flex align-items-center">
+                <?php if (isset($_SESSION["user_id"])) : ?>
 
                     <a class="navbar-icon" href="Backend/logout.php">
                         <i class='bx bx-log-out' style='font-size: 50px;'></i>
                     </a>
-                <?php else: ?>
+                <?php else : ?>
 
                     <a class="navbar-icon" href="Signin.php?page=Anmelden">
                         <i class='bx bx-log-in'></i>
@@ -114,15 +117,15 @@
                     <i class='bx bx-map'></i>
 
                   
-                    <!-- <span class="badge bg-white text-dark">2</span> -->
+                    < <span class="badge bg-white text-dark">2</span> 
                 </a>
                 <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i
                         class='bx bxs-user'></i>
-
-
-
                 </a>
-            </div>
+                -->
+
+
+        </div>
         </div>
     </nav>
 
