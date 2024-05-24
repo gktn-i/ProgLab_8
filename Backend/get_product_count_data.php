@@ -1,11 +1,12 @@
 <?php
 $mysqli = require __DIR__ . "/database.php";
 
-$query = "  SELECT products.Name, products.Size, orderitems.SKU, COUNT(*) as orderCount 
-            FROM orderitems 
-            JOIN products ON orderitems.SKU = products.SKU 
-            GROUP BY products.SKU 
-            ORDER BY orderCount DESC;";
+$query = " SELECT products.Name, products.Size, orderitems.SKU, COUNT(*) as orderCount 
+FROM orderitems 
+JOIN products ON orderitems.SKU = products.SKU 
+GROUP BY products.SKU, products.Name, products.Size
+ORDER BY orderCount DESC
+LIMIT 20;";
 
 $result = mysqli_query($mysqli, $query);
 
