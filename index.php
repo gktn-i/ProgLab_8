@@ -45,7 +45,7 @@
             justify-content: space-around;
             margin: 20px auto;
             max-width: 1200px;
-            margin-top: 50px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
 
@@ -333,6 +333,22 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     </script>
+
+<div class="modal fade" id="storeStatisticsModal" tabindex="-1" aria-labelledby="storeStatisticsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="storeStatisticsModalLabel">Store Statistics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <canvas id="storeChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script type="text/javascript " src="particles.js "></script>
     <script src="app.js "></script>
 

@@ -10,12 +10,15 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         .navbar {
-            background-color: #3C5131;
-            box-shadow: 10px 13px 40px rgba(71, 71, 71, 0.658);
+            
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
             justify-content: center;
+        }
+
+        .navbar-brand{
+            margin: 0;
         }
 
         .navbar-dark .navbar-nav .nav-link {
@@ -34,7 +37,7 @@
 
         .navbar img {
             width: 40px;
-            margin-right: 20px;
+            
         }
 
         .white-img {
@@ -51,6 +54,8 @@
         .navimg {
             height: 80px;
             width: 80px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
         }
 
         .btn.btn-outline-primary.white-button {
@@ -89,7 +94,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid d-flex justify-content-center">
             <a href="index.php?page=start" class="navbar-brand">
-                <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 80px; width: 80px;">
+                <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 90px; width: 90px;">
             </a>
         
             
