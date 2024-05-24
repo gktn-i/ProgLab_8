@@ -145,10 +145,27 @@ $(document).ready(function () {
         $('#myChart').hide();
     }
 
-    function createBarChart(labels, data) {
+    function createBarChart(labels, data, prices) {
         var ctx = document.getElementById('myChart').getContext('2d');
         if (myChart) {
             myChart.destroy();
+        }
+
+        var backgroundColors = [];
+
+
+        var minPrice = Math.min(...prices);
+        var maxPrice = Math.max(...prices);
+
+        // Farbverlauf definieren
+        for (var i = 0; i < data.length; i++) {
+            var price = prices[i];
+            var gradient = (price - minPrice) / (maxPrice - minPrice);
+
+            var redValue = Math.round(255 * gradient);
+            var greenValue = Math.round(255 - (255 * gradient));
+            var color = 'rgba(' + redValue + ',' + greenValue + ',0,0.8)';
+            backgroundColors.push(color);
         }
 
         myChart = new Chart(ctx, {
@@ -158,8 +175,8 @@ $(document).ready(function () {
                 datasets: [{
                     label: 'Order Count',
                     data: data,
-                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
-                    borderColor: 'rgb(60, 81, 49, 1)',
+                    backgroundColor: backgroundColors,
+                    borderColor: 'rgba(60, 81, 49, 1)',
                     borderWidth: 1
                 }]
             },
@@ -167,6 +184,26 @@ $(document).ready(function () {
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            generateLabels: function (chart) {
+                                return [{
+                                    text: 'Price: Cheap',
+                                    fillStyle: 'rgba(0, 255, 0, 0.8)', // Hellgrün
+                                    strokeStyle: 'rgba(0, 255, 0, 0.8)',
+                                    lineWidth: 1
+                                }, {
+                                    text: 'Price: expensive',
+                                    fillStyle: 'rgba(255, 0, 0, 0.8)', // Dunkelrot
+                                    strokeStyle: 'rgba(255, 0, 0, 0.8)',
+                                    lineWidth: 1
+                                }];
+                            }
+                        }
                     }
                 }
             }
@@ -278,11 +315,13 @@ $(document).ready(function () {
                 if (requestDataProducts) {
                     var labels = [];
                     var orderCounts = [];
+                    var prices = [];
                     $.each(requestDataProducts, function (index, item) {
                         labels.push(item.Name);
                         orderCounts.push(item.orderCount);
+                        prices.push(parseFloat(item.minPrice));
                     });
-                    createBarChart(labels, orderCounts);
+                    createBarChart(labels, orderCounts, prices);
                 }
             }
         } else if (selectedRadio === 'thirdRadio') {
@@ -317,7 +356,7 @@ $(document).ready(function () {
                     createTurnoverBarChart(labels, turnoverAmounts);
                 }
             }
-        }else if (selectedRadio === 'fifthRadio') {
+        } else if (selectedRadio === 'fifthRadio') {
             if (displayType === 'list') {
                 if (requestOrdersByRestaurant) {
                     showOrdersByRestaurant(requestOrdersByRestaurant);
@@ -333,7 +372,7 @@ $(document).ready(function () {
                     createOrdersByRestaurantBarChart(labels, orderCounts);
                 }
             }
-        } 
+        }
     }
 
     $('#filter_options1').change(function () {
@@ -354,7 +393,7 @@ $(document).ready(function () {
             fetchDataCustomerOrders();
         } else if (selectedRadio === 'fifthRadio') {
             fetchorderbyresturant();
-        } 
+        }
         else {
             fetchData();
         }
