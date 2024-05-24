@@ -66,7 +66,7 @@ $(document).ready(function () {
     function fetchDataTurnover() {
         $.ajax({
             type: "GET",
-            url: "Backend/get_store_turnover_data.php", // Ensure this URL is correct
+            url: "Backend/get_store_turnover_data.php",
             dataType: "json",
             success: function (data) {
                 requestDataTurnover = data;

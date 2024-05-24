@@ -46,9 +46,11 @@
             margin: 20px auto;
             max-width: 1200px;
             margin-top: 50px;
+            flex-wrap: wrap;
         }
 
         .stat-box {
+            min-width: fit-content;
             flex: 1;
             margin: 10px;
             padding: 20px;
@@ -196,6 +198,8 @@
             border-color: #121212;
             width: 1290px;
             border-radius: 3px;
+            border: solid 1px;
+            border-color: #666;
         }
 
         #particles-js {
