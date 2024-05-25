@@ -233,7 +233,7 @@
     <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
-    <?php include 'Footer.php'; ?>
+ 
 
     <div class="statistics">
         <div class="stat-box">
@@ -297,7 +297,7 @@
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
-                    <label class="form-check-label" for="fifthRadio">Order Count</label>
+                    <label class="form-check-label" for="fifthRadio">Orders sorted by Stores</label>
                 </li>
             </ul>
         </div>

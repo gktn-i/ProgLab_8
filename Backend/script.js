@@ -32,6 +32,11 @@ $(document).ready(function () {
         });
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7976ed199e71782756de1468b6658185c3f63b25
     function fetchData() {
         $.ajax({
             type: "GET",
@@ -76,14 +81,28 @@ $(document).ready(function () {
             }
         });
     }
+    function fetchorderbyresturant() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_orders_by_resturant.php",
+            dataType: "json",
+            success: function (data) {
+                requestOrdersByRestaurant = data;
+                updateDisplay($('#filter_options1').val(), selectedRadio);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching orders by restaurant data: ", xhr.responseText);
+            }
+        });
+    }
 
     function showListData(data) {
         var listItems = "";
         $.each(data, function (index, item) {
             listItems += '<li class="list-group-item">' +
-                '<label>Gericht: ' + item.Name + '</label><br>' +
+                '<label>Food: ' + item.Name + '</label><br>' +
                 '<span>Size: ' + item.Size + '</span><br>' +
-                '<span>Order Count: ' + item.orderCount + '</span>' +
+                '<span>Number of orders: ' + item.orderCount + '</span>' +
                 '</li>';
         });
         $('#dataList').html(listItems);
@@ -117,11 +136,40 @@ $(document).ready(function () {
         $('#dataList').show();
         $('#myChart').hide();
     }
+    function showOrdersByRestaurant(data) {
+        var listItems = "";
+        $.each(data, function (index, item) {
+            listItems += '<li class="list-group-item">' +
+                '<label>Store: ' + item.storeID + '</label><br>' +
+                '<span>Order Count: ' + item.order_count + '</span>' +
+                '</li>';
+        });
+        $('#dataList').html(listItems);
+        $('#dataList').show();
+        $('#myChart').hide();
+    }
 
-    function createBarChart(labels, data) {
+    function createBarChart(labels, data, prices) {
         var ctx = document.getElementById('myChart').getContext('2d');
         if (myChart) {
             myChart.destroy();
+        }
+
+        var backgroundColors = [];
+
+
+        var minPrice = Math.min(...prices);
+        var maxPrice = Math.max(...prices);
+
+        // Farbverlauf definieren
+        for (var i = 0; i < data.length; i++) {
+            var price = prices[i];
+            var gradient = (price - minPrice) / (maxPrice - minPrice);
+
+            var redValue = Math.round(255 * gradient);
+            var greenValue = Math.round(255 - (255 * gradient));
+            var color = 'rgba(' + redValue + ',' + greenValue + ',0,0.8)';
+            backgroundColors.push(color);
         }
 
         myChart = new Chart(ctx, {
@@ -131,8 +179,8 @@ $(document).ready(function () {
                 datasets: [{
                     label: 'Order Count',
                     data: data,
-                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
-                    borderColor: 'rgb(60, 81, 49, 1)',
+                    backgroundColor: backgroundColors,
+                    borderColor: 'rgba(60, 81, 49, 1)',
                     borderWidth: 1
                 }]
             },
@@ -140,6 +188,26 @@ $(document).ready(function () {
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            generateLabels: function (chart) {
+                                return [{
+                                    text: 'Price: Cheap',
+                                    fillStyle: 'rgba(0, 255, 0, 0.8)', // Hellgrün
+                                    strokeStyle: 'rgba(0, 255, 0, 0.8)',
+                                    lineWidth: 1
+                                }, {
+                                    text: 'Price: expensive',
+                                    fillStyle: 'rgba(255, 0, 0, 0.8)', // Dunkelrot
+                                    strokeStyle: 'rgba(255, 0, 0, 0.8)',
+                                    lineWidth: 1
+                                }];
+                            }
+                        }
                     }
                 }
             }
@@ -210,6 +278,36 @@ $(document).ready(function () {
         $('#myChart').show();
         $('#dataList').hide();
     }
+    function createOrdersByRestaurantBarChart(labels, data) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of orders',
+                    data: data,
+                    backgroundColor: 'rgba(60, 81, 49, 0.2)',
+                    borderColor: 'rgb(60, 81, 49, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        $('#myChart').show();
+        $('#dataList').hide();
+    }
 
     function updateDisplay(displayType, selectedRadio) {
         if (selectedRadio === 'firstRadio') {
@@ -221,11 +319,13 @@ $(document).ready(function () {
                 if (requestDataProducts) {
                     var labels = [];
                     var orderCounts = [];
+                    var prices = [];
                     $.each(requestDataProducts, function (index, item) {
                         labels.push(item.Name);
                         orderCounts.push(item.orderCount);
+                        prices.push(parseFloat(item.minPrice));
                     });
-                    createBarChart(labels, orderCounts);
+                    createBarChart(labels, orderCounts, prices);
                 }
             }
         } else if (selectedRadio === 'thirdRadio') {
@@ -260,6 +360,22 @@ $(document).ready(function () {
                     createTurnoverBarChart(labels, turnoverAmounts);
                 }
             }
+        } else if (selectedRadio === 'fifthRadio') {
+            if (displayType === 'list') {
+                if (requestOrdersByRestaurant) {
+                    showOrdersByRestaurant(requestOrdersByRestaurant);
+                }
+            } else if (displayType === 'chart') {
+                if (requestOrdersByRestaurant) {
+                    var labels = [];
+                    var orderCounts = [];
+                    $.each(requestOrdersByRestaurant, function (index, item) {
+                        labels.push(item.storeID);
+                        orderCounts.push(item.order_count);
+                    });
+                    createOrdersByRestaurantBarChart(labels, orderCounts);
+                }
+            }
         }
     }
 
@@ -279,7 +395,10 @@ $(document).ready(function () {
             fetchDataTurnover();
         } else if (selectedRadio === 'thirdRadio') {
             fetchDataCustomerOrders();
-        } else {
+        } else if (selectedRadio === 'fifthRadio') {
+            fetchorderbyresturant();
+        }
+        else {
             fetchData();
         }
     });
@@ -287,5 +406,6 @@ $(document).ready(function () {
     fetchData();
     fetchDataCustomerOrders();
     fetchGeneralStatistics();
+    fetchorderbyresturant();
 });
 
