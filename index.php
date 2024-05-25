@@ -10,6 +10,9 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
+
+    
+    
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
     <style>
@@ -39,7 +42,6 @@
             background-color: #1e1e1e;
         }
 
-
         .statistics {
             display: flex;
             justify-content: space-around;
@@ -60,7 +62,7 @@
             text-align: center;
             animation: fadeIn 1s ease-in;
             border: 1px solid;
-            border-color:#666;
+            border-color: #666;
         }
 
         .stat-content {
@@ -79,8 +81,6 @@
             margin: 0;
             font-size: 24px;
             color: darkgreen;
-
-
         }
 
         .stat-box p {
@@ -90,13 +90,12 @@
             font-weight: bold;
         }
 
-
         .container {
             display: flex;
             max-width: 1200px;
             margin: 50px auto;
             margin-bottom: 10%;
-            height: 600;
+            height: 600px;
         }
 
         .left-section {
@@ -107,10 +106,8 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
             border: 1px solid;
-            border-color:#666;
-
+            border-color: #666;
         }
-
 
         .right-section {
             flex-basis: 70%;
@@ -119,7 +116,7 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border: 1px solid;
-            border-color:#666;
+            border-color: #666;
         }
 
         h1,
@@ -144,7 +141,6 @@
             transition: all 0.3s ease;
         }
 
-
         .list-group-item label {
             font-weight: bold;
         }
@@ -162,9 +158,7 @@
         .list-group-item:hover {
             background-color: #e9e9e9;
             transition: opacity 0.3s;
-
         }
-
 
         .form-group2 {
             margin-bottom: 20px;
@@ -175,7 +169,6 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
         }
-
 
         select {
             width: 100%;
@@ -192,7 +185,7 @@
         }
 
         #map {
-            height: 400px;
+            height: 500px;
             margin: 20px auto;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-color: #121212;
@@ -204,27 +197,40 @@
 
         #particles-js {
             position: fixed;
-            /* Festposition, unabhängig von Scrollen */
             top: 0;
-            /* Oberer Rand auf 0 setzen */
             left: 0;
-            /* Linker Rand auf 0 setzen */
             width: 100vw;
-            /* 100% der viewport Breite */
             height: 100vh;
-            /* 100% der viewport Höhe */
             z-index: -1;
-            /* Hintergrundebene */
+        }
+
+        /* Popup styles */
+        #chartPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        #closePopup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
         }
     </style>
 </head>
 
-
 <body>
 
-<div id="particles-js"></div>
-
-
+    <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
     <?php include 'Footer.php'; ?>
@@ -247,6 +253,7 @@
             <p>Total Products</p>
         </div>
     </div>
+
 
     <div id="map"></div>
 
@@ -304,57 +311,137 @@
             </ul>
         </div>
     </div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // AJAX request to get location data from map.php
-        fetch('/Backend/map.php')
-            .then(response => response.json())
-            .then(locations => {
-                var map = L.map('map');
 
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                var markers = locations.map(function(location) {
-                    var marker = L.marker([location.latitude, location.longitude]);
-
-                    marker.bindPopup(
-                        '<b>Store ID:</b> ' + location.storeID + '<br>' +
-                        '<b>City:</b> ' + location.city + '<br>' +
-                        '<b>Zip Code:</b> ' + location.zipcode + '<br>' +
-                        '<b>State:</b> ' + location.state + ' (' + location.state_abbr + ')'
-                    );
-                    return marker;
-                });
-
-                var featureGroup = L.featureGroup(markers).addTo(map);
-                map.fitBounds(featureGroup.getBounds());
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    </script>
-
-<div class="modal fade" id="storeStatisticsModal" tabindex="-1" aria-labelledby="storeStatisticsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="storeStatisticsModalLabel">Store Statistics</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <canvas id="storeChart"></canvas>
+    <!-- Modal -->
+    <div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="storeModalLabel">Store Statistics</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="storeChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-    <script type="text/javascript " src="particles.js "></script>
-    <script src="app.js "></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        $(document).ready(function() {
+            var map = L.map('map').setView([37.7749, -122.4194], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            function fetchLocations() {
+                fetch('/Backend/map.php')
+                    .then(response => response.json())
+                    .then(locations => {
+                        console.log("Locations fetched: ", locations);
+                        var markers = locations.map(function(location) {
+                            var marker = L.marker([location.latitude, location.longitude]);
+
+                            marker.on('click', function() {
+                                console.log(`Fetching statistics for store ID: ${location.storeID}`);
+                                fetchStoreStatistics(location, marker);
+                            });
+
+                            return marker;
+                        });
+
+                        var featureGroup = L.featureGroup(markers).addTo(map);
+                        map.fitBounds(featureGroup.getBounds());
+                    })
+                    .catch(error => {
+                        console.error('Error fetching map data:', error);
+                    });
+            }
+
+            function fetchStoreStatistics(location, marker) {
+                fetch(`/Backend/get_store_statistics.php?storeID=${location.storeID}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Statistics fetched: ", data);
+                        var popupContent = `
+                <b>Store ID:</b> ${location.storeID}<br>
+                <b>City:</b> ${location.city}<br>
+                <b>Zip Code:</b> ${location.zipcode}<br>
+                <b>State:</b> ${location.state} (${location.state_abbr})<br>
+                <canvas id="storeChart" width="200" height="150"></canvas>`;
+                        marker.bindPopup(popupContent).openPopup();
+
+                        setTimeout(() => {
+                            var ctx = document.getElementById('storeChart');
+                            if (ctx) {
+                                ctx = ctx.getContext('2d');
+
+                                var chart = new Chart(ctx, {
+                                    type: 'pie',
+                                    data: {
+                                        labels: ['Total Orders', 'Total Revenue', 'Total Customers'],
+                                        datasets: [{
+                                            data: [data[0].totalOrders, data[0].totalRevenue, data[0].totalCustomers],
+                                            backgroundColor: [
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                position: 'top',
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function(context) {
+                                                        let label = context.label || '';
+                                                        if (label) {
+                                                            label += ': ';
+                                                        }
+                                                        if (context.raw !== null) {
+                                                            label += context.raw.toLocaleString();
+                                                        }
+                                                        return label;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                console.error('Canvas element not found');
+                            }
+                        }, 300);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching store statistics: ', error);
+                    });
+            }
+            fetchLocations();
+        });
+    </script>
 </body>
 
 
 
+<script type="text/javascript " src="particles.js "></script>
+<script src="app.js "></script>
+
+</body>
 
 </html>
