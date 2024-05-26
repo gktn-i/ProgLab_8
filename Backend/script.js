@@ -2,7 +2,12 @@ var requestDataProducts = null; // Daten für die Gerichte
 var requestDataCustomers = null; // Daten für die Kundenzählung
 var requestDataTurnover = null; // Daten für die Umsätze
 var myChart = null; // Variable für das Chart-Objekt
+
+
+var requestCategoryandturnover = null;
+
 var storeChart = null; // Variable für das Store-Chart-Objekt
+
 var selectedRadio = 'firstRadio';
 
 $(document).ready(function () {
@@ -47,7 +52,120 @@ $(document).ready(function () {
             }
         });
     }
+    //--
+    function fetchCategoryandTurnover() {
+        $.ajax({
+            type: "GET",
+            url: "Backend/get_category_turnover.php",
+            dataType: "json",
+            success: function (data) {
+                requestCategoryandturnover = data; 
+                updateDisplay($('#filter_options1').val(), selectedRadio);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching category and turnover data: ", xhr.responseText);
+            }
+        });
+    }
 
+    function showStackedBarChart(data) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+       
+        var labels = [];
+        var categories = {};
+
+        data.forEach(function (item) {
+            if (!labels.includes(item.Month)) {
+                labels.push(item.Month);
+            }
+            if (!categories[item.Category]) {
+                categories[item.Category] = [];
+            }
+            categories[item.Category].push({
+                month: item.Month,
+                totalRevenue: item.TotalRevenue
+            });
+        });
+        var categoryColors = {
+            Classic: 'rgba(255, 99, 132, 0.8)', 
+            Specialty: 'rgba(54, 162, 235, 0.8)', 
+            Vegetarian: 'rgba(255, 206, 86, 0.8)' 
+            
+        };
+        var datasets = [];
+        for (var category in categories) {
+            var categoryData = [];
+            labels.forEach(function (label) {
+                var monthData = categories[category].find(function (item) {
+                    return item.month === label;
+                });
+                categoryData.push(monthData ? monthData.totalRevenue : 0);
+            });
+            datasets.push({
+                label: category,
+                data: categoryData,
+                backgroundColor: categoryColors[category] || getRandomColor()
+            });
+        }
+
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly turnover by category'
+                    }
+                }
+            }
+        });
+
+        $('#myChart').show();
+        $('#dataList').hide();
+    }
+
+    /*    zufällige Farben zu generieren
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        } */
+    function showCategoryAndTurnoverList(data) {
+        var listItems = "";
+        $.each(data, function (index, item) {
+            listItems += '<li class="list-group-item">' +
+                '<label>Category ' + item.Category + '</label><br>' +
+                '<span>Order Month: ' + item.Month + '</span>' +
+                '<span>Order Total Revenue: ' + item.TotalRevenue + '</span>' +
+                '</li>';
+        });
+        $('#dataList').html(listItems);
+        $('#dataList').show();
+        $('#myChart').hide();
+    }
+
+    //---
     function fetchDataCustomerOrders() {
         $.ajax({
             type: "GET",
@@ -372,6 +490,16 @@ $(document).ready(function () {
                     createOrdersByRestaurantBarChart(labels, orderCounts);
                 }
             }
+        } else if (selectedRadio === 'fourthRadio') {
+            if (displayType === 'list') {
+                if (requestCategoryandturnover) {
+                    showCategoryAndTurnoverList(requestCategoryandturnover);
+                }
+            } else if (displayType === 'chart') {
+                if (requestCategoryandturnover) {
+                    showStackedBarChart(requestCategoryandturnover);
+                }
+            }
         }
     }
 
@@ -403,5 +531,6 @@ $(document).ready(function () {
     fetchDataCustomerOrders();
     fetchGeneralStatistics();
     fetchorderbyresturant();
+    fetchCategoryandTurnover();
 });
 
