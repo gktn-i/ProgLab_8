@@ -2,7 +2,12 @@ var requestDataProducts = null; // Daten für die Gerichte
 var requestDataCustomers = null; // Daten für die Kundenzählung
 var requestDataTurnover = null; // Daten für die Umsätze
 var myChart = null; // Variable für das Chart-Objekt
+
+
 var requestCategoryandturnover = null;
+
+var storeChart = null; // Variable für das Store-Chart-Objekt
+
 var selectedRadio = 'firstRadio';
 
 $(document).ready(function () {
@@ -31,7 +36,6 @@ $(document).ready(function () {
             }
         });
     }
-
 
 
     function fetchData() {
@@ -522,7 +526,6 @@ $(document).ready(function () {
             fetchData();
         }
     });
-
     // Initial fetch
     fetchData();
     fetchDataCustomerOrders();
