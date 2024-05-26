@@ -10,8 +10,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-
-
+   
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
@@ -360,9 +359,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
+<script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
     <script>
         $(document).ready(function() {
-            var map = L.map('map').setView([37.7749, -122.4194], 5);
+            var map = L.map('map', {
+                fullscreenControl: true,
+            }).setView([37.7749, -122.4194], 5);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -461,11 +464,11 @@
                                                 position: 'bottom',
                                                 labels: {
                                                     font: {
-                                                        size: 12 
+                                                        size: 12
                                                     },
                                                     boxWidth: 10,
-                                                    padding: 10, 
-                                                    usePointStyle: true, 
+                                                    padding: 10,
+                                                    usePointStyle: true,
                                                 }
                                             },
                                             tooltip: {
@@ -485,8 +488,8 @@
                                         },
                                         layout: {
                                             padding: {
-                                                top: 10, 
-                                                bottom: 10 
+                                                top: 10,
+                                                bottom: 10
                                             }
                                         }
                                     }
@@ -534,11 +537,11 @@
                                                 position: 'bottom',
                                                 labels: {
                                                     font: {
-                                                        size: 12 
+                                                        size: 12
                                                     },
                                                     boxWidth: 10,
                                                     padding: 4,
-                                                    usePointStyle: true, 
+                                                    usePointStyle: true,
                                                 }
                                             },
                                             tooltip: {
@@ -558,8 +561,8 @@
                                         },
                                         layout: {
                                             padding: {
-                                                top: 10, 
-                                                bottom: 10 
+                                                top: 10,
+                                                bottom: 10
                                             }
                                         }
                                     }
@@ -573,7 +576,7 @@
 
                             /// Line chart for Total Customers
                             var ctxCustomers = document.getElementById('storeChartCustomers');
-                            console.log("Canvas Element: ", ctxCustomers); 
+                            console.log("Canvas Element: ", ctxCustomers);
 
                             if (ctxCustomers) {
                                 ctxCustomers = ctxCustomers.getContext('2d');
@@ -605,9 +608,9 @@
                                                 },
                                                 ticks: {
                                                     beginAtZero: true,
-                                                    stepSize: 1, 
+                                                    stepSize: 1,
                                                     callback: function(value, index, values) {
-                                                        return Number.isInteger(value) ? value : null; 
+                                                        return Number.isInteger(value) ? value : null;
                                                     }
                                                 }
                                             }
@@ -650,7 +653,7 @@
                             } else {
                                 console.error('Canvas element not found for Customers');
                             }
-                            
+
                             // showChart('orders');
                         }, 300);
                     })
