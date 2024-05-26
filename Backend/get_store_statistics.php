@@ -8,23 +8,54 @@ if (!$storeID) {
     exit;
 }
 
-$query = "
-    SELECT 
-        (SELECT COUNT(*) FROM orders WHERE storeID = '$storeID') AS totalOrders, 
-        (SELECT SUM(total) FROM orders WHERE storeID = '$storeID') AS totalRevenue, 
-        (SELECT COUNT(DISTINCT customerID) FROM orders WHERE storeID = '$storeID') AS totalCustomers, 
-        (SELECT COUNT(DISTINCT oi.SKU) FROM orderitems oi JOIN orders o ON oi.orderID = o.orderID WHERE o.storeID = '$storeID') AS totalProducts
+// Fetch orders data
+$ordersQuery = "
+    SELECT p.Name AS productName, SUM(o.nItems) AS quantitySold 
+    FROM orderitems oi 
+    JOIN products p ON oi.SKU = p.SKU
+    JOIN orders o ON oi.orderID = o.orderID
+    WHERE o.storeID = '$storeID' 
+    GROUP BY p.Name
 ";
-
-$result = mysqli_query($mysqli, $query);
-
-$data = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
+$ordersResult = mysqli_query($mysqli, $ordersQuery);
+$ordersData = [];
+while ($row = mysqli_fetch_assoc($ordersResult)) {
+    $ordersData[] = $row;
 }
 
-// JSON 
-header('Content-Type: application/json');
+// Fetch revenue data
+$revenueQuery = "
+    SELECT DATE_FORMAT(o.orderDate, '%Y-%m') AS period, SUM(o.total) AS totalRevenue 
+    FROM orders o
+    WHERE o.storeID = '$storeID'
+    GROUP BY period
+    ORDER BY period
+";
+$revenueResult = mysqli_query($mysqli, $revenueQuery);
+$revenueData = [];
+while ($row = mysqli_fetch_assoc($revenueResult)) {
+    $revenueData[] = $row;
+}
 
-echo json_encode($data);
+// Fetch total customers data
+$customersQuery = "
+    SELECT COUNT(DISTINCT customerID) AS totalCustomers, DATE(orderDate) as time 
+    FROM orders 
+    WHERE storeID = '$storeID'
+    GROUP BY DATE(orderDate)
+";
+$customersResult = mysqli_query($mysqli, $customersQuery);
+$customersData = [];
+while ($row = mysqli_fetch_assoc($customersResult)) {
+    $customersData[] = $row;
+}
+// Combine all data into a single response
+$response = [
+    'orders' => $ordersData,
+    'revenue' => $revenueData,
+    'customers' => $customersData,
+];
+
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>

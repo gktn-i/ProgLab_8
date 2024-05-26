@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 
-    
-    
+
+
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
     <style>
@@ -225,6 +225,50 @@
             cursor: pointer;
             font-size: 20px;
         }
+
+        .chartjs-legend {
+            max-height: 70px;
+            overflow-y: auto;
+            margin-bottom: 5px;
+        }
+
+        .popup-content {
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content-wrapper {
+            width: 520;
+        }
+
+        .popup-button {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: darkgreen;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup-button:hover {
+            background-color: #45a049;
+        }
+
+        .popup-button:active {
+            background-color: #45a049;
+        }
+
+        .popup-canvas {
+            width: 300px !important;
+            height: 200px !important;
+        }
     </style>
 </head>
 
@@ -233,7 +277,7 @@
     <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
- 
+
 
     <div class="statistics">
         <div class="stat-box">
@@ -312,22 +356,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="storeModalLabel">Store Statistics</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <canvas id="storeChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -368,43 +396,77 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log("Statistics fetched: ", data);
+
+
                         var popupContent = `
-                <b>Store ID:</b> ${location.storeID}<br>
-                <b>City:</b> ${location.city}<br>
-                <b>Zip Code:</b> ${location.zipcode}<br>
-                <b>State:</b> ${location.state} (${location.state_abbr})<br>
-                <canvas id="storeChart" width="200" height="150"></canvas>`;
+    <b>Store ID:</b> ${location.storeID}<br>
+    <b>City:</b> ${location.city}<br>
+    <b>Zip Code:</b> ${location.zipcode}<br>
+    <b>State:</b> ${location.state} (${location.state_abbr})<br>
+    <div id="chartButtons" style="margin-top: 10px;">
+        <button class="popup-button" onclick="showChart('orders')">Orders</button>
+        <button class="popup-button" onclick="showChart('revenue')">Revenue</button>
+        <button class="popup-button" onclick="showChart('customers')">Customers</button>
+    </div>
+    <div style="padding: 10px; width: 500px;">
+        <canvas id="storeChartOrders" width="500" height="400" style="display: none;"></canvas>
+        <canvas id="storeChartRevenue" width="500" height="400" style="display: none;"></canvas>
+        <canvas id="storeChartCustomers" width="500" height="400" style="display: none;"></canvas>
+    </div>`;
+
                         marker.bindPopup(popupContent).openPopup();
 
-                        setTimeout(() => {
-                            var ctx = document.getElementById('storeChart');
-                            if (ctx) {
-                                ctx = ctx.getContext('2d');
 
-                                var chart = new Chart(ctx, {
+
+
+                        setTimeout(() => {
+
+
+
+
+                            // Pie chart for Orders
+                            var ctxOrders = document.getElementById('storeChartOrders');
+                            if (ctxOrders) {
+                                ctxOrders = ctxOrders.getContext('2d');
+                                new Chart(ctxOrders, {
                                     type: 'pie',
                                     data: {
-                                        labels: ['Total Orders', 'Total Revenue', 'Total Customers'],
+                                        labels: data.orders.map(item => item.productName),
                                         datasets: [{
-                                            data: [data[0].totalOrders, data[0].totalRevenue, data[0].totalCustomers],
+                                            data: data.orders.map(item => item.quantitySold),
                                             backgroundColor: [
                                                 'rgba(75, 192, 192, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',
-                                                'rgba(255, 206, 86, 0.2)'
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
                                             ],
                                             borderColor: [
                                                 'rgba(75, 192, 192, 1)',
                                                 'rgba(54, 162, 235, 1)',
-                                                'rgba(255, 206, 86, 1)'
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
                                             ],
                                             borderWidth: 1
                                         }]
                                     },
                                     options: {
                                         responsive: true,
+                                        maintainAspectRatio: false,
                                         plugins: {
                                             legend: {
-                                                position: 'top',
+                                                position: 'bottom',
+                                                labels: {
+                                                    font: {
+                                                        size: 12 
+                                                    },
+                                                    boxWidth: 10,
+                                                    padding: 10, 
+                                                    usePointStyle: true, 
+                                                }
                                             },
                                             tooltip: {
                                                 callbacks: {
@@ -420,20 +482,199 @@
                                                     }
                                                 }
                                             }
+                                        },
+                                        layout: {
+                                            padding: {
+                                                top: 10, 
+                                                bottom: 10 
+                                            }
                                         }
                                     }
                                 });
                             } else {
-                                console.error('Canvas element not found');
+                                console.error('Canvas element not found for Orders');
                             }
+
+                            // Line chart for Total Revenue
+                            var ctxRevenue = document.getElementById('storeChartRevenue');
+                            if (ctxRevenue) {
+                                ctxRevenue = ctxRevenue.getContext('2d');
+                                new Chart(ctxRevenue, {
+                                    type: 'line',
+                                    data: {
+                                        labels: data.revenue.map(item => item.period),
+                                        datasets: [{
+                                            label: 'Total Revenue',
+                                            data: data.revenue.map(item => item.totalRevenue),
+                                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                            borderColor: 'rgba(54, 162, 235, 1)',
+                                            borderWidth: 1,
+                                            fill: true,
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Period'
+                                                }
+                                            },
+                                            y: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Revenue'
+                                                }
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                position: 'bottom',
+                                                labels: {
+                                                    font: {
+                                                        size: 12 
+                                                    },
+                                                    boxWidth: 10,
+                                                    padding: 4,
+                                                    usePointStyle: true, 
+                                                }
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function(context) {
+                                                        let label = context.dataset.label || '';
+                                                        if (label) {
+                                                            label += ': ';
+                                                        }
+                                                        if (context.raw !== null) {
+                                                            label += context.raw.toLocaleString();
+                                                        }
+                                                        return label;
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        layout: {
+                                            padding: {
+                                                top: 10, 
+                                                bottom: 10 
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                console.error('Canvas element not found for Revenue');
+                            }
+
+
+
+
+                            /// Line chart for Total Customers
+                            var ctxCustomers = document.getElementById('storeChartCustomers');
+                            console.log("Canvas Element: ", ctxCustomers); 
+
+                            if (ctxCustomers) {
+                                ctxCustomers = ctxCustomers.getContext('2d');
+                                new Chart(ctxCustomers, {
+                                    type: 'line',
+                                    data: {
+                                        labels: data.customers.map(item => item.time),
+                                        datasets: [{
+                                            label: 'Total Customers',
+                                            data: data.customers.map(item => parseFloat(item.totalCustomers)),
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        scales: {
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Period'
+                                                }
+                                            },
+                                            y: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Customer Count'
+                                                },
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                    stepSize: 1, 
+                                                    callback: function(value, index, values) {
+                                                        return Number.isInteger(value) ? value : null; 
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                position: 'bottom',
+                                                labels: {
+                                                    font: {
+                                                        size: 12
+                                                    },
+                                                    boxWidth: 10,
+                                                    padding: 10,
+                                                    usePointStyle: true,
+                                                }
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function(context) {
+                                                        let label = context.dataset.label || '';
+                                                        if (label) {
+                                                            label += ': ';
+                                                        }
+                                                        if (context.raw !== null) {
+                                                            label += context.raw.toLocaleString();
+                                                        }
+                                                        return label;
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        layout: {
+                                            padding: {
+                                                top: 10,
+                                                bottom: 10
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                console.error('Canvas element not found for Customers');
+                            }
+                            
+                            // showChart('orders');
                         }, 300);
                     })
                     .catch(error => {
                         console.error('Error fetching store statistics: ', error);
                     });
             }
+
             fetchLocations();
         });
+
+        function showChart(type) {
+            document.getElementById('storeChartOrders').style.display = 'none';
+            document.getElementById('storeChartRevenue').style.display = 'none';
+            document.getElementById('storeChartCustomers').style.display = 'none';
+
+            if (type === 'orders') {
+                document.getElementById('storeChartOrders').style.display = 'block';
+            } else if (type === 'revenue') {
+                document.getElementById('storeChartRevenue').style.display = 'block';
+            } else if (type === 'customers') {
+                document.getElementById('storeChartCustomers').style.display = 'block';
+            }
+        }
     </script>
 </body>
 

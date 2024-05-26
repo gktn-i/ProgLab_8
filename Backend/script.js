@@ -32,11 +32,7 @@ $(document).ready(function () {
         });
     }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 7976ed199e71782756de1468b6658185c3f63b25
     function fetchData() {
         $.ajax({
             type: "GET",
