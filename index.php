@@ -587,7 +587,7 @@
                                         datasets: [{
                                             label: 'Total Customers',
                                             data: data.customers.map(item => parseFloat(item.totalCustomers)),
-                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderColor: 'rgba(255, 161, 71, 1)',
                                             borderWidth: 1
                                         }]
                                     },

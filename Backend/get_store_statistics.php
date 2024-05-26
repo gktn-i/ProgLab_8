@@ -39,10 +39,10 @@ while ($row = mysqli_fetch_assoc($revenueResult)) {
 
 // Fetch total customers data
 $customersQuery = "
-    SELECT COUNT(DISTINCT customerID) AS totalCustomers, DATE(orderDate) as time 
+    SELECT COUNT(DISTINCT customerID) AS totalCustomers, DATE_FORMAT(orderDate, '%Y-%m') as time 
     FROM orders 
     WHERE storeID = '$storeID'
-    GROUP BY DATE(orderDate)
+    GROUP BY time
 ";
 $customersResult = mysqli_query($mysqli, $customersQuery);
 $customersData = [];
