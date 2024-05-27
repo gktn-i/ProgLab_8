@@ -380,6 +380,7 @@
                 position: 'topleft'
             });
 
+            
 
             resetControl.onAdd = function(map) {
                 var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
@@ -390,6 +391,7 @@
                 div.style.justifyContent = 'center';
                 div.style.alignItems = 'center';
                 div.innerHTML = '<i class="bx bx-street-view" style="font-size:20px;"></i>';
+                div.title ='Reset View';
                 div.onclick = function() {
                     map.setView([37.7749, -122.4194], 5);
                 }
@@ -478,6 +480,8 @@
                     .catch(error => {
                         console.error('Error fetching map data:', error);
                     });
+
+                    
 
 
             }
