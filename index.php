@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-   
+
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
@@ -95,6 +95,8 @@
             margin: 50px auto;
             margin-bottom: 10%;
             height: 600px;
+            animation: fadeIn 1s ease-in;
+
         }
 
         .left-section {
@@ -192,6 +194,8 @@
             border-radius: 3px;
             border: solid 1px;
             border-color: #666;
+            animation: fadeIn 1s ease-in;
+
         }
 
         #particles-js {
@@ -360,7 +364,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
-<script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
+    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
     <script>
         $(document).ready(function() {
             var map = L.map('map', {
@@ -372,18 +376,68 @@
 
             function fetchLocations() {
                 fetch('/Backend/map.php')
+
                     .then(response => response.json())
                     .then(locations => {
                         console.log("Locations fetched: ", locations);
                         var markers = locations.map(function(location) {
-                            var marker = L.marker([location.latitude, location.longitude]);
 
-                            marker.on('click', function() {
-                                console.log(`Fetching statistics for store ID: ${location.storeID}`);
-                                fetchStoreStatistics(location, marker);
+
+                            var greenIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
                             });
 
-                            return marker;
+                            var redIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            });
+
+
+                            var orangeIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            });
+
+
+                            fetch('/Backend/get_total_store_statistics.php?storeID=' + location.storeID)
+                                .then(response => response.json())
+                                .then(statistics => {
+                                    var icon;
+                                    if (statistics.totalRevenue > 100000) {
+                                        icon = greenIcon;
+                                    } else if (statistics.totalRevenue > 50000) {
+                                        icon = orangeIcon;
+                                    } else {
+                                        icon = redIcon;
+                                    }
+
+                                    var marker = L.marker([location.latitude, location.longitude], {
+                                        icon: icon
+                                    }).addTo(map);
+
+                                    marker.on('click', function() {
+                                        console.log(`Fetching statistics for store ID: ${location.storeID}`);
+                                        fetchStoreStatistics(location, marker);
+                                    });
+
+                                    return marker;
+                                });
+
+                           
+                            return null;
                         });
 
                         var featureGroup = L.featureGroup(markers).addTo(map);
@@ -392,6 +446,8 @@
                     .catch(error => {
                         console.error('Error fetching map data:', error);
                     });
+
+                    
             }
 
             function fetchStoreStatistics(location, marker) {
