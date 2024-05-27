@@ -1,6 +1,6 @@
 # ProgLab_8
 newest Version:
-![grafik](https://github.com/gktn-i/ProgLab_8/assets/131660863/d394a994-4659-477a-8457-4c6fb447ceda)
+![grafik](https://github.com/gktn-i/ProgLab_8/assets/131660863/be0c434c-7774-4a70-905b-8b594fda9e34)
 
 
 
