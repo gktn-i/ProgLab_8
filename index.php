@@ -80,6 +80,7 @@
             margin: 0;
             font-size: 24px;
             color: darkgreen;
+            user-select: none
         }
 
         .stat-box p {
@@ -87,6 +88,7 @@
             font-size: 18px;
             color: #666;
             font-weight: bold;
+            user-select: none
         }
 
         .container {
@@ -186,7 +188,7 @@
         }
 
         #map {
-            height: 500px;
+            height: 550px;
             margin: 20px auto;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-color: #121212;
