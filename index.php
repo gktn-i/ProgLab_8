@@ -338,7 +338,7 @@
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
-                    <label class="form-check-label" for="thirdRadio">Customer Count</label>
+                    <label class="form-check-label" for="thirdRadio">Top Customer</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
