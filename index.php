@@ -374,6 +374,36 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
+            var resetControl = L.control({
+                position: 'topleft'
+            });
+
+
+            resetControl.onAdd = function(map) {
+                var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                div.style.backgroundColor = 'white';
+                div.style.width = '34px';
+                div.style.height = '34px';
+                div.style.display = 'flex';
+                div.style.justifyContent = 'center';
+                div.style.alignItems = 'center';
+                div.innerHTML = '<i class="bx bx-street-view" style="font-size:20px;"></i>';
+                div.onclick = function() {
+                    map.setView([37.7749, -122.4194], 5);
+                }
+                div.onmouseover = function() {
+                    this.style.backgroundColor = ' #f2f2f2'; 
+                }
+                div.onmouseout = function() {
+                    this.style.backgroundColor = 'white';
+                }
+                return div;
+            };
+
+            resetControl.addTo(map);
+
+            resetControl.addTo(map);
+
             function fetchLocations() {
                 fetch('/Backend/map.php')
 
@@ -436,7 +466,7 @@
                                     return marker;
                                 });
 
-                           
+
                             return null;
                         });
 
@@ -447,7 +477,7 @@
                         console.error('Error fetching map data:', error);
                     });
 
-                    
+
             }
 
             function fetchStoreStatistics(location, marker) {
