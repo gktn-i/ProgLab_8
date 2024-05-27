@@ -308,7 +308,7 @@
 
     <div class="container">
         <div class="left-section">
-            <?php if (isset($error_message)): ?>
+            <?php if (isset($error_message)) : ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
             <div class="form-group">
@@ -329,8 +329,7 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
-                        checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
                     <label class="form-check-label" for="firstRadio">Best seller product</label>
                 </li>
                 <li class="list-group-item">
@@ -369,7 +368,7 @@
     <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
     <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var map = L.map('map', {
                 fullscreenControl: true,
             }).setView([37.7749, -122.4194], 5);
@@ -415,15 +414,6 @@
                     .then(response => response.json())
                     .then(locations => {
                         console.log("Locations fetched: ", locations);
-
-                        var markers = locations.map(function (location) {
-                            var marker = L.marker([location.latitude, location.longitude]);
-
-                            marker.on('click', function () {
-                                console.log(`Fetching statistics for store ID: ${location.storeID}`);
-                                fetchStoreStatistics(location, marker);
-
-
                         var markers = locations.map(function(location) {
 
 
@@ -434,7 +424,6 @@
                                 iconAnchor: [12, 41],
                                 popupAnchor: [1, -34],
                                 shadowSize: [41, 41]
-
                             });
 
                             var redIcon = new L.Icon({
@@ -579,7 +568,7 @@
                                             },
                                             tooltip: {
                                                 callbacks: {
-                                                    label: function (context) {
+                                                    label: function(context) {
                                                         let label = context.label || '';
                                                         if (label) {
                                                             label += ': ';
@@ -652,7 +641,7 @@
                                             },
                                             tooltip: {
                                                 callbacks: {
-                                                    label: function (context) {
+                                                    label: function(context) {
                                                         let label = context.dataset.label || '';
                                                         if (label) {
                                                             label += ': ';
@@ -715,7 +704,7 @@
                                                 ticks: {
                                                     beginAtZero: true,
                                                     stepSize: 1,
-                                                    callback: function (value, index, values) {
+                                                    callback: function(value, index, values) {
                                                         return Number.isInteger(value) ? value : null;
                                                     }
                                                 }
@@ -735,7 +724,7 @@
                                             },
                                             tooltip: {
                                                 callbacks: {
-                                                    label: function (context) {
+                                                    label: function(context) {
                                                         let label = context.dataset.label || '';
                                                         if (label) {
                                                             label += ': ';
