@@ -462,6 +462,9 @@
     <b>City:</b> ${location.city}<br>
     <b>Zip Code:</b> ${location.zipcode}<br>
     <b>State:</b> ${location.state} (${location.state_abbr})<br>
+    <b>Total Revenue:</b> $${data.totalrevenue.totalRevenue1}<br>
+    <b>Total Customers:</b> ${data.totalcustomers.totalCustomers1}<br>
+
     <div id="chartButtons" style="margin-top: 10px;">
         <button class="popup-button" onclick="showChart('orders')">Orders</button>
         <button class="popup-button" onclick="showChart('revenue')">Revenue</button>
