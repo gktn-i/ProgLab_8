@@ -62,6 +62,7 @@
             animation: fadeIn 1s ease-in;
             border: 1px solid;
             border-color: #666;
+            transition: transform 0.3s ease-in-out;
         }
 
         .stat-content {
@@ -89,6 +90,10 @@
             color: #666;
             font-weight: bold;
             user-select: none
+        }
+
+        .stat-box:hover{
+            transform: translateY(-5px);
         }
 
         .container {
