@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-   
+
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
@@ -93,8 +93,24 @@
             display: flex;
             max-width: 1200px;
             margin: 50px auto;
-            margin-bottom: 10%;
+            margin: 10px;
             height: 600px;
+        }
+
+        .comparison-section {
+           justify-content: center;
+            display: flex;
+            width: 1295px;
+            margin: 50px auto;
+            margin-bottom: 3%;
+            height: 600px;
+            border: 1px solid;
+            border-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+
+
         }
 
         .left-section {
@@ -355,12 +371,24 @@
         </div>
     </div>
 
+    <div class="comparison-section">
+        <h1>Store Comparison</h1>
+        <div id="store1Container">
+            <h2></h2>
+           
+        </div>
+        <div id="store2Container">
+            <h2></h2>
+            
+        </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
-<script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
+    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
     <script>
         $(document).ready(function() {
             var map = L.map('map', {
