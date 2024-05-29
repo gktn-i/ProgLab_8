@@ -247,7 +247,6 @@
 
 <body>
 
-    <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
 
