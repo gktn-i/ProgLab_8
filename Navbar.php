@@ -1,8 +1,10 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
+    <script src="Backend/script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order</title>
@@ -140,7 +142,6 @@
         .stat-box:hover {
             transform: translateY(-5px);
         }
-
     </style>
 </head>
 
@@ -155,10 +156,6 @@
 
     </nav>
 
-
-
-    </div>
-    </div>
 
     <div class="statistics">
         <a href="total_orders.php" class="stat-box">
