@@ -104,6 +104,23 @@
             height: 600px;
             animation: fadeIn 1s ease-in;
 
+
+        }
+        
+        .comparison-section {
+           justify-content: center;
+            display: flex;
+            width: 1295px;
+            margin: 50px auto;
+            margin-bottom: 3%;
+            height: 600px;
+            border: 1px solid;
+            border-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+
+
         }
 
         .left-section {
@@ -363,6 +380,18 @@
             <ul class="list-group" id="dataList">
                 <!-- Placeholder for list data -->
             </ul>
+        </div>
+    </div>
+
+    <div class="comparison-section">
+        <h1>Store Comparison</h1>
+        <div id="store1Container">
+            <h2></h2>
+           
+        </div>
+        <div id="store2Container">
+            <h2></h2>
+            
         </div>
     </div>
 
