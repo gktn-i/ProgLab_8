@@ -58,6 +58,22 @@
             display: flex;
             width: 1295px;
             margin: 50px auto;
+
+            height: 600px;
+            border: 1px solid;
+            border-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+
+
+        }
+
+        .comparison-section {
+           justify-content: center;
+            display: flex;
+            width: 1295px;
+            margin: 50px auto;
             margin-bottom: 3%;
             height: 600px;
             border: 1px solid;
