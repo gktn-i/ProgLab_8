@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Total Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Total Products</title>
     <style>
     </style>
 </head>
+
 <body>
-<?php include 'Navbar.php'; ?>
+    <?php include 'Navbar.php'; ?>
 
 
     <div class="container">
@@ -15,4 +19,5 @@
     <footer>
     </footer>
 </body>
+
 </html>

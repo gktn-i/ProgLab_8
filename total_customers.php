@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
 
-    <title>Total Orders</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Total Customers</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,15 +23,16 @@
 
 
         }
-
     </style>
 </head>
+
 <body>
-<?php include 'Navbar.php'; ?>
+    <?php include 'Navbar.php'; ?>
 
 
     <div class="container">
     </div>
 
 </body>
+
 </html>
