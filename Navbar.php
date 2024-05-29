@@ -141,6 +141,8 @@
 
         .stat-box:hover {
             transform: translateY(-5px);
+            background-color: #f2f2f2;
+
         }
     </style>
 </head>
