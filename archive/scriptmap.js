@@ -26,7 +26,7 @@ $(document).ready(function () {
                         data = data[0];
                     }
                     $('#totalOrders').text(data.totalOrders);
-                    $('#totalRevenue').text(`$${parseFloat(data.totalRevenue).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`);
+                    $('#totalRevenue').text(`$${parseFloat(data.totalRevenue).toFixed(2)}`);
                     $('#totalCustomers').text(data.totalCustomers);
                     $('#totalProducts').text(data.totalProducts);
                 }

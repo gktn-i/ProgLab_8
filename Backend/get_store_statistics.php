@@ -49,13 +49,33 @@ $customersData = [];
 while ($row = mysqli_fetch_assoc($customersResult)) {
     $customersData[] = $row;
 }
+
+
+$totalrevenueQuery = "
+    SELECT SUM(o.total) AS totalRevenue1 
+    FROM orders o
+    WHERE o.storeID = '$storeID'
+";
+$totalrevenueResult = mysqli_query($mysqli, $totalrevenueQuery);
+$totalrevenueData = mysqli_fetch_assoc($totalrevenueResult);
+
+// Fetch total customers data
+$totalcustomersQuery = "
+    SELECT COUNT(DISTINCT o.customerID) AS totalCustomers1 
+    FROM orders o
+    WHERE o.storeID = '$storeID'
+";
+$totalcustomersResult = mysqli_query($mysqli, $totalcustomersQuery);
+$totalcustomersData = mysqli_fetch_assoc($totalcustomersResult);
+
 // Combine all data into a single response
 $response = [
     'orders' => $ordersData,
     'revenue' => $revenueData,
     'customers' => $customersData,
+    'totalrevenue' => $totalrevenueData,
+    'totalcustomers' => $totalcustomersData,
 ];
 
 header('Content-Type: application/json');
 echo json_encode($response);
-?>

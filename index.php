@@ -41,60 +41,32 @@
             background-color: #1e1e1e;
         }
 
-        .statistics {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px auto;
-            max-width: 1200px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
-            min-width: fit-content;
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            animation: fadeIn 1s ease-in;
-            border: 1px solid;
-            border-color: #666;
-        }
-
-        .stat-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-content i {
-            font-size: 24px;
-            margin-right: 10px;
-            color: darkgreen;
-        }
-
-        .stat-box h2 {
-            margin: 0;
-            font-size: 24px;
-            color: darkgreen;
-        }
-
-        .stat-box p {
-            margin: 10px 0 0;
-            font-size: 18px;
-            color: #666;
-            font-weight: bold;
-        }
 
         .container {
             display: flex;
             max-width: 1200px;
             margin: 50px auto;
-            margin: 10px;
+            margin-bottom: 2%;
             height: 600px;
+            animation: fadeIn 1s ease-in;
+
+
+        }
+        
+        .comparison-section {
+           justify-content: center;
+            display: flex;
+            width: 1295px;
+            margin: 50px auto;
+
+            height: 600px;
+            border: 1px solid;
+            border-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+
+
         }
 
         .comparison-section {
@@ -200,7 +172,7 @@
         }
 
         #map {
-            height: 500px;
+            height: 550px;
             margin: 20px auto;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-color: #121212;
@@ -208,6 +180,8 @@
             border-radius: 3px;
             border: solid 1px;
             border-color: #666;
+            animation: fadeIn 1s ease-in;
+
         }
 
         #particles-js {
@@ -289,29 +263,10 @@
 
 <body>
 
-    <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
 
 
-    <div class="statistics">
-        <div class="stat-box">
-            <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
-            <p>Total Orders</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
-            <p>Total Revenue</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
-            <p>Total Customers</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
-            <p>Total Products</p>
-        </div>
-    </div>
 
 
     <div id="map"></div>
@@ -348,11 +303,11 @@
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
-                    <label class="form-check-label" for="thirdRadio">Customer Count</label>
+                    <label class="form-check-label" for="thirdRadio">Top Customer</label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fourthRadio">
-                    <label class="form-check-label" for="fourthRadio">Best ?</label>
+                    <label class="form-check-label" for="fourthRadio">Monthly turnover by category </label>
                 </li>
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
@@ -398,20 +353,102 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
+            var resetControl = L.control({
+                position: 'topleft'
+            });
+
+            
+
+            resetControl.onAdd = function(map) {
+                var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                div.style.backgroundColor = 'white';
+                div.style.width = '34px';
+                div.style.height = '34px';
+                div.style.display = 'flex';
+                div.style.justifyContent = 'center';
+                div.style.alignItems = 'center';
+                div.innerHTML = '<i class="bx bx-street-view" style="font-size:20px;"></i>';
+                div.title ='Reset View';
+                div.onclick = function() {
+                    map.setView([37.7749, -122.4194], 5);
+                }
+                div.onmouseover = function() {
+                    this.style.backgroundColor = ' #f2f2f2'; 
+                }
+                div.onmouseout = function() {
+                    this.style.backgroundColor = 'white';
+                }
+                return div;
+            };
+
+            resetControl.addTo(map);
+
+            resetControl.addTo(map);
+
             function fetchLocations() {
                 fetch('/Backend/map.php')
+
                     .then(response => response.json())
                     .then(locations => {
                         console.log("Locations fetched: ", locations);
                         var markers = locations.map(function(location) {
-                            var marker = L.marker([location.latitude, location.longitude]);
 
-                            marker.on('click', function() {
-                                console.log(`Fetching statistics for store ID: ${location.storeID}`);
-                                fetchStoreStatistics(location, marker);
+
+                            var greenIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
                             });
 
-                            return marker;
+                            var redIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            });
+
+
+                            var orangeIcon = new L.Icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34],
+                                shadowSize: [41, 41]
+                            });
+
+
+                            fetch('/Backend/get_total_store_statistics.php?storeID=' + location.storeID)
+                                .then(response => response.json())
+                                .then(statistics => {
+                                    var icon;
+                                    if (statistics.totalRevenue > 100000) {
+                                        icon = greenIcon;
+                                    } else if (statistics.totalRevenue > 50000) {
+                                        icon = orangeIcon;
+                                    } else {
+                                        icon = redIcon;
+                                    }
+
+                                    var marker = L.marker([location.latitude, location.longitude], {
+                                        icon: icon
+                                    }).addTo(map);
+
+                                    marker.on('click', function() {
+                                        console.log(`Fetching statistics for store ID: ${location.storeID}`);
+                                        fetchStoreStatistics(location, marker);
+                                    });
+
+                                    return marker;
+                                });
+
+
+                            return null;
                         });
 
                         var featureGroup = L.featureGroup(markers).addTo(map);
@@ -420,6 +457,10 @@
                     .catch(error => {
                         console.error('Error fetching map data:', error);
                     });
+
+                    
+
+
             }
 
             function fetchStoreStatistics(location, marker) {
@@ -434,6 +475,9 @@
     <b>City:</b> ${location.city}<br>
     <b>Zip Code:</b> ${location.zipcode}<br>
     <b>State:</b> ${location.state} (${location.state_abbr})<br>
+    <b>Total Revenue:</b> $${data.totalrevenue.totalRevenue1}<br>
+    <b>Total Customers:</b> ${data.totalcustomers.totalCustomers1}<br>
+
     <div id="chartButtons" style="margin-top: 10px;">
         <button class="popup-button" onclick="showChart('orders')">Orders</button>
         <button class="popup-button" onclick="showChart('revenue')">Revenue</button>
@@ -711,8 +755,8 @@
 
 
 
-<script type="text/javascript " src="particles.js "></script>
-<script src="app.js "></script>
+<!-- <script type="text/javascript " src="particles.js "></script> -->
+<!-- <script src="app.js "></script> -->
 
 </body>
 
