@@ -41,60 +41,6 @@
             background-color: #1e1e1e;
         }
 
-        .statistics {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px auto;
-            max-width: 1200px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
-            min-width: fit-content;
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            animation: fadeIn 1s ease-in;
-            border: 1px solid;
-            border-color: #666;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .stat-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-content i {
-            font-size: 24px;
-            margin-right: 10px;
-            color: darkgreen;
-        }
-
-        .stat-box h2 {
-            margin: 0;
-            font-size: 24px;
-            color: darkgreen;
-            user-select: none
-        }
-
-        .stat-box p {
-            margin: 10px 0 0;
-            font-size: 18px;
-            color: #666;
-            font-weight: bold;
-            user-select: none
-        }
-
-        .stat-box:hover{
-            transform: translateY(-5px);
-        }
 
         .container {
             display: flex;
@@ -305,25 +251,6 @@
 
     <?php include 'Navbar.php'; ?>
 
-
-    <div class="statistics">
-        <div class="stat-box">
-            <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
-            <p>Total Orders</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
-            <p>Total Revenue</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
-            <p>Total Customers</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
-            <p>Total Products</p>
-        </div>
-    </div>
 
 
     <div id="map"></div>

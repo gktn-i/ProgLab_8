@@ -10,18 +10,18 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         .navbar {
-            
+
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
             justify-content: center;
         }
 
-        .navbar-brand{
+        .navbar-brand {
             margin: 0;
         }
 
-       
+
 
         .search-bar {
             width: 30%;
@@ -35,7 +35,7 @@
 
         .navbar img {
             width: 40px;
-            
+
         }
 
         .white-img {
@@ -83,6 +83,61 @@
             transition: opacity 0.3s;
             text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
         }
+
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 1200px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            min-width: fit-content;
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            border: 1px solid;
+            border-color: #666;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .stat-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-content i {
+            font-size: 24px;
+            margin-right: 10px;
+            color: darkgreen;
+        }
+
+        .stat-box h2 {
+            margin: 0;
+            font-size: 24px;
+            color: darkgreen;
+            user-select: none
+        }
+
+        .stat-box p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+            user-select: none
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 
@@ -90,42 +145,37 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid d-flex justify-content-center">
+        <div class="container-fluid d-flex justify-content-center">
             <a href="index.php?page=start" class="navbar-brand">
                 <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 90px; width: 90px;">
             </a>
-        
-            
-            <!-- Remove comments to show icons: -->
 
-
-            <!--  <div class="d-flex align-items-center">
-                <?php if (isset($_SESSION["user_id"])) : ?>
-
-                    <a class="navbar-icon" href="Backend/logout.php">
-                        <i class='bx bx-log-out' style='font-size: 50px;'></i>
-                    </a>
-                <?php else : ?>
-
-                    <a class="navbar-icon" href="Signin.php?page=Anmelden">
-                        <i class='bx bx-log-in'></i>
-                    </a>
-                <?php endif; ?>
-                <a class="navbar-icon" href="mappage.php?page=Warenkorb" style="margin-left : 10px ;">
-                    <i class='bx bx-map'></i>
-
-                  
-                    < <span class="badge bg-white text-dark">2</span> 
-                </a>
-                <a class="navbar-icon" href="Profil.php?page=Log In " style="margin-top: 15px; "><i
-                        class='bx bxs-user'></i>
-                </a>
-                -->
-
-
-        </div>
-        </div>
     </nav>
+
+
+
+    </div>
+    </div>
+
+    <div class="statistics">
+        <a href="total_orders.php" class="stat-box">
+            <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
+            <p>Total Orders</p>
+        </a>
+        <a href="total_revenue.php" class="stat-box">
+            <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
+            <p>Total Revenue</p>
+        </a>
+        <a href="total_customers.php" class="stat-box">
+            <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
+            <p>Total Customers</p>
+        </a>
+        <a href="total_products.php" class="stat-box">
+            <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
+            <p>Total Products</p>
+        </a>
+    </div>
+
 
     <?php
     /* echo ' <h1>' . $_GET['page'] . ' </h1>'; */
