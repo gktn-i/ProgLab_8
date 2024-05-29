@@ -106,6 +106,8 @@
             border: 1px solid;
             border-color: #666;
             transition: transform 0.3s ease-in-out;
+            text-decoration: none;
+
         }
 
         .stat-content {
@@ -138,6 +140,7 @@
         .stat-box:hover {
             transform: translateY(-5px);
         }
+
     </style>
 </head>
 
