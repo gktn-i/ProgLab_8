@@ -21,9 +21,7 @@
             margin: 0;
         }
 
-        .navbar-dark .navbar-nav .nav-link {
-            color: white;
-        }
+       
 
         .search-bar {
             width: 30%;

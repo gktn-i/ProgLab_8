@@ -783,8 +783,8 @@
 
 
 
-<script type="text/javascript " src="particles.js "></script>
-<script src="app.js "></script>
+<!-- <script type="text/javascript " src="particles.js "></script> -->
+<!-- <script src="app.js "></script> -->
 
 </body>
 
