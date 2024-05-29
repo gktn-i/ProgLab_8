@@ -100,7 +100,7 @@
             display: flex;
             max-width: 1200px;
             margin: 50px auto;
-            margin-bottom: 10%;
+            margin-bottom: 2%;
             height: 600px;
             animation: fadeIn 1s ease-in;
 
