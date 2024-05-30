@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
-    <script src="Backend/comp-script.js"></script>
+   
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
@@ -427,7 +427,7 @@
         <!-- JavaScript-Dateien einbinden -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="comp-script.js"></script>
+        <script src="/Backend/comp-script.js"></script>
     </body>
 
 </html>
