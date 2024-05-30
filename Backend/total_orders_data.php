@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json');
 
-// Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -12,60 +11,76 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$graph = isset($_GET['graph']) ? $_GET['graph'] : '';
-
 $data = [];
-$query = '';
 
-switch ($graph) {
-    case 'orders_by_month':
-        $query = "
-            SELECT DATE_FORMAT(orderDate, '%Y-%m') AS month, COUNT(*) AS total_orders 
-            FROM orders 
-            GROUP BY month 
-            ORDER BY month;
-        ";
-        break;
-    case 'average_order_value_by_month':
-        $query = "
-            SELECT DATE_FORMAT(orderDate, '%Y-%m') AS month, AVG(total) AS avg_order_value 
-            FROM orders 
-            GROUP BY month 
-            ORDER BY month;
-        ";
-        break;
-    case 'orders_by_store':
-        $query = "
-            SELECT s.city, COUNT(*) AS total_orders 
-            FROM orders o 
-            JOIN stores s ON o.storeID = s.storeID 
-            GROUP BY s.city 
-            ORDER BY total_orders DESC;
-        ";
-        break;
-    case 'orders_by_customer':
-        $query = "
-            SELECT c.customerID, COUNT(*) AS total_orders 
-            FROM orders o 
-            JOIN customers c ON o.customerID = c.customerID 
-            GROUP BY c.customerID 
-            ORDER BY total_orders DESC;
-        ";
-        break;
-    default:
-        echo json_encode(["error" => "Invalid graph parameter"]);
-        exit();
+// Query for orders by month
+$query1 = "
+    SELECT DATE_FORMAT(orderDate, '%Y-%m') AS month, COUNT(*) AS total_orders 
+    FROM orders 
+    GROUP BY month 
+    ORDER BY month;
+";
+
+$result1 = mysqli_query($mysqli, $query1);
+if ($result1) {
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $data['orders_by_month'][] = $row;
+    }
+} else {
+    $data['orders_by_month'] = ["error" => "Query failed: " . $mysqli->error];
 }
 
-$result = mysqli_query($mysqli, $query);
+// Query for average order value by month
+$query2 = "
+    SELECT DATE_FORMAT(orderDate, '%Y-%m') AS month, AVG(total) AS avg_order_value 
+    FROM orders 
+    GROUP BY month 
+    ORDER BY month;
+";
 
-if (!$result) {
-    echo json_encode(["error" => "Query failed: " . $mysqli->error]);
-    exit();
+$result2 = mysqli_query($mysqli, $query2);
+if ($result2) {
+    while ($row = mysqli_fetch_assoc($result2)) {
+        $data['average_order_value_by_month'][] = $row;
+    }
+} else {
+    $data['average_order_value_by_month'] = ["error" => "Query failed: " . $mysqli->error];
 }
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
+// Query for orders by store
+$query3 = "
+    SELECT s.city, COUNT(*) AS total_orders 
+    FROM orders o 
+    JOIN stores s ON o.storeID = s.storeID 
+    GROUP BY s.city 
+    ORDER BY total_orders DESC;
+";
+
+$result3 = mysqli_query($mysqli, $query3);
+if ($result3) {
+    while ($row = mysqli_fetch_assoc($result3)) {
+        $data['orders_by_store'][] = $row;
+    }
+} else {
+    $data['orders_by_store'] = ["error" => "Query failed: " . $mysqli->error];
+}
+
+// Query for pizza distribution
+$query4 = "
+    SELECT p.Name, COUNT(*) AS total_orders 
+    FROM orderitems o 
+    JOIN products p ON o.SKU = p.SKU 
+    GROUP BY p.Name 
+    ORDER BY total_orders DESC;
+";
+
+$result4 = mysqli_query($mysqli, $query4);
+if ($result4) {
+    while ($row = mysqli_fetch_assoc($result4)) {
+        $data['pizza_distribution'][] = $row;
+    }
+} else {
+    $data['pizza_distribution'] = ["error" => "Query failed: " . $mysqli->error];
 }
 
 echo json_encode($data);
