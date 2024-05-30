@@ -388,6 +388,34 @@ $(document).ready(function() {
     }
 
     fetchLocations();
+
+
+    function addLegendToMap(map) {
+        var legend = L.control({position: 'bottomleft'});
+    
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            div.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+            div.style.padding= '4px';
+            div.style.borderRadius = '4px';
+            var grades = [0, 50000, 100000];
+            var labels = ['<strong>Revenue</strong>'];
+            var colors = ['red', 'orange', 'green'];
+    
+            for (var i = 0; i < grades.length; i++) {
+                labels.push(
+                    '<i style="background:' + colors[i] + '; width: 10px; height: 10px; display: inline-block;"></i> ' +
+                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] : '+'));
+            }
+    
+            div.innerHTML = labels.join('<br>');
+            return div;
+        };
+    
+        legend.addTo(map);
+    }
+    
+    addLegendToMap(map);
 });
 
 function showChart(type) {
@@ -403,3 +431,4 @@ function showChart(type) {
         document.getElementById('storeChartCustomers').style.display = 'block';
     }
 }
+
