@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
-   
+
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
@@ -287,11 +287,12 @@
             font-size: 24px;
             top: 0;
             left: 0;
-          
+
             font-weight: bold;
             margin-bottom: 10px;
             margin-top: 10px;
         }
+    
     </style>
 </head>
 
@@ -382,13 +383,11 @@
 
 
     <body>
-
         <div class="comparison-section">
             <h1 class="page-title">Store Comparison</h1>
             <div class="stores-container">
                 <div class="store-row">
                     <div class="store-container">
-
                         <span class="store-label">Store 1:</span>
                         <div class="dropdown-wrapper">
                             <input type="text" id="store1Search" class="search-input" placeholder="Search...">
@@ -396,7 +395,6 @@
                                 data-placeholder="Choose a Store"></select>
                         </div>
                     </div>
-
                     <div class="store-container">
                         <span class="store-label">Store 2:</span>
                         <div class="dropdown-wrapper">
@@ -404,7 +402,6 @@
                             <select id="store2Select" class="dropdown-select"
                                 data-placeholder="Choose a Store"></select>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -416,11 +413,21 @@
                 <input type="date" id="endDate">
                 <button id="applyFilter">Apply</button>
             </div>
-
-
-            <!-- Hier wird das Diagramm platziert -->
             <div class="chart-container">
                 <canvas id="comparisonChart"></canvas>
+            </div>
+            <div class="total-revenue-container">
+            <h1 class="page-title">Total Revenue</h1>
+                <div class="total-revenue">
+                    <div class="total-revenue-item">
+                    <h1 class="page-titlename">Store 1</h1>
+                        <p id="totalRevenueStore1">$0.00</p>
+                    </div>
+                    <div class="total-revenue-item">
+                    <h1 class="page-titlename">Store 2</h1>
+                        <p id="totalRevenueStore2">$0.00</p>
+                    </div>
+                </div>
             </div>
         </div>
 
