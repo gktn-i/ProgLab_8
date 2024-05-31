@@ -27,20 +27,24 @@
 }
 
 .store-container {
-    width: 40%; /* Reduziere die Breite der Store-Container */
-    margin: 0 5px; /* Verringere den Seitenabstand der Store-Container */
+    width: 40%;
+    /* Reduziere die Breite der Store-Container */
+    margin: 0 5px;
+    /* Verringere den Seitenabstand der Store-Container */
 }
 
 .store-label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    font-size: 14px; /* Reduziere die Schriftgröße für Store-Labels */
+    font-size: 14px;
+    /* Reduziere die Schriftgröße für Store-Labels */
 }
 
 .stores-container {
     display: flex;
-    justify-content: space-between; /* Platziere die Store-Container am Anfang und am Ende */
+    justify-content: space-between;
+    /* Platziere die Store-Container am Anfang und am Ende */
     margin-bottom: 20px;
 }
 
@@ -247,7 +251,7 @@ body {
 
 
 .page-titlename {
-     /* Reduziere die Schriftgröße für Store-Titel */
+    /* Reduziere die Schriftgröße für Store-Titel */
     font-size: 20px;
     top: 0;
     left: 0;
@@ -258,13 +262,44 @@ body {
 .total-revenue-item {
     width: 45%;
     text-align: center;
-    margin-bottom: 20px; /* Erhöhe den Abstand zwischen den Store-Containern */
+    margin-bottom: 20px;
+    /* Erhöhe den Abstand zwischen den Store-Containern */
 }
 
 
 .total-revenue-item p {
     font-size: 1.5em;
-    margin-top: 20px; /* Maintain vertical space */
-    padding-left: 200px; /* Add horizontal space to the left */
-    padding-right: 200px; /* Add horizontal space to the right */
-  }
+    margin-top: 20px;
+    /* Maintain vertical space */
+    padding-left: 200px;
+    /* Add horizontal space to the left */
+    padding-right: 200px;
+    /* Add horizontal space to the right */
+}
+
+.best-seller {
+    display: flex;
+    justify-content: space-between;
+    /* Ändern Sie space-around zu space-between */
+    margin-bottom: 20px;
+    /* Fügen Sie einen Abstand zwischen den "Best Seller" und "Total Revenue" hinzu */
+}
+
+.best-seller-item {
+    width: 45%;
+    text-align: center;
+}
+
+.best-seller-item h1 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.best-seller-item p {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+.product-name {
+    font-size: 16px !important;
+}

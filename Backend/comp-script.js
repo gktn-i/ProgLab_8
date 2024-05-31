@@ -74,7 +74,7 @@ function fetchStoreRevenue(storeID) {
 function updateChart(chart, store1Data, store2Data) {
     console.log("Store 1 Data:", store1Data);
     console.log("Store 2 Data:", store2Data);
-    
+
     const store1Dates = store1Data.map(item => item.orderDate);
     const store2Dates = store2Data.map(item => item.orderDate);
     const allDates = [...new Set([...store1Dates, ...store2Dates])].sort();
@@ -99,17 +99,17 @@ function updateChart(chart, store1Data, store2Data) {
     chart.data.datasets[1].label = "Store 2";
 
     chart.update();
-    
+
     const totalRevenueStore1 = store1Revenues.reduce((sum, revenue) => sum + revenue, 0);
     const totalRevenueStore2 = store2Revenues.reduce((sum, revenue) => sum + revenue, 0);
-    
+
     console.log("Total Revenue Store 1:", totalRevenueStore1);
     console.log("Total Revenue Store 2:", totalRevenueStore2);
-    
+
     if (!isNaN(totalRevenueStore1)) {
         document.getElementById('totalRevenueStore1').textContent = `$${totalRevenueStore1.toFixed(2)}`;
     }
-    
+
     if (!isNaN(totalRevenueStore2)) {
         document.getElementById('totalRevenueStore2').textContent = `$${totalRevenueStore2.toFixed(2)}`;
     }
@@ -219,4 +219,65 @@ document.addEventListener('DOMContentLoaded', function () {
 
     store1Select.addEventListener('change', updateChartOnSelection);
     store2Select.addEventListener('change', updateChartOnSelection);
+
+    async function updateChartOnSelection() {
+        const store1Select = document.getElementById('store1Select');
+        const store2Select = document.getElementById('store2Select');
+
+        if (store1Select.value && store2Select.value) {
+            try {
+                const [store1Data, store2Data] = await Promise.all([
+                    fetchStoreRevenue(store1Select.value),
+                    fetchStoreRevenue(store2Select.value)
+                ]);
+                updateChart(comparisonChart, store1Data, store2Data);
+
+                // Ajax-Anfrage nur senden, wenn beide Stores ausgewählt wurden
+                $.ajax({
+                    url: 'Backend/get_best_seller_comp.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        storeID: store1Select.value
+                    },
+                    success: function (data) {
+                        console.log('Received data for Store 1:', data);
+                        if (data.length >= 3) {
+                            $('#bestsellerproduct1').text(data[0].Name);
+                            $('#bestsellerproduct2').text(data[1].Name);
+                            $('#bestsellerproduct3').text(data[2].Name);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Ajax request for Store 1 failed:', error);
+                    }
+                });
+
+                $.ajax({
+                    url: 'Backend/get_best_seller_comp.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        storeID: store2Select.value
+                    },
+                    success: function (data) {
+                        console.log('Received data for Store 2:', data);
+                        if (data.length >= 3) {
+                            $('#bestsellerproduct4').text(data[0].Name);
+                            $('#bestsellerproduct5').text(data[1].Name);
+                            $('#bestsellerproduct6').text(data[2].Name);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Ajax request for Store 2 failed:', error);
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error fetching store data for comparison: ", error);
+            }
+        }
+    }
+
+
 });

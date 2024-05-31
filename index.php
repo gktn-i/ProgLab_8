@@ -292,7 +292,6 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
-    
     </style>
 </head>
 
@@ -417,24 +416,40 @@
                 <canvas id="comparisonChart"></canvas>
             </div>
             <div class="total-revenue-container">
-            <h1 class="page-title">Total Revenue</h1>
+                <h1 class="page-title">Total Revenue</h1>
                 <div class="total-revenue">
                     <div class="total-revenue-item">
-                    <h1 class="page-titlename">Store 1</h1>
+                        <h1 class="page-titlename">Store 1</h1>
                         <p id="totalRevenueStore1">$0.00</p>
                     </div>
                     <div class="total-revenue-item">
-                    <h1 class="page-titlename">Store 2</h1>
+                        <h1 class="page-titlename">Store 2</h1>
                         <p id="totalRevenueStore2">$0.00</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="total-revenue-container">
+                <h1 class="page-title">Best Seller product</h1>
+                <div class="best-seller">
+                    <div class="best-seller-item">
+                        <h1 class="page-titlename">Store 1</h1>
+                        <p id="bestsellerproduct1" class="product-name"></p>
+                        <p id="bestsellerproduct2" class="product-name"></p>
+                        <p id="bestsellerproduct3" class="product-name"></p>
+                    </div>
+                    <div class="best-seller-item">
+                        <h1 class="page-titlename">Store 2</h1>
+                        <p id="bestsellerproduct4" class="product-name"></p>
+                        <p id="bestsellerproduct5" class="product-name"></p>
+                        <p id="bestsellerproduct6" class="product-name"></p>
+                    </div>
 
-        <!-- JavaScript-Dateien einbinden -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="/Backend/comp-script.js"></script>
+                </div>
+
+                <!-- JavaScript-Dateien einbinden -->
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="/Backend/comp-script.js"></script>
     </body>
 
 </html>
