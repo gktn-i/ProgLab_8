@@ -12,18 +12,16 @@
             padding: 0;
             background-color: #f5f5f5;
         }
-
         .container {
             display: flex;
             flex-wrap: wrap;
             max-width: 1300px;
             margin: 50px auto;
             margin-bottom: 2%;
-            height: 800px;
+            height: auto;
             animation: fadeIn 1s ease-in;
             justify-content: space-between;
         }
-
         .section {
             flex: calc(50% - 20px);
             box-sizing: border-box;
@@ -33,37 +31,44 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-color: #666666;
             margin: 5px;
+            height: auto;
         }
-
         .chart-container {
             position: relative;
             height: 400px;
             width: 100%;
         }
+
+        h2{
+            text-align: center;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
-
 <body>
     <?php include 'Navbar.php'; ?>
-
     <div class="container">
         <!-- Chart sections -->
         <div class="section">
+            <h2>Total Orders by Month</h2>
             <div class="chart-container">
                 <canvas id="chart1"></canvas>
             </div>
         </div>
         <div class="section">
+            <h2>Average Order Value by Month</h2>
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
             </div>
         </div>
         <div class="section">
+            <h2>Total Orders by Store</h2>
             <div class="chart-container">
                 <canvas id="chart3"></canvas>
             </div>
         </div>
         <div class="section">
+            <h2>Pizza Distribution</h2>
             <div class="chart-container">
                 <canvas id="chart4"></canvas>
             </div>
