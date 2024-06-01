@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f5f5f5;
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -22,6 +23,7 @@
             animation: fadeIn 1s ease-in;
             justify-content: space-between;
         }
+
         .section {
             flex: calc(50% - 20px);
             box-sizing: border-box;
@@ -33,18 +35,22 @@
             margin: 5px;
             height: auto;
         }
+
         .chart-container {
             position: relative;
             height: 400px;
             width: 100%;
         }
 
-        h2{
+        h2 {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 40px;
+            font-size: 1.2em;
         }
+        
     </style>
 </head>
+
 <body>
     <?php include 'Navbar.php'; ?>
     <div class="container">
@@ -103,11 +109,51 @@
         }
 
         document.addEventListener('DOMContentLoaded', async function() {
-            var chartConfigs = [
-                { type: 'line', options: { responsive: true, title: { display: true, text: 'Total Orders by Month' } } },
-                { type: 'line', options: { responsive: true, title: { display: true, text: 'Average Order Value by Month' } } },
-                { type: 'bar', options: { responsive: true, title: { display: true, text: 'Total Orders by Store' } } },
-                { type: 'pie', options: { responsive: true, title: { display: true, text: 'Pizza Distribution' } } }
+            var chartConfigs = [{
+                    type: 'line',
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Total Orders by Month'
+                        }
+                    }
+                },
+                {
+                    type: 'line',
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Average Order Value by Month'
+                        }
+                    }
+                },
+                {
+                    type: 'bar',
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Total Orders by Store'
+                        }
+                    }
+                },
+                {
+                    type: 'pie',
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Pizza Distribution'
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'right'
+                            }
+                        }
+                    }
+                }
             ];
 
             let allData = await fetchAllChartData();
@@ -121,7 +167,8 @@
                         data: allData.orders_by_month.map(item => item.total_orders),
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
+                        borderWidth: 1,
+                        fill: true,
                     }]
                 };
                 renderChart(ctx1, chart1Data, chartConfigs[0]);
@@ -166,7 +213,24 @@
                         borderWidth: 1
                     }]
                 };
-                renderChart(ctx4, chart4Data, chartConfigs[3]);
+                var chart4Config = {
+                    type: 'pie',
+                    data: chart4Data,
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Pizza Distribution'
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'right'
+                            }
+                        }
+                    }
+                };
+                renderChart(ctx4, chart4Data, chart4Config);
             }
         });
     </script>
