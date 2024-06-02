@@ -18,6 +18,7 @@ function fetchLoadStores() {
     });
 }
 
+
 function addOptions(dropdownId, data) {
     const dropdown = document.getElementById(dropdownId);
     dropdown.innerHTML = '';
@@ -71,6 +72,42 @@ function fetchStoreRevenue(storeID) {
     });
 }
 
+async function fetchOrderCategoryCount(storeID) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `Backend/get_order_category_count_comp.php?storeID=${storeID}`);
+        xhr.responseType = "json";
+
+        xhr.onloadstart = function () {
+            console.log("AJAX request started"); // Logge, wenn die Anfrage gestartet wird
+        };
+
+        xhr.onload = function () {
+            console.log("XHR Success:", xhr.response); // Logge die empfangenen Daten bei Erfolg
+            if (xhr.status === 200) {
+                resolve(xhr.response);
+            } else {
+                reject(new Error("Error fetching order category count: " + xhr.statusText));
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error("XHR Network Error"); // Logge Netzwerkfehler
+            reject(new Error("Network error while fetching order category count"));
+        };
+
+        xhr.ontimeout = function () {
+            console.error("XHR Timeout Error"); // Logge Time-out Fehler
+            reject(new Error("Timeout error while fetching order category count"));
+        };
+
+        xhr.onloadend = function () {
+            console.log("AJAX request completed"); // Logge, wenn die Anfrage abgeschlossen ist
+        };
+
+        xhr.send();
+    });
+}
 function updateChart(chart, store1Data, store2Data) {
     console.log("Store 1 Data:", store1Data);
     console.log("Store 2 Data:", store2Data);
@@ -278,16 +315,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-/*     function updateCategoryTurnoverPieCharts(store1Data, store2Data) {
-        const categories1 = store1Data.map(item => item.Category);
-        const counts1 = store1Data.map(item => item.OrderCount);
-
-        const categories2 = store2Data.map(item => item.Category);
-        const counts2 = store2Data.map(item => item.OrderCount);
-
-        updatePieChart('categoryTurnoverPieChart1', categories1, counts1, 'Store 1');
-        updatePieChart('categoryTurnoverPieChart2', categories2, counts2, 'Store 2');
-    } */
+    /*     function updateCategoryTurnoverPieCharts(store1Data, store2Data) {
+            const categories1 = store1Data.map(item => item.Category);
+            const counts1 = store1Data.map(item => item.OrderCount);
+    
+            const categories2 = store2Data.map(item => item.Category);
+            const counts2 = store2Data.map(item => item.OrderCount);
+    
+            updatePieChart('categoryTurnoverPieChart1', categories1, counts1, 'Store 1');
+            updatePieChart('categoryTurnoverPieChart2', categories2, counts2, 'Store 2');
+        } */
 
 });
 
@@ -319,7 +356,7 @@ async function updateOrderCount() {
             const orderCountStore1 = await fetchOrderCount(store1Select.value);
             const totalOrderCountStore1 = document.getElementById('totalordercountStore1');
             if (totalOrderCountStore1) {
-                totalOrderCountStore1.textContent = `Total Order Count: ${orderCountStore1}`;
+                totalOrderCountStore1.textContent = `Total Order: ${orderCountStore1}`;
             } else {
                 console.error("Element with ID 'totalordercountStore1' not found.");
             }
@@ -345,10 +382,159 @@ async function updateOrderCount() {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialisierung des Dropdowns und des Diagramms...
-    
+
     // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
     store1Select.addEventListener('change', updateOrderCount);
     store2Select.addEventListener('change', updateOrderCount);
 });
 
 
+
+
+function updateCategoryCountChart(store1Data, store2Data) {
+    const store1Categories = store1Data.map(item => item.Category);
+    const store1Counts = store1Data.map(item => parseInt(item.orderCount));
+
+    const store2Categories = store2Data.map(item => item.Category);
+    const store2Counts = store2Data.map(item => parseInt(item.orderCount));
+
+    const store1Colors = generateRandomColors(store1Categories.length);
+    const store2Colors = generateRandomColors(store2Categories.length);
+
+    drawPieChart('store1PieChart', store1Categories, store1Counts, store1Colors);
+    drawPieChart('store2PieChart', store2Categories, store2Counts, store2Colors);
+}
+
+function drawPieChart(canvasId, categories, counts, colors) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: categories,
+            datasets: [{
+                data: counts,
+                backgroundColor: colors,
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: canvasId === 'store1PieChart' ? 'Store 1' : 'Store 2'
+            }
+        }
+    });
+}
+
+function generateRandomColors(numColors) {
+    const colors = [];
+    for (let i = 0; i < numColors; i++) {
+        colors.push(`rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.8)`);
+    }
+    return colors;
+}
+
+async function updateCategoryCount() {
+    const store1Select = document.getElementById('store1Select');
+    const store2Select = document.getElementById('store2Select');
+
+    if (store1Select.value && store2Select.value) {
+        try {
+            const [store1Data, store2Data] = await Promise.all([
+                fetchOrderCategoryCount(store1Select.value),
+                fetchOrderCategoryCount(store2Select.value)
+            ]);
+            updateCategoryCountChart(store1Data, store2Data);
+        } catch (error) {
+            console.error("Error fetching order category count for comparison: ", error);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
+    store1Select.addEventListener('change', updateCategoryCount);
+    store2Select.addEventListener('change', updateCategoryCount);
+
+    // Funktion zum Zeichnen der Tortendiagramme aktualisieren
+    // Funktion zum Zeichnen eines Pie-Charts
+    function drawPieChart(canvasId, categories, counts, colors) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+
+        // Überprüfen, ob ein Chart auf dem Canvas existiert
+        if (Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy(); // Vorheriges Chart zerstören
+        }
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: categories,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: colors,
+                }]
+            },
+            options: {
+                responsive: false,
+                title: {
+                    display: true,
+                    text: canvasId === 'store1PieChart' ? 'Store 1' : 'Store 2'
+                }
+            }
+        });
+    }
+    // updateCategoryCountChart aktualisieren, um die Tortendiagramme zu zeichnen
+    function updateCategoryCountChart(store1Data, store2Data) {
+        const store1Categories = store1Data.map(item => item.Category);
+        const store1Counts = store1Data.map(item => parseInt(item.orderCount));
+
+        const store2Categories = store2Data.map(item => item.Category);
+        const store2Counts = store2Data.map(item => parseInt(item.orderCount));
+
+        const store1Colors = generateRandomColors(store1Categories.length);
+        const store2Colors = generateRandomColors(store2Categories.length);
+
+        // Set width and height for both pie charts
+        document.getElementById('store1PieChart').width = 300;
+        document.getElementById('store1PieChart').height = 300;
+        document.getElementById('store2PieChart').width = 300;
+        document.getElementById('store2PieChart').height = 300;
+
+        drawPieChart('store1PieChart', store1Categories, store1Counts, store1Colors);
+        drawPieChart('store2PieChart', store2Categories, store2Counts, store2Colors);
+    }
+    document.getElementById('store2PieChart').width = 300; // Setze die Breite auf 300 Pixel
+    document.getElementById('store2PieChart').height = 300; // Setze die Höhe auf 300 Pixel
+    document.getElementById('store1PieChart').style.marginRight = '10px'; // Abstand zwischen den Diagrammen
+    document.getElementById('store2PieChart').style.marginLeft = '10px';
+
+
+    function generateRandomColors(numColors) {
+        const colors = [];
+        for (let i = 0; i < numColors; i++) {
+            colors.push(`rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.8)`);
+        }
+        return colors;
+    }
+
+    async function updateCategoryCount() {
+        const store1Select = document.getElementById('store1Select');
+        const store2Select = document.getElementById('store2Select');
+
+        if (store1Select.value && store2Select.value) {
+            try {
+                const [store1Data, store2Data] = await Promise.all([
+                    fetchOrderCategoryCount(store1Select.value),
+                    fetchOrderCategoryCount(store2Select.value)
+                ]);
+                updateCategoryCountChart(store1Data, store2Data);
+            } catch (error) {
+                console.error("Error fetching order category count for comparison: ", error);
+            }
+        }
+    }
+
+
+
+});

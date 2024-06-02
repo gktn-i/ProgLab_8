@@ -462,7 +462,9 @@
                 </div>
             </div>
             <h1>Order Category Count</h1>
-            <canvas id="categoryBarChart" width="800" height="400"></canvas>
+                <canvas id="store1PieChart" width="300" height="300"></canvas>
+                <canvas id="store2PieChart" width="300" height="300"></canvas>
+
 
         </div>
 

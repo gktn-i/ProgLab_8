@@ -1,4 +1,13 @@
 <?php
+// Überprüfen, ob storeID im GET-Parameter vorhanden ist
+if(isset($_GET['storeID'])) {
+    $storeID = $_GET['storeID'];
+} else {
+    // Falls nicht vorhanden, eine Fehlermeldung ausgeben und das Skript beenden
+    echo json_encode("Error: storeID parameter is missing");
+    exit(); // Beende das Skript hier, um weitere Ausführung zu verhindern
+}
+
 // Verbindung zur Datenbank herstellen
 $mysqli = require __DIR__ . "/database.php";
 
