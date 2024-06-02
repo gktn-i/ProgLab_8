@@ -436,28 +436,41 @@
                 <div class="best-seller">
                     <div class="best-seller-item">
                         <h1 class="page-titlename">Store 1</h1>
-                        <p id="bestsellerproduct1" class="product-name"></p>
-                        <p id="bestsellerproduct2" class="product-name"></p>
-                        <p id="bestsellerproduct3" class="product-name"></p>
+                        <p id="bestsellerproduct1" class="product-name"> Top 1</p>
+                        <p id="bestsellerproduct2" class="product-name"> Top 2</p>
+                        <p id="bestsellerproduct3" class="product-name"> Top 3</p>
                     </div>
                     <div class="best-seller-item">
                         <h1 class="page-titlename">Store 2</h1>
-                        <p id="bestsellerproduct4" class="product-name"></p>
-                        <p id="bestsellerproduct5" class="product-name"></p>
-                        <p id="bestsellerproduct6" class="product-name"></p>
+                        <p id="bestsellerproduct4" class="product-name"> Top 1</p>
+                        <p id="bestsellerproduct5" class="product-name"> Top 2</p>
+                        <p id="bestsellerproduct6" class="product-name"> Top 3</p>
                     </div>
                 </div>
             </div>
-            <div class="pyramid-chart-container">
-                <h1 class="page-title">Category Orders Comparison</h1>
-                <canvas id="pyramidChart" width="800" height="400"></canvas>
+            <div class="total-revenue-container">
+                <h1 class="page-title">Total Order </h1>
+                <div class="total-revenue">
+                    <div class="total-revenue-item">
+                        <h1 class="page-titlename">Store 1</h1>
+                        <p id="totalordercountStore1" class="product-name">0</p>
+                    </div>
+                    <div class="total-revenue-item">
+                        <h1 class="page-titlename">Store 2</h1>
+                        <p id="totalordercountStore2" class="product-name">0</p>
+                    </div>
+                </div>
             </div>
+            <h1>Order Category Count</h1>
+            <canvas id="categoryBarChart" width="800" height="400"></canvas>
 
-            <!-- JavaScript-Dateien einbinden -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="/Backend/comp-script.js"></script>
-            <script src="/Backend/comp-script2.js"></script>
+        </div>
+
+        <!-- JavaScript-Dateien einbinden -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/Backend/comp-script.js"></script>
+        <script src="/Backend/comp-script2.js"></script>
     </body>
 
 </html>

@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function updateChartOnSelection() {
         const store1Select = document.getElementById('store1Select');
         const store2Select = document.getElementById('store2Select');
-    
+
         if (store1Select.value && store2Select.value) {
             try {
                 const [store1Data, store2Data] = await Promise.all([
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     fetchStoreRevenue(store2Select.value)
                 ]);
                 updateChart(comparisonChart, store1Data, store2Data);
-        
+
                 // Ajax-Anfrage nur senden, wenn beide Stores ausgewählt wurden
                 $.ajax({
                     url: 'Backend/get_best_seller_comp.php',
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error('Ajax request for Store 1 failed:', error);
                     }
                 });
-    
+
                 $.ajax({
                     url: 'Backend/get_best_seller_comp.php',
                     type: 'GET',
@@ -272,22 +272,83 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.error('Ajax request for Store 2 failed:', error);
                     }
                 });
-    
+
             } catch (error) {
                 console.error("Error fetching store data for comparison: ", error);
             }
         }
     }
-    function updateCategoryTurnoverPieCharts(store1Data, store2Data) {
+/*     function updateCategoryTurnoverPieCharts(store1Data, store2Data) {
         const categories1 = store1Data.map(item => item.Category);
         const counts1 = store1Data.map(item => item.OrderCount);
-      
+
         const categories2 = store2Data.map(item => item.Category);
         const counts2 = store2Data.map(item => item.OrderCount);
-      
+
         updatePieChart('categoryTurnoverPieChart1', categories1, counts1, 'Store 1');
         updatePieChart('categoryTurnoverPieChart2', categories2, counts2, 'Store 2');
-      }
-      
-    
+    } */
+
 });
+
+async function fetchOrderCount(storeID) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `Backend/get_totalorder_comp.php?storeID=${storeID}`);
+        xhr.responseType = "json";
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                resolve(xhr.response);
+            } else {
+                reject(new Error("Error fetching order count: " + xhr.statusText));
+            }
+        };
+        xhr.onerror = function () {
+            reject(new Error("Network error while fetching order count"));
+        };
+        xhr.send();
+    });
+}
+
+async function updateOrderCount() {
+    const store1Select = document.getElementById('store1Select');
+    const store2Select = document.getElementById('store2Select');
+
+    if (store1Select.value) {
+        try {
+            const orderCountStore1 = await fetchOrderCount(store1Select.value);
+            const totalOrderCountStore1 = document.getElementById('totalordercountStore1');
+            if (totalOrderCountStore1) {
+                totalOrderCountStore1.textContent = `Total Order Count: ${orderCountStore1}`;
+            } else {
+                console.error("Element with ID 'totalordercountStore1' not found.");
+            }
+        } catch (error) {
+            console.error("Error fetching order count for Store 1: ", error);
+        }
+    }
+
+    if (store2Select.value) {
+        try {
+            const orderCountStore2 = await fetchOrderCount(store2Select.value);
+            const totalOrderCountStore2 = document.getElementById('totalordercountStore2');
+            if (totalOrderCountStore2) {
+                totalOrderCountStore2.textContent = `Total Order: ${orderCountStore2}`;
+            } else {
+                console.error("Element with ID 'totalordercountStore2' not found.");
+            }
+        } catch (error) {
+            console.error("Error fetching order count for Store 2: ", error);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialisierung des Dropdowns und des Diagramms...
+    
+    // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
+    store1Select.addEventListener('change', updateOrderCount);
+    store2Select.addEventListener('change', updateOrderCount);
+});
+
+
