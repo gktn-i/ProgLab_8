@@ -1,3 +1,19 @@
+$(document).ready(function(){
+    $('.accordion-title').click(function(){
+        $('.comparison-section').toggleClass('open');
+        $('.comparison-section').toggleClass('closed');
+        $(this).toggleClass('active');
+        var accordionContent = $(this).next('.accordion-content');
+        accordionContent.toggleClass('show');
+        if (accordionContent.hasClass('show')) {
+            accordionContent.css('max-height', accordionContent.prop('scrollHeight') + 'px');
+        } else {
+            accordionContent.css('max-height', 0);
+        }
+    });
+});
+
+
 let comparisonChart;
 function fetchLoadStores() {
     return new Promise((resolve, reject) => {

@@ -1,4 +1,42 @@
 .comparison-section {
+    height: 50px; /* Start-Höhe */
+    overflow: hidden;
+    transition: height 0.5s ease;
+    display: flex;
+    flex-direction: row; /* Anordnung horizontal */
+}
+
+.comparison-section.closed {
+    height: 100px; /* Geschlossene Höhe */
+}
+
+.comparison-section.open {
+    height: 2500px; /* Geöffnete Höhe */
+}
+
+.comparison-section .accordion-content {
+    flex-grow: 1; /* Füllt den verfügbaren Platz aus */
+    display: none;
+    overflow: hidden; /* Verhindert ein plötzliches Aufklappen */
+    transition: max-height 0.5s ease; /* Übergangseffekt für die Höhe */
+    max-height: 0; /* Startet mit einer Höhe von 0 */
+}
+
+.comparison-section .accordion-title {
+    cursor: pointer;
+}
+
+.comparison-section .accordion-icon {
+    float: right;
+}
+
+.comparison-section .accordion-content.show {
+    display: block;
+    max-height: 500px; /* Setze eine maximale Höhe für die Animation */
+}
+
+
+.comparison-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,8 +45,8 @@
     /* Äußerer Abstand oben und unten automatisch setzen, um die Section in der Mitte horizontal zu zentrieren */
     padding: 50px;
     width: 1295px;
-    height: 2000px;
-    border: 1px solid #1e1e1e;
+    height: 2500px;
+  /*   */
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
@@ -331,21 +369,28 @@ body {
     /* Alignieren Sie die Elemente oben */
 
 }
-#store1PieChart, #store2PieChart {
+
+#store1PieChart,
+#store2PieChart {
     width: 300px;
     height: 300px;
-    margin-right: 10px; /* Abstand zwischen den Diagrammen */
+    margin-right: 10px;
+    /* Abstand zwischen den Diagrammen */
 }
 
-.chart-container {
+/* .chart-container {
     width: 500px;
     height: 300px;
-  }
+  } */
 .pie-chart-canvas {
-    width: 300px; /* Adjust width as desired */
-    height: 300px; /* Adjust height as desired */
+    width: 300px;
+    /* Adjust width as desired */
+    height: 300px;
+    /* Adjust height as desired */
     display: inline-block;
     /* Remove margin */
-    margin: 0; /* Adjust margin as desired */
-    float: left; /* Float the elements left to arrange them side-by-side */
-  }
+    margin: 0;
+    /* Adjust margin as desired */
+    float: left;
+    /* Float the elements left to arrange them side-by-side */
+}
