@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
+    <script src="/Backend/comp-script2.js"></script>
+
 
     <title>Dashboard</title>
     <script src="Backend/script.js"></script>
+
     <style>
         @keyframes fadeIn {
             from {
@@ -443,13 +446,18 @@
                         <p id="bestsellerproduct5" class="product-name"></p>
                         <p id="bestsellerproduct6" class="product-name"></p>
                     </div>
-
                 </div>
+            </div>
+            <div class="pyramid-chart-container">
+                <h1 class="page-title">Category Orders Comparison</h1>
+                <canvas id="pyramidChart" width="800" height="400"></canvas>
+            </div>
 
-                <!-- JavaScript-Dateien einbinden -->
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                <script src="/Backend/comp-script.js"></script>
+            <!-- JavaScript-Dateien einbinden -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="/Backend/comp-script.js"></script>
+            <script src="/Backend/comp-script2.js"></script>
     </body>
 
 </html>

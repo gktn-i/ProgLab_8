@@ -7,7 +7,7 @@
     /* Äußerer Abstand oben und unten automatisch setzen, um die Section in der Mitte horizontal zu zentrieren */
     padding: 50px;
     width: 1295px;
-    height: 1500px;
+    height: 2000px;
     border: 1px solid #1e1e1e;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -262,7 +262,7 @@ body {
 .total-revenue-item {
     width: 45%;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     /* Erhöhe den Abstand zwischen den Store-Containern */
 }
 
@@ -271,9 +271,9 @@ body {
     font-size: 1.5em;
     margin-top: 20px;
     /* Maintain vertical space */
-    padding-left: 200px;
+    padding-left: 220px;
     /* Add horizontal space to the left */
-    padding-right: 200px;
+    padding-right: 220px;
     /* Add horizontal space to the right */
 }
 
@@ -288,6 +288,10 @@ body {
 .best-seller-item {
     width: 45%;
     text-align: center;
+    padding-left: 20px;
+    /* Add horizontal space to the left */
+    padding-right: 20px;
+    /* Add horizontal space to the right */
 }
 
 .best-seller-item h1 {
@@ -300,6 +304,30 @@ body {
     font-size: 1.5em;
     margin-top: 20px;
 }
+
 .product-name {
     font-size: 16px !important;
+    padding-left: 190px;
+    /* Add horizontal space to the left */
+    padding-right: 190px;
+    /* Add horizontal space to the right */
+}
+
+.Monthly-turnover-by-category {
+    display: flex;
+    justify-content: space-between;
+    /* Die Elemente werden mit gleichem Abstand am Anfang und am Ende des Flex-Containers platziert */
+}
+
+.Monthly-turnover-by-category-item {
+    width: 45%;
+    /* Oder eine andere Breite, die Ihrem Layout entspricht */
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline-block;
+    /* Setzen Sie die Elemente auf inline-block, damit sie nebeneinander angezeigt werden */
+    vertical-align: top;
+    /* Alignieren Sie die Elemente oben */
+
 }
