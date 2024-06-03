@@ -431,4 +431,3 @@ function showChart(type) {
         document.getElementById('storeChartCustomers').style.display = 'block';
     }
 }
-
