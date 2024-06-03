@@ -385,6 +385,9 @@
 
 
     <body>
+
+
+
         <div class="comparison-section closed">
             <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
             <div class="accordion-content">
@@ -464,14 +467,16 @@
                             </div>
                         </div>
                     </div>
-                    <h1>Order Category Count</h1>
+                    <h1 class="page-title">Order Category Count</h1>
                     <h1 class="page-titlename">Store 1</h1>
                     <canvas id="store1PieChart" width="300" height="300"></canvas>
                     <h1 class="page-titlename">Store 2</h1>
                     <canvas id="store2PieChart" width="300" height="300"></canvas>
+                    <div>
+                        <canvas id="barChartStore"></canvas>
+                    </div>
 
-
-                </div> <!-- Hier bleibt der bisherige Inhalt unverändert -->
+                </div>
             </div>
         </div>
 

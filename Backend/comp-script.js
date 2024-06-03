@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $('.accordion-title').click(function(){
-        $('.comparison-section').toggleClass('open');
-        $('.comparison-section').toggleClass('closed');
+        const section = $(this).closest('.comparison-section');
+        section.toggleClass('open');
+        section.toggleClass('closed');
         $(this).toggleClass('active');
         var accordionContent = $(this).next('.accordion-content');
         accordionContent.toggleClass('show');
@@ -469,11 +470,12 @@ async function updateCategoryCount() {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
+    const store1Select = document.getElementById('store1Select');
+    const store2Select = document.getElementById('store2Select');
+
+    // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
     store1Select.addEventListener('change', updateCategoryCount);
     store2Select.addEventListener('change', updateCategoryCount);
-
-    // Funktion zum Zeichnen der Tortendiagramme aktualisieren
-    // Funktion zum Zeichnen eines Pie-Charts
     function drawPieChart(canvasId, categories, counts, colors) {
         const ctx = document.getElementById(canvasId).getContext('2d');
 
@@ -500,6 +502,45 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+    function drawBarChart(canvasId, categories, store1Counts, store2Counts) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+
+        // Überprüfen, ob ein Chart auf dem Canvas existiert
+        if (Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy(); // Vorheriges Chart zerstören
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: categories,
+                datasets: [
+                    {
+                        label: 'Store 1',
+                        data: store1Counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)', // Farbe für Store 1
+                    },
+                    {
+                        label: 'Store 2',
+                        data: store2Counts,
+                        backgroundColor: 'rgba(153, 102, 255, 0.8)', // Farbe für Store 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Order Counts by Category'
+                }
+            }
+        });
+    }
     // updateCategoryCountChart aktualisieren, um die Tortendiagramme zu zeichnen
     function updateCategoryCountChart(store1Data, store2Data) {
         const store1Categories = store1Data.map(item => item.Category);
@@ -519,6 +560,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         drawPieChart('store1PieChart', store1Categories, store1Counts, store1Colors);
         drawPieChart('store2PieChart', store2Categories, store2Counts, store2Colors);
+
+        // Draw Bar Chart
+        const allCategories = Array.from(new Set([...store1Categories, ...store2Categories]));
+        const alignedStore1Counts = allCategories.map(cat => store1Categories.includes(cat) ? store1Counts[store1Categories.indexOf(cat)] : 0);
+        const alignedStore2Counts = allCategories.map(cat => store2Categories.includes(cat) ? store2Counts[store2Categories.indexOf(cat)] : 0);
+
+        drawBarChart('barChartStore', allCategories, alignedStore1Counts, alignedStore2Counts);
     }
     document.getElementById('store2PieChart').width = 300; // Setze die Breite auf 300 Pixel
     document.getElementById('store2PieChart').height = 300; // Setze die Höhe auf 300 Pixel
@@ -535,9 +583,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function updateCategoryCount() {
-        const store1Select = document.getElementById('store1Select');
-        const store2Select = document.getElementById('store2Select');
-
         if (store1Select.value && store2Select.value) {
             try {
                 const [store1Data, store2Data] = await Promise.all([
@@ -550,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
+    updateCategoryCount();
 
 
 });
