@@ -259,6 +259,7 @@
             width: 300px !important;
             height: 200px !important;
         }
+        
     </style>
 </head>
 

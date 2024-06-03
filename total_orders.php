@@ -38,8 +38,12 @@
 
         .chart-container {
             position: relative;
-            height: 400px;
+            height: 350px;
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 8px;
         }
 
         h2 {
@@ -68,7 +72,7 @@
 
         #time-filter button {
             padding: 5px 10px;
-            border-color: #666666;            
+            border-color: #666666;
             color: white;
             border: 1px solid;
             border-radius: 4px;
@@ -78,6 +82,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
         }
+
         #time-filter button:hover {
             background-color: green;
         }
@@ -260,11 +265,11 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // default "all" year on page load
             initializeCharts();
 
-            document.getElementById('time-filter').addEventListener('submit', function (event) {
+            document.getElementById('time-filter').addEventListener('submit', function(event) {
                 event.preventDefault();
                 let year = document.getElementById('year').value;
                 initializeCharts(year);
