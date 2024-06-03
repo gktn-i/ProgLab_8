@@ -96,11 +96,11 @@ async function fetchOrderCategoryCount(storeID) {
         xhr.responseType = "json";
 
         xhr.onloadstart = function () {
-            console.log("AJAX request started"); // Logge, wenn die Anfrage gestartet wird
+            console.log("AJAX request started"); // Log
         };
 
         xhr.onload = function () {
-            console.log("XHR Success:", xhr.response); // Logge die empfangenen Daten bei Erfolg
+            console.log("XHR Success:", xhr.response); 
             if (xhr.status === 200) {
                 resolve(xhr.response);
             } else {
@@ -109,17 +109,17 @@ async function fetchOrderCategoryCount(storeID) {
         };
 
         xhr.onerror = function () {
-            console.error("XHR Network Error"); // Logge Netzwerkfehler
+            console.error("XHR Network Error"); 
             reject(new Error("Network error while fetching order category count"));
         };
 
         xhr.ontimeout = function () {
-            console.error("XHR Timeout Error"); // Logge Time-out Fehler
+            console.error("XHR Timeout Error");
             reject(new Error("Timeout error while fetching order category count"));
         };
 
         xhr.onloadend = function () {
-            console.log("AJAX request completed"); // Logge, wenn die Anfrage abgeschlossen ist
+            console.log("AJAX request completed"); 
         };
 
         xhr.send();
@@ -398,9 +398,6 @@ async function updateOrderCount() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialisierung des Dropdowns und des Diagramms...
-
-    // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
     store1Select.addEventListener('change', updateOrderCount);
     store2Select.addEventListener('change', updateOrderCount);
 });
@@ -473,15 +470,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const store1Select = document.getElementById('store1Select');
     const store2Select = document.getElementById('store2Select');
 
-    // Event-Listener für die Auswahländerungen der Dropdowns hinzufügen
     store1Select.addEventListener('change', updateCategoryCount);
     store2Select.addEventListener('change', updateCategoryCount);
     function drawPieChart(canvasId, categories, counts, colors) {
         const ctx = document.getElementById(canvasId).getContext('2d');
 
-        // Überprüfen, ob ein Chart auf dem Canvas existiert
         if (Chart.getChart(ctx)) {
-            Chart.getChart(ctx).destroy(); // Vorheriges Chart zerstören
+            Chart.getChart(ctx).destroy(); 
         }
 
         new Chart(ctx, {
@@ -505,9 +500,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function drawBarChart(canvasId, categories, store1Counts, store2Counts) {
         const ctx = document.getElementById(canvasId).getContext('2d');
 
-        // Überprüfen, ob ein Chart auf dem Canvas existiert
         if (Chart.getChart(ctx)) {
-            Chart.getChart(ctx).destroy(); // Vorheriges Chart zerstören
+            Chart.getChart(ctx).destroy(); 
         }
 
         new Chart(ctx, {
@@ -518,12 +512,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     {
                         label: 'Store 1',
                         data: store1Counts,
-                        backgroundColor: 'rgba(75, 192, 192, 0.8)', // Farbe für Store 1
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)', 
                     },
                     {
                         label: 'Store 2',
                         data: store2Counts,
-                        backgroundColor: 'rgba(153, 102, 255, 0.8)', // Farbe für Store 2
+                        backgroundColor: 'rgba(153, 102, 255, 0.8)', 
                     }
                 ]
             },
@@ -552,7 +546,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const store1Colors = generateRandomColors(store1Categories.length);
         const store2Colors = generateRandomColors(store2Categories.length);
 
-        // Set width and height for both pie charts
         document.getElementById('store1PieChart').width = 300;
         document.getElementById('store1PieChart').height = 300;
         document.getElementById('store2PieChart').width = 300;
@@ -561,16 +554,15 @@ document.addEventListener('DOMContentLoaded', function () {
         drawPieChart('store1PieChart', store1Categories, store1Counts, store1Colors);
         drawPieChart('store2PieChart', store2Categories, store2Counts, store2Colors);
 
-        // Draw Bar Chart
         const allCategories = Array.from(new Set([...store1Categories, ...store2Categories]));
         const alignedStore1Counts = allCategories.map(cat => store1Categories.includes(cat) ? store1Counts[store1Categories.indexOf(cat)] : 0);
         const alignedStore2Counts = allCategories.map(cat => store2Categories.includes(cat) ? store2Counts[store2Categories.indexOf(cat)] : 0);
 
         drawBarChart('barChartStore', allCategories, alignedStore1Counts, alignedStore2Counts);
     }
-    document.getElementById('store2PieChart').width = 300; // Setze die Breite auf 300 Pixel
-    document.getElementById('store2PieChart').height = 300; // Setze die Höhe auf 300 Pixel
-    document.getElementById('store1PieChart').style.marginRight = '10px'; // Abstand zwischen den Diagrammen
+    document.getElementById('store2PieChart').width = 300; 
+    document.getElementById('store2PieChart').height = 300; 
+    document.getElementById('store1PieChart').style.marginRight = '10px'; 
     document.getElementById('store2PieChart').style.marginLeft = '10px';
 
 
