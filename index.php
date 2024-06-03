@@ -11,9 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-
-    <script src="/scriptmap.js"></script>
-
+    <script src="/Backend/comp-script2.js"></script>
 
 
     <title>Dashboard</title>
@@ -46,7 +44,6 @@
             background-color: #1e1e1e;
         }
 
- comparison
         .statistics {
             display: flex;
             justify-content: space-around;
@@ -102,7 +99,6 @@
             transform: translateY(-5px);
         }
 
-
         .container {
             display: flex;
             max-width: 1200px;
@@ -113,38 +109,6 @@
 
 
         }
-
-
-        
-        .comparison-section {
-           justify-content: center;
-            display: flex;
-            width: 1295px;
-            margin: 50px auto;
-
-            height: 600px;
-            border: 1px solid;
-            border-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-
-
-        }
-
-        .comparison-section {
-           justify-content: center;
-            display: flex;
-            width: 1295px;
-            margin: 50px auto;
-            margin-bottom: 3%;
-            height: 600px;
-            border: 1px solid;
-            border-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-
 
 
 
@@ -336,10 +300,29 @@
 
 <body>
 
+    <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
 
 
+   <!--  <div class="statistics">
+        <div class="stat-box">
+            <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
+            <p>Total Orders</p>
+        </div>
+        <div class="stat-box">
+            <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
+            <p>Total Revenue</p>
+        </div>
+        <div class="stat-box">
+            <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
+            <p>Total Customers</p>
+        </div>
+        <div class="stat-box">
+            <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
+            <p>Total Products</p>
+        </div>
+    </div> -->
 
 
     <div id="map"></div>
@@ -497,7 +480,6 @@
                 </div>
             </div>
         </div>
-
 
 
         <!-- JavaScript-Dateien einbinden -->
@@ -905,17 +887,6 @@
                     console.error('Error fetching store statistics: ', error);
                 });
         }
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
-    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
-
-
-   
-</body>
-
 
         fetchLocations();
     });
