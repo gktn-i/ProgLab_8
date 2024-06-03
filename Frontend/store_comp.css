@@ -8,7 +8,9 @@
 }
 
 .comparison-section.closed {
-    height: 100px; 
+    height: 100px;
+    border: 1px solid;
+    border-color: #666;
 }
 
 .comparison-section.closed:hover {
@@ -16,20 +18,22 @@
 }
 
 .comparison-section.open {
-    height: 3000px; 
-    background-color: #ffffff; 
+    height: 3000px;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #666;
 }
 
 .comparison-section.open:hover {
-    background-color: #ffffff; 
+    background-color: #ffffff;
 }
 
 .comparison-section .accordion-content {
-    flex-grow: 1; 
+    flex-grow: 1;
     display: none;
-    overflow: hidden; 
-    transition: max-height 0.5s ease; 
-    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    max-height: 0;
 }
 
 .comparison-section .accordion-title {
@@ -42,7 +46,7 @@
 
 .comparison-section .accordion-content.show {
     display: block;
-    max-height: 500px; 
+    max-height: 500px;
 }
 
 
@@ -53,7 +57,7 @@
     align-items: center;
     justify-content: flex-start;
     margin: 10px auto;
-   
+
     padding: 50px;
     width: 1295px;
     height: 3000px;
@@ -357,4 +361,3 @@ body {
     margin: 0;
     float: left;
 }
-

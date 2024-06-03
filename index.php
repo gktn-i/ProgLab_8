@@ -378,7 +378,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <ul class="list-group" id="dataList">
-                <!-- Placeholder for list data -->
+             
             </ul>
         </div>
     </div>
@@ -392,7 +392,7 @@
             <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
             <div class="accordion-content">
                 <div class="comparison-section">
-                    <!-- <h1 class="page-title">Store Comparison</h1> -->
+                  
                     <div class="stores-container">
                         <div class="store-row">
                             <div class="store-container">
