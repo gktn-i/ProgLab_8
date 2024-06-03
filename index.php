@@ -286,6 +286,7 @@
             height: 200px !important;
         }
 
+
         .page-title {
             font-size: 24px;
             top: 0;
@@ -295,6 +296,7 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
+
     </style>
 </head>
 
@@ -481,6 +483,7 @@
         </div>
 
 
+
         <!-- JavaScript-Dateien einbinden -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -537,6 +540,15 @@
         resetControl.addTo(map);
 
         resetControl.addTo(map);
+
+    </div>
+ä
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
+    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
+
 
         function fetchLocations() {
             fetch('/Backend/map.php')
