@@ -261,7 +261,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Initialize charts with default "all" year on page load
+            // default "all" year on page load
             initializeCharts();
 
             document.getElementById('time-filter').addEventListener('submit', function (event) {

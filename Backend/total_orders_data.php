@@ -8,12 +8,10 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-// Get the year from the URL parameters
 $year = isset($_GET['year']) ? $_GET['year'] : null;
 
 $data = [];
 
-// Modify the queries to include a WHERE clause that filters the data by year
 $query1 = "
     SELECT DATE_FORMAT(orderDate, '%Y-%m') AS month, COUNT(*) AS total_orders 
     FROM orders 
