@@ -73,7 +73,7 @@ if ($products === null || !is_array($products)) {
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            bottom: 10px; /* erhöhen Sie die Position auf 20px */
+            bottom: 10px; 
             right: 10px;
             transition: background-color 0.3s;
         }
