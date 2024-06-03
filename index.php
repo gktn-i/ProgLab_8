@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-
+    <script src="/Backend/comp-script2.js"></script>
 
 
     <title>Dashboard</title>
@@ -286,7 +286,6 @@
             height: 200px !important;
         }
 
-
         .page-title {
             font-size: 24px;
             top: 0;
@@ -296,7 +295,6 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
-
     </style>
 </head>
 
@@ -307,7 +305,7 @@
     <?php include 'Navbar.php'; ?>
 
 
-    <!--  <div class="statistics">
+   <!--  <div class="statistics">
         <div class="stat-box">
             <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
             <p>Total Orders</p>
@@ -380,7 +378,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <ul class="list-group" id="dataList">
-
+             
             </ul>
         </div>
     </div>
@@ -394,7 +392,7 @@
             <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
             <div class="accordion-content">
                 <div class="comparison-section">
-
+                  
                     <div class="stores-container">
                         <div class="store-row">
                             <div class="store-container">
@@ -416,10 +414,11 @@
                         </div>
                     </div>
                     <div class="date-filter">
-                        <label for="startDate" class="label">Start Date:</label>
-                        <input type="date" id="startDate" class="date-input">
-                        <label for="endDate" class="label end-date-label">End Date:</label>
-                        <input type="date" id="endDate" class="date-input">
+                        <label for="startDate" class="font-weight-bold" style="margin-right: 10px;">Start Date:</label>
+                        <input type="date" id="startDate">
+                        <label for="endDate" class="font-weight-bold" style="margin-left: 20px; margin-right: 10px;">End
+                            Date:</label>
+                        <input type="date" id="endDate">
                         <button id="applyFilter">Apply</button>
                     </div>
                     <div class="chart-container">
@@ -483,7 +482,6 @@
         </div>
 
 
-
         <!-- JavaScript-Dateien einbinden -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -540,15 +538,6 @@
         resetControl.addTo(map);
 
         resetControl.addTo(map);
-
-    </div>
-ä
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
-    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
-
 
         function fetchLocations() {
             fetch('/Backend/map.php')
