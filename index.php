@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-    
+
 
 
     <title>Dashboard</title>
@@ -305,7 +305,7 @@
     <?php include 'Navbar.php'; ?>
 
 
-   <!--  <div class="statistics">
+    <!--  <div class="statistics">
         <div class="stat-box">
             <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
             <p>Total Orders</p>
@@ -378,7 +378,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <ul class="list-group" id="dataList">
-             
+
             </ul>
         </div>
     </div>
@@ -392,7 +392,7 @@
             <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
             <div class="accordion-content">
                 <div class="comparison-section">
-                  
+
                     <div class="stores-container">
                         <div class="store-row">
                             <div class="store-container">
@@ -414,11 +414,10 @@
                         </div>
                     </div>
                     <div class="date-filter">
-                        <label for="startDate" class="font-weight-bold" style="margin-right: 10px;">Start Date:</label>
-                        <input type="date" id="startDate">
-                        <label for="endDate" class="font-weight-bold" style="margin-left: 20px; margin-right: 10px;">End
-                            Date:</label>
-                        <input type="date" id="endDate">
+                        <label for="startDate" class="label">Start Date:</label>
+                        <input type="date" id="startDate" class="date-input">
+                        <label for="endDate" class="label end-date-label">End Date:</label>
+                        <input type="date" id="endDate" class="date-input">
                         <button id="applyFilter">Apply</button>
                     </div>
                     <div class="chart-container">

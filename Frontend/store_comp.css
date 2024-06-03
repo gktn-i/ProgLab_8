@@ -361,3 +361,28 @@ body {
     margin: 0;
     float: left;
 }
+
+.date-input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 200px;
+    height: 30px;
+}
+
+.date-input:focus {
+    border-color: #007bff;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.end-date-label {
+    margin-left: 20px;
+    margin-right: 10px;
+}
