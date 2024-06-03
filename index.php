@@ -468,12 +468,13 @@
                         </div>
                     </div>
                     <h1 class="page-title">Order Category Count</h1>
+
                     <h1 class="page-titlename">Store 1</h1>
                     <canvas id="store1PieChart" width="300" height="300"></canvas>
                     <h1 class="page-titlename">Store 2</h1>
                     <canvas id="store2PieChart" width="300" height="300"></canvas>
                     <div>
-                        <canvas id="barChartStore"></canvas>
+                        <canvas id="barChartStore" style="width: 600px; height: 400px;"></canvas>
                     </div>
 
                 </div>
