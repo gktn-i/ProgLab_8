@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-    <script src="/Backend/comp-script2.js"></script>
+    
 
 
     <title>Dashboard</title>
