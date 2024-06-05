@@ -1,14 +1,4 @@
-<?php
-include 'Backend/get_total_product.php';
-$products = get_unique_products();
 
-
-if ($products === null || !is_array($products)) {
-    echo "Fehler beim Abrufen der Produkte.";
-
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -47,11 +37,10 @@ if ($products === null || !is_array($products)) {
             max-width: 300px;
             transition: all 0.3s ease;
             position: relative;
-            
         }
 
         .product-card h2 {
-            font-size: 18px;;
+            font-size: 18px;
             margin: 10px 0;
         }
 
@@ -73,7 +62,7 @@ if ($products === null || !is_array($products)) {
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            bottom: 10px; 
+            bottom: 10px;
             right: 10px;
             transition: background-color 0.3s;
         }
@@ -92,8 +81,8 @@ if ($products === null || !is_array($products)) {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 50px;
-            margin-bottom: 50px;
+            margin-top: 0px;
+            margin-bottom: 20px;
         }
 
         .section {
@@ -108,7 +97,28 @@ if ($products === null || !is_array($products)) {
             max-width: 600px;
             border-color: #666666;
             border: 1px solid;
+        }
 
+        /* Dropdown-Menü */
+        #sizeSelect {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2d6a4f;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Dropdown-Optionen */
+        #year option {
+            background-color: white;
+            color: #2d6a4f;
+        }
+
+        .dropdown-container {
+            text-align: center;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -117,18 +127,16 @@ if ($products === null || !is_array($products)) {
     <?php include 'Navbar.php'; ?>
 
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
-    <div class="container">
-        <?php foreach ($products as $product): ?>
-            <div class="product-card">
-                <h2><?php echo htmlspecialchars($product['Name']); ?></h2>
-                <p>$<?php echo htmlspecialchars($product['Price']); ?></p>
-                <div id="info-<?php echo htmlspecialchars($product['SKU']); ?>" class="product-info"></div>
-                <button class="info-button"
-                    onclick="toggleIngredients('<?php echo htmlspecialchars($product['SKU']); ?>')">i</button>
-            </div>
-        <?php endforeach; ?>
+    <div class="dropdown-container">
+        <select id="sizeSelect" onchange="filterProducts()">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+            <option value="Extra Large">Extra Large</option>
+        </select>
     </div>
-
+    <div class="container" id="productList"></div>
+    </ul>
     <div class="section-container">
         <div class="section"></div>
         <div class="section"></div>
@@ -138,6 +146,8 @@ if ($products === null || !is_array($products)) {
         <div class="section"></div>
         <div class="section"></div>
     </div>
+    
+
 
 </body>
 

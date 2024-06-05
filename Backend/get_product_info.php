@@ -7,12 +7,9 @@ if ($mysqli->connect_error) {
     exit;
 }
 
-$size = isset($_GET['size']) ? $_GET['size'] : '';
+$sku = isset($_GET['sku']) ? $_GET['sku'] : '';
 
-$query = "SELECT * FROM products";
-if (!empty($size)) {
-    $query .= " WHERE Size = ?";
-}
+$query = "SELECT Ingredients FROM products WHERE SKU = ?";
 
 $stmt = $mysqli->prepare($query);
 if (!$stmt) {
@@ -21,10 +18,7 @@ if (!$stmt) {
     exit;
 }
 
-if (!empty($size)) {
-    $stmt->bind_param("s", $size);
-}
-
+$stmt->bind_param("s", $sku);
 $result = $stmt->execute();
 if (!$result) {
     http_response_code(500); // Internal Server Error
@@ -39,9 +33,10 @@ if (!$result) {
     exit;
 }
 
-$products = $result->fetch_all(MYSQLI_ASSOC);
+$product = $result->fetch_assoc();
+
+echo json_encode($product);
 
 $stmt->close();
 $mysqli->close();
-
-echo json_encode($products);
+?>
