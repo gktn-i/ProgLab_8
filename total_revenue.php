@@ -22,17 +22,12 @@
 
         .chart-container {
             width: 300px;
-            /* Adjust the width as needed */
             height: 300px;
-            /* Adjust the height as needed */
-            margin: 20px;
-            /* Add spacing around the charts */
             text-align: center;
         }
 
         .dropdown-container {
             margin-right: 100px;
-            /* Add spacing to the right */
             text-align: center;
         }
 
@@ -62,16 +57,14 @@
             border-color: #666666;
             margin: 5px;
             height: calc(50% - 20px);
-            /* Gleichmäßige Höhe für alle Abschnitte */
+            
         }
 
         .title {
             font-size: 24px;
-            /* Ändere die Schriftgröße nach Bedarf */
             font-weight: bold;
-            /* Optional: Falls du den Text fett haben möchtest */
             margin: 10px 0;
-            /* Ändere den Seitenabstand nach Bedarf */
+            
         }
     </style>
 
@@ -100,7 +93,6 @@
                 </select>
             </div>
             <div class="container" id="chartsContainer">
-                <!-- Bar charts will be added here dynamically -->
             </div>
         </div>
 
