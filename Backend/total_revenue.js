@@ -40,51 +40,73 @@ $(document).ready(function() {
     });
 
     // Fetch data and create the bar charts
-    $.getJSON('/Backend/get_turnover_product.php', function(data) {
-        createBarCharts(data);
+    $('#yearSelect').change(function() {
+        var selectedYear = $(this).val();
+        fetchData(selectedYear);
     });
+
+    // Fetch data and create charts initially for "all" years
+    fetchData('all');
+
+    function fetchData(year) {
+        $.getJSON('/Backend/get_turnover_product.php?year=' + year, function(data) {
+            createBarCharts(data);
+        });
+    }
 
     // Function to create bar charts
     function createBarCharts(data) {
-        // Clear the existing chartsContainer
-        $('#chartsContainer').empty();
+        $('#chartsContainer').empty();  // Clear the existing charts
 
-        // Create a single bar chart for all data
-        var labels = [];
-        var sums = [];
+        var yearData = {};
 
+        // Group data by year
         data.forEach(function(item) {
-            labels.push(item.SKU);
-            sums.push(item.totalRevenue);
+            var year = item.year;
+            if (!yearData[year]) {
+                yearData[year] = [];
+            }
+            yearData[year].push(item);
         });
 
-        var chartContainer = $('<div class="chart-container"></div>');
-        var canvas = $('<canvas></canvas>');
-        chartContainer.append('<h3>Total Revenue by SKU</h3>');
-        chartContainer.append(canvas);
-        $('#chartsContainer').append(chartContainer);
+        // Create a bar chart for each year
+        for (var year in yearData) {
+            var chartContainer = $('<div class="chart-container"></div>');
+            var canvas = $('<canvas></canvas>');
+            chartContainer.append('<h3>Year ' + year + '</h3>');
+            chartContainer.append(canvas);
+            $('#chartsContainer').append(chartContainer);
 
-        var ctx = canvas[0].getContext('2d');
+            var ctx = canvas[0].getContext('2d');
+            var labels = [];
+            var sums = [];
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Revenue',
-                    data: sums,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+            yearData[year].forEach(function(item) {
+                labels.push(item.SKU);
+                sums.push(item.totalRevenue);
+            });
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Revenue',
+                        data: sums,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 });
+
