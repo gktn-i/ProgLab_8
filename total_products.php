@@ -100,7 +100,7 @@
         }
 
         /* Dropdown-Menü */
-        #sizeSelect {
+        .dropdown-select {
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -111,7 +111,7 @@
         }
 
         /* Dropdown-Optionen */
-        #year option {
+        .dropdown-option {
             background-color: white;
             color: #2d6a4f;
         }
@@ -128,15 +128,21 @@
 
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
     <div class="dropdown-container">
-        <select id="sizeSelect" onchange="filterProducts()">
-            <option value="Small">Small</option>
-            <option value="Medium">Medium</option>
-            <option value="Large">Large</option>
-            <option value="Extra Large">Extra Large</option>
+        <select id="sizeSelect" class="dropdown-select" onchange="filterProducts()">
+            <option class="dropdown-option" value="Small">Small</option>
+            <option class="dropdown-option" value="Medium">Medium</option>
+            <option class="dropdown-option" value="Large">Large</option>
+            <option class="dropdown-option" value="Extra Large">Extra Large</option>
         </select>
     </div>
     <div class="container" id="productList"></div>
     </ul>
+    <!-- Jahr Dropdown-Menü -->
+    <div class="dropdown-container">
+        <select id="yearSelect" class="dropdown-select" onchange="fetchMostOrderedProduct(this.value)">
+            <!-- Options werden dynamisch von JavaScript hinzugefügt -->
+        </select>
+    </div>
     <div class="section-container">
         <div class="section"></div>
         <div class="section"></div>
@@ -146,9 +152,6 @@
         <div class="section"></div>
         <div class="section"></div>
     </div>
-    
-
-
 </body>
 
 </html>

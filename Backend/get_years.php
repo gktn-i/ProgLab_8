@@ -11,20 +11,22 @@ if ($mysqli->connect_error) {
     exit;
 }
 
-$size = isset($_GET['size']) ? $_GET['size'] : 'Medium';
-$query = "SELECT * FROM products WHERE Size = ?";
-$stmt = $mysqli->prepare($query);
-$stmt->bind_param("s", $size);
-$stmt->execute();
-$result = $stmt->get_result();
+$query = "SELECT DISTINCT YEAR(orderDate) AS year FROM orders ORDER BY year ASC";
 
-$products = [];
-while ($row = $result->fetch_assoc()) {
-    $products[] = $row;
+$result = $mysqli->query($query);
+
+if (!$result) {
+    http_response_code(500); 
+    echo json_encode(["error" => "Failed to execute query"]);
+    exit;
 }
 
-echo json_encode($products);
+$years = [];
+while ($row = $result->fetch_assoc()) {
+    $years[] = $row['year'];
+}
 
-$stmt->close();
+echo json_encode($years);
+
 $mysqli->close();
 ?>
