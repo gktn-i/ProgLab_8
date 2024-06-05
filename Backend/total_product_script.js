@@ -1,7 +1,210 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    fetchChartData();
     fetchYears();
 });
 
+let chartData = {};
+let ordersPerCategoryChart, ordersPerYearChart, totalRevenueChart, averageOrderValueChart;
+let currentFilter = 'all';
+
+function fetchChartData() {
+    fetch('Backend/get_chart_data.php')
+        .then(response => response.json())
+        .then(data => {
+            chartData = data;
+            populateCategoryDropdown(data.categories);
+            createCharts();
+        })
+        .catch(error => console.error('Error fetching chart data:', error));
+}
+
+
+function populateCategoryDropdown(categories) {
+    const categorySelect = document.getElementById('categorySelect');
+    categorySelect.innerHTML = '<option class="dropdown-option" value="all">All</option>';
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categorySelect.appendChild(option);
+    });
+
+    categorySelect.addEventListener('change', function () {
+        filterCharts(this.value);
+    });
+}
+
+function createCharts() {
+    const ctx1 = document.getElementById('ordersPerCategoryChart').getContext('2d');
+    const ctx2 = document.getElementById('ordersPerYearChart').getContext('2d');
+    const ctx3 = document.getElementById('totalRevenueChart').getContext('2d');
+    const ctx4 = document.getElementById('averageOrderValueChart').getContext('2d');
+
+    ordersPerCategoryChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: chartData.categories,
+            datasets: [{
+                label: 'Orders per Category',
+                data: chartData.ordersPerCategory,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            onClick: function (event, elements) {
+                if (elements.length > 0) {
+                    const category = chartData.categories[elements[0].index];
+                    if (currentFilter === category) {
+                        currentFilter = 'all';
+                    } else {
+                        currentFilter = category;
+                    }
+                    filterCharts(currentFilter);
+                    document.getElementById('categorySelect').value = currentFilter;
+                }
+            }
+        }
+    });
+
+    ordersPerYearChart = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: chartData.years,
+            datasets: [{
+                label: 'Orders per Year',
+                data: chartData.ordersPerYear,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            onClick: function (event, elements) {
+                if (elements.length > 0) {
+                    const year = chartData.years[elements[0]._index];
+                    displayOrdersForYear(year);
+                }
+            }
+        }
+    });
+
+    totalRevenueChart = createTotalRevenueChart(ctx3);
+
+    averageOrderValueChart = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: chartData.categories,
+            datasets: [{
+                label: 'Average Order Value',
+                data: chartData.averageOrderValue,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function filterCharts(category = 'all') {
+    currentFilter = category;
+    const filteredData = getFilteredData(category);
+
+    ordersPerCategoryChart.data.datasets[0].data = filteredData.ordersPerCategory;
+    ordersPerCategoryChart.update();
+
+    ordersPerYearChart.data.datasets[0].data = filteredData.ordersPerYear;
+    ordersPerYearChart.update();
+
+    totalRevenueChart.data.datasets[0].data = filteredData.totalRevenue;
+    totalRevenueChart.update();
+
+    averageOrderValueChart.data.datasets[0].data = filteredData.averageOrderValue;
+    averageOrderValueChart.update();
+}
+
+function getFilteredData(category) {
+    if (category === 'all') {
+        return chartData;
+    }
+
+    const filteredData = {
+        categories: chartData.categories,
+        ordersPerCategory: chartData.ordersPerCategory.map((val, idx) => chartData.categories[idx] === category ? val : 0),
+        ordersPerYear: chartData.ordersPerYear.map((val, idx) => chartData.categories[idx] === category ? val : 0),
+        totalRevenue: chartData.totalRevenue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
+        averageOrderValue: chartData.averageOrderValue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
+    };
+
+    return filteredData;
+}
+
+function displayOrdersForYear(year) {
+    const clickedYearIndex = chartData.years.findIndex(y => y === year);
+    const ordersForClickedYear = chartData.ordersPerYear[clickedYearIndex];
+    const categories = chartData.categories;
+
+    const data = {
+        labels: categories,
+        datasets: [{
+            label: `Orders for ${year}`,
+            data: ordersForClickedYear,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    displayOrdersPerCategoryChart(data);
+}
+
+function displayOrdersPerCategoryChart(data) {
+    const ctx = document.getElementById('ordersPerCategoryForYearChart').getContext('2d');
+    const ordersPerCategoryForYearChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function createTotalRevenueChart(ctx) {
+    const pieColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+    const borderColors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
+
+    const topCategories = chartData.categories.slice(0, 3); // Anzahl der anzuzeigenden Top-Kategorien anpassen
+    const topData = chartData.totalRevenue.slice(0, 3); // Daten für die Top-Kategorien
+
+    return new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: topCategories,
+
+            datasets: [{
+                label: 'Total Revenue',
+                data: topData,
+                backgroundColor: pieColors.slice(0, topCategories.length),
+                borderColor: borderColors.slice(0, topCategories.length),
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function getFilteredOrdersPerYear(ordersPerYear, category) {
+    // Hier können wir Daten filtern, wenn das Backend spezifische Daten bereitstellt.
+    // Angenommen, wir haben eine entsprechende Funktion im Backend, die dies ermöglicht.
+    // Aktuell geben wir die ungefilterten Daten zurück.
+    return ordersPerYear; // Diese Zeile sollte durch die Filterlogik ersetzt werden, wenn nötig.
+}
 function fetchYears() {
     fetch('Backend/get_years.php')
         .then(response => {
@@ -60,7 +263,7 @@ function displayProducts(products) {
         productName.textContent = product.Name;
         productCard.appendChild(productName);
 
-        var productPrice = document.createElement       
+        var productPrice = document.createElement
         var productPrice = document.createElement('p');
         productPrice.textContent = `$${product.Price}`;
         productCard.appendChild(productPrice);

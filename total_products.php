@@ -1,19 +1,12 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Backend/total_product_script.js"></script>
     <title>Total Products</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
         .container {
             max-width: 1300px;
             margin: 50px auto;
@@ -85,6 +78,21 @@
             margin-bottom: 20px;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 50px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .section {
             flex: 1;
             background-color: #fff;
@@ -93,13 +101,15 @@
             margin: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             height: 500px;
-            width: calc(50% - 40px);
             max-width: 600px;
-            border-color: #666666;
-            border: 1px solid;
+            border: 1px solid #666666;
         }
 
-        /* Dropdown-Menü */
+        .dropdown-container {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
         .dropdown-select {
             padding: 10px;
             border: none;
@@ -109,23 +119,10 @@
             font-size: 16px;
             cursor: pointer;
         }
-
-        /* Dropdown-Optionen */
-        .dropdown-option {
-            background-color: white;
-            color: #2d6a4f;
-        }
-
-        .dropdown-container {
-            text-align: center;
-            margin-bottom: 5px;
-        }
     </style>
-</head>
+</head> <?php include 'Navbar.php'; ?>
 
 <body>
-    <?php include 'Navbar.php'; ?>
-
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
     <div class="dropdown-container">
         <select id="sizeSelect" class="dropdown-select" onchange="filterProducts()">
@@ -138,19 +135,30 @@
     <div class="container" id="productList"></div>
     </ul>
     <!-- Jahr Dropdown-Menü -->
+ 
+    <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Order Statistics</h1>
+
     <div class="dropdown-container">
-        <select id="yearSelect" class="dropdown-select" onchange="fetchMostOrderedProduct(this.value)">
+        <select id="categorySelect" class="dropdown-select">
             <!-- Options werden dynamisch von JavaScript hinzugefügt -->
         </select>
     </div>
-    <div class="section-container">
-        <div class="section"></div>
-        <div class="section"></div>
-    </div>
 
-    <div class="section-container">
-        <div class="section"></div>
-        <div class="section"></div>
+    <div class="container">
+        <div class="section">
+            <canvas id="ordersPerCategoryChart"></canvas>
+        </div>
+        <div class="section">
+            <canvas id="ordersPerYearChart"></canvas>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <canvas id="totalRevenueChart"></canvas>
+        </div>
+        <div class="section">
+            <canvas id="averageOrderValueChart"></canvas>
+        </div>
     </div>
 </body>
 
