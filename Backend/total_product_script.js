@@ -293,4 +293,5 @@ function toggleIngredients(sku) {
     }
 }
 
+
 window.onload = filterProducts;

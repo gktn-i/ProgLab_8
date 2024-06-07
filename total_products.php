@@ -9,7 +9,7 @@
     <style>
         .container {
             max-width: 1300px;
-            margin: 50px auto;
+            margin: 20px auto;
             animation: fadeIn 1s ease-in;
             display: flex;
             flex-wrap: wrap;
@@ -87,7 +87,7 @@
 
         .container {
             max-width: 1300px;
-            margin: 50px auto;
+            margin: 20px auto;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -103,6 +103,8 @@
             height: 500px;
             max-width: 600px;
             border: 1px solid #666666;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .dropdown-container {
@@ -120,7 +122,8 @@
             cursor: pointer;
         }
     </style>
-</head> <?php include 'Navbar.php'; ?>
+</head> 
+<?php include 'Navbar.php'; ?>
 
 <body>
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
