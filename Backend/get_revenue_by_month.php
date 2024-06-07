@@ -1,14 +1,14 @@
 <?php
-$mysqli = require __DIR__ . "/Backend\database.php"; 
+$mysqli = require __DIR__ . "/database.php"; 
 
 $conn = $mysqli;
 
-// Query to retrieve the total revenue for the years 2020, 2021, 2022
-$sql = "SELECT YEAR(orderDate) as year, SUM(total) as total_revenue
+// Query to retrieve the total revenue by month for the years 2020, 2021, 2022
+$sql = "SELECT CONCAT(YEAR(orderDate), '-', MONTH(orderDate)) as month, SUM(total) as total_revenue
         FROM orders
         WHERE YEAR(orderDate) IN (2020, 2021, 2022)
-        GROUP BY YEAR(orderDate)
-        ORDER BY YEAR(orderDate)";
+        GROUP BY YEAR(orderDate), MONTH(orderDate)
+        ORDER BY YEAR(orderDate), MONTH(orderDate)";
 
 $result = $conn->query($sql);
 
@@ -24,7 +24,6 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // Output the data as JSON
-header('Content-Type: application/json');
 echo json_encode($data);
 
 // Close the database connection

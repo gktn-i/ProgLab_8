@@ -14,30 +14,19 @@
             flex-wrap: wrap;
             max-width: 1300px;
             margin: 50px auto;
-            margin-bottom: 2%;
-            height: 800px;
-            animation: fadeIn 1s ease-in;
             justify-content: space-between;
         }
 
         .chart-container {
-            width: 300px;
-            height: 300px;
+            width: 600px;
+            height: 400px;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .dropdown-container {
-            margin-right: 100px;
             text-align: center;
-        }
-
-        .totalrevenuetopic {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        canvas {
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         body {
@@ -51,23 +40,18 @@
             flex: calc(50% - 20px);
             box-sizing: border-box;
             padding: 10px;
-            border: 1px solid;
+            border: 1px solid #666;
             border-radius: 3px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-color: #666666;
             margin: 5px;
-            height: calc(50% - 20px);
-            
         }
 
         .title {
             font-size: 24px;
             font-weight: bold;
             margin: 10px 0;
-            
         }
     </style>
-
 </head>
 
 <body>
@@ -76,35 +60,29 @@
     <div class="container">
         <div class="section">
             <div class="chart-container">
-                <div class="title">Total Revenue Dashboard</div>
+                <div class="title">Total Revenue by Year</div>
                 <canvas id="revenueChart"></canvas>
             </div>
         </div>
         <div class="section">
-        <div class="title">Sales by product</div>
-
-            <div class="dropdown-container">
-                <label for="yearSelect">Select Year:</label>
-                <select id="yearSelect">
-                    <option value="all">Select a Year</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                </select>
-            </div>
-            <div class="container" id="chartsContainer">
+            <div class="chart-container">
+                <div class="title">Total Revenue by Store</div>
+                <canvas id="storeRevenueChart"></canvas>
             </div>
         </div>
-
         <div class="section">
+            <div class="chart-container">
+                <div class="title">Total Revenue by Category</div>
+                <canvas id="categoryRevenueChart"></canvas>
+            </div>
         </div>
         <div class="section">
+            <div class="chart-container">
+                <div class="title">Total Revenue by Month</div>
+                <canvas id="monthlyRevenueChart"></canvas>
+            </div>
         </div>
-
     </div>
-
-
-
 
 </body>
 

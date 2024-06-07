@@ -1,104 +1,52 @@
 $(document).ready(function() {
-    // Fetch data and create the pie chart
-    $.getJSON('get_total_revenue.php', function(data) {
-        const labels = data.map(item => item.year);
-        const values = data.map(item => item.total_revenue);
+    fetchDataAndCreateChart('get_total_revenue.php', 'revenueChart', 'pie', 'Total Revenue by Year');
+    fetchDataAndCreateChart('Backend/get_revenue_by_store.php', 'storeRevenueChart', 'bar', 'Total Revenue by Store');
+    fetchDataAndCreateCategoryRevenueChart('Backend/get_revenue_by_category.php', 'categoryRevenueChart', 'Total Revenue by Category');
+    fetchDataAndCreateChart('Backend/get_revenue_by_month.php', 'monthlyRevenueChart', 'line', 'Total Revenue by Month');
 
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Revenue',
-                    data: values,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right' // Position the legend on the right side
-                    }
-                }
-            }
-        });
-    });
+    function fetchDataAndCreateChart(url, chartId, chartType, label) {
+        $.getJSON(url, function(data) {
+            // Debugging: Log the fetched data to the console
+            console.log(`Data fetched from ${url}:`, data);
 
-    // Fetch data and create the bar charts
-    $('#yearSelect').change(function() {
-        var selectedYear = $(this).val();
-        fetchData(selectedYear);
-    });
+            const labels = data.map(item => item.year || item.storeID || item.category || item.month);
+            const values = data.map(item => item.total_revenue);
 
-    // Fetch data and create charts initially for "all" years
-    fetchData('all');
-
-    function fetchData(year) {
-        $.getJSON('/Backend/get_turnover_product.php?year=' + year, function(data) {
-            createBarCharts(data);
-        });
-    }
-
-    // Function to create bar charts
-    function createBarCharts(data) {
-        $('#chartsContainer').empty();  // Clear the existing charts
-
-        var yearData = {};
-
-        // Group data by year
-        data.forEach(function(item) {
-            var year = item.year;
-            if (!yearData[year]) {
-                yearData[year] = [];
-            }
-            yearData[year].push(item);
-        });
-
-        // Create a bar chart for each year
-        for (var year in yearData) {
-            var chartContainer = $('<div class="chart-container"></div>');
-            var canvas = $('<canvas></canvas>');
-            chartContainer.append('<h3>Year ' + year + '</h3>');
-            chartContainer.append(canvas);
-            $('#chartsContainer').append(chartContainer);
-
-            var ctx = canvas[0].getContext('2d');
-            var labels = [];
-            var sums = [];
-
-            yearData[year].forEach(function(item) {
-                labels.push(item.SKU);
-                sums.push(item.totalRevenue);
-            });
-
+            const ctx = document.getElementById(chartId).getContext('2d');
             new Chart(ctx, {
-                type: 'bar',
+                type: chartType,
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Total Revenue',
-                        data: sums,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        label: label,
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
@@ -106,7 +54,57 @@ $(document).ready(function() {
                     }
                 }
             });
-        }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error(`Failed to fetch data from ${url}:`, textStatus, errorThrown);
+        });
+    }
+
+    function fetchDataAndCreateCategoryRevenueChart(url, chartId, label) {
+        $.getJSON(url, function(data) {
+            // Debugging: Log the fetched data to the console
+            console.log(`Data fetched from ${url}:`, data);
+
+            const labels = data.map(item => item.Category);
+            const values = data.map(item => item.total_revenue);
+
+            const ctx = document.getElementById(chartId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error(`Failed to fetch data from ${url}:`, textStatus, errorThrown);
+        });
     }
 });
-
