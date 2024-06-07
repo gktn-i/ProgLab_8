@@ -18,7 +18,6 @@ function fetchChartData() {
         .catch(error => console.error('Error fetching chart data:', error));
 }
 
-
 function populateCategoryDropdown(categories) {
     const categorySelect = document.getElementById('categorySelect');
     categorySelect.innerHTML = '<option class="dropdown-option" value="all">All</option>';
@@ -79,14 +78,6 @@ function createCharts() {
                 borderColor: 'rgba(153, 102, 255, 1)',
                 borderWidth: 1
             }]
-        },
-        options: {
-            onClick: function (event, elements) {
-                if (elements.length > 0) {
-                    const year = chartData.years[elements[0]._index];
-                    displayOrdersForYear(year);
-                }
-            }
         }
     });
 
@@ -114,14 +105,24 @@ function filterCharts(category = 'all') {
     ordersPerCategoryChart.data.datasets[0].data = filteredData.ordersPerCategory;
     ordersPerCategoryChart.update();
 
-    ordersPerYearChart.data.datasets[0].data = filteredData.ordersPerYear;
-    ordersPerYearChart.update();
+    fetchOrdersPerYearForCategory(category);
 
     totalRevenueChart.data.datasets[0].data = filteredData.totalRevenue;
     totalRevenueChart.update();
 
     averageOrderValueChart.data.datasets[0].data = filteredData.averageOrderValue;
     averageOrderValueChart.update();
+}
+
+function fetchOrdersPerYearForCategory(category) {
+    fetch(`Backend/get_orders_per_year.php?category=${category}`)
+        .then(response => response.json())
+        .then(data => {
+            ordersPerYearChart.data.labels = data.years;
+            ordersPerYearChart.data.datasets[0].data = data.ordersPerYear;
+            ordersPerYearChart.update();
+        })
+        .catch(error => console.error('Error fetching orders per year data:', error));
 }
 
 function getFilteredData(category) {
@@ -132,7 +133,6 @@ function getFilteredData(category) {
     const filteredData = {
         categories: chartData.categories,
         ordersPerCategory: chartData.ordersPerCategory.map((val, idx) => chartData.categories[idx] === category ? val : 0),
-        ordersPerYear: chartData.ordersPerYear.map((val, idx) => chartData.categories[idx] === category ? val : 0),
         totalRevenue: chartData.totalRevenue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
         averageOrderValue: chartData.averageOrderValue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
     };
@@ -180,14 +180,13 @@ function createTotalRevenueChart(ctx) {
     const pieColors = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
     const borderColors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
 
-    const topCategories = chartData.categories.slice(0, 3); // Anzahl der anzuzeigenden Top-Kategorien anpassen
-    const topData = chartData.totalRevenue.slice(0, 3); // Daten für die Top-Kategorien
+    const topCategories = chartData.categories.slice(0, 3);
+    const topData = chartData.totalRevenue.slice(0, 3);
 
     return new Chart(ctx, {
         type: 'pie',
         data: {
             labels: topCategories,
-
             datasets: [{
                 label: 'Total Revenue',
                 data: topData,
@@ -199,12 +198,6 @@ function createTotalRevenueChart(ctx) {
     });
 }
 
-function getFilteredOrdersPerYear(ordersPerYear, category) {
-    // Hier können wir Daten filtern, wenn das Backend spezifische Daten bereitstellt.
-    // Angenommen, wir haben eine entsprechende Funktion im Backend, die dies ermöglicht.
-    // Aktuell geben wir die ungefilterten Daten zurück.
-    return ordersPerYear; // Diese Zeile sollte durch die Filterlogik ersetzt werden, wenn nötig.
-}
 function fetchYears() {
     fetch('Backend/get_years.php')
         .then(response => {
@@ -237,7 +230,6 @@ function populateYearDropdown(years) {
     }
 }
 
-
 function filterProducts() {
     var selectedSize = document.getElementById('sizeSelect').value;
 
@@ -253,7 +245,7 @@ function filterProducts() {
 
 function displayProducts(products) {
     var productList = document.getElementById('productList');
-    productList.innerHTML = ''; // Leeren der Produktliste
+    productList.innerHTML = ''; // Clear product list
 
     products.forEach(product => {
         var productCard = document.createElement('div');
@@ -263,7 +255,6 @@ function displayProducts(products) {
         productName.textContent = product.Name;
         productCard.appendChild(productName);
 
-        var productPrice = document.createElement
         var productPrice = document.createElement('p');
         productPrice.textContent = `$${product.Price}`;
         productCard.appendChild(productPrice);
@@ -284,6 +275,7 @@ function displayProducts(products) {
         productList.appendChild(productCard);
     });
 }
+
 function toggleIngredients(sku) {
     var infoDiv = document.getElementById(`info-${sku}`);
     if (infoDiv.style.display === 'none' || infoDiv.style.display === '') {
