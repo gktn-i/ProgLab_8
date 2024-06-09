@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="Backend/total_product_script.js"></script>
     <title>Total Products</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="Backend/total_product_script.js" defer></script>
     <style>
+        /* Ihr vorhandenes CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
         .container {
             max-width: 1300px;
             margin: 20px auto;
-            animation: fadeIn 1s ease-in;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -78,21 +87,6 @@
             margin-bottom: 20px;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
         .section {
             flex: 1;
             background-color: #fff;
@@ -122,10 +116,11 @@
             cursor: pointer;
         }
     </style>
-</head> 
-<?php include 'Navbar.php'; ?>
+</head>
 
 <body>
+    <?php include 'Navbar.php'; ?>
+
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
     <div class="dropdown-container">
         <select id="sizeSelect" class="dropdown-select" onchange="filterProducts()">
@@ -136,9 +131,7 @@
         </select>
     </div>
     <div class="container" id="productList"></div>
-    </ul>
-    <!-- Jahr Dropdown-Menü -->
- 
+
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Order Statistics</h1>
 
     <div class="dropdown-container">
@@ -148,20 +141,20 @@
     </div>
 
     <div class="container">
-        <div class="section">
+        <section class="section">
             <canvas id="ordersPerCategoryChart"></canvas>
-        </div>
-        <div class="section">
+        </section>
+        <section class="section">
             <canvas id="ordersPerYearChart"></canvas>
-        </div>
+        </section>
     </div>
     <div class="container">
-        <div class="section">
-            <canvas id="totalRevenueChart"></canvas>
-        </div>
-        <div class="section">
+        <section class="section">
+            <div id="mostSoldProductsTableContainer"></div>
+        </section>
+        <section class="section">
             <canvas id="averageOrderValueChart"></canvas>
-        </div>
+        </section>
     </div>
 </body>
 
