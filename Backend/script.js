@@ -280,9 +280,8 @@ $(document).ready(function () {
         for (var i = 0; i < data.length; i++) {
             var price = prices[i];
             var gradient = (price - minPrice) / (maxPrice - minPrice);
-
-            var redValue = Math.round(255 * gradient);
-            var greenValue = Math.round(255 - (255 * gradient));
+            var redValue = Math.round(200 * gradient); 
+            var greenValue = Math.round(200 - (200 * gradient)); 
             var color = 'rgba(' + redValue + ',' + greenValue + ',0,0.8)';
             backgroundColors.push(color);
         }
@@ -312,13 +311,13 @@ $(document).ready(function () {
                             generateLabels: function (chart) {
                                 return [{
                                     text: 'Price: Cheap',
-                                    fillStyle: 'rgba(0, 255, 0, 0.8)', // Hellgrün
-                                    strokeStyle: 'rgba(0, 255, 0, 0.8)',
+                                    fillStyle: 'rgba(0, 200, 0, 0.8)', 
+                                    strokeStyle: 'rgba(0, 200, 0, 0.8)',
                                     lineWidth: 1
                                 }, {
                                     text: 'Price: expensive',
-                                    fillStyle: 'rgba(255, 0, 0, 0.8)', // Dunkelrot
-                                    strokeStyle: 'rgba(255, 0, 0, 0.8)',
+                                    fillStyle: 'rgba(200, 0, 0, 0.8)',
+                                    strokeStyle: 'rgba(200, 0, 0, 0.8)',
                                     lineWidth: 1
                                 }];
                             }

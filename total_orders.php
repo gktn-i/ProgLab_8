@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Orders</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="scriptmap.js"></script>
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +23,7 @@
             display: flex;
             flex-wrap: wrap;
             max-width: 1300px;
-            margin: 30px auto;
+            margin: 20px auto;
             margin-bottom: 2%;
             height: auto;
             animation: fadeIn 1s ease-in;
@@ -86,11 +92,94 @@
         #time-filter button:hover {
             background-color: green;
         }
+
+
+        #map {
+            height: 450px;
+            margin: 20px auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-color: #121212;
+            width: 1290px;
+            border-radius: 3px;
+            border: solid 1px;
+            border-color: #666;
+            animation: fadeIn 1s ease-in;
+            margin-bottom: 20px;
+
+        }
+
+        #chartPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        #closePopup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .chartjs-legend {
+            max-height: 70px;
+            overflow-y: auto;
+            margin-bottom: 5px;
+        }
+
+        .popup-content {
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content-wrapper {
+            width: 520;
+        }
+
+        .popup-button {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: darkgreen;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup-button:hover {
+            background-color: #45a049;
+        }
+
+        .popup-button:active {
+            background-color: #45a049;
+        }
+
+        .popup-canvas {
+            width: 300px !important;
+            height: 200px !important;
+        }
     </style>
 </head>
 
 <body>
     <?php include 'Navbar.php'; ?>
+
+    <!-- <div id="map"></div> -->
+
 
     <form id="time-filter">
         <select id="year">
@@ -128,6 +217,14 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="/leaflet.fullscreen/leaflet.fullscreen.css" />
+    <script src="/leaflet.fullscreen/leaflet.fullscreen.js"></script>
+
 
     <script>
         let charts = [];
