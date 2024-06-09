@@ -269,23 +269,21 @@ $(document).ready(function () {
         if (myChart) {
             myChart.destroy();
         }
-
+    
         var backgroundColors = [];
-
-
+    
         var minPrice = Math.min(...prices);
         var maxPrice = Math.max(...prices);
-
+    
         // Farbverlauf definieren
         for (var i = 0; i < data.length; i++) {
             var price = prices[i];
             var gradient = (price - minPrice) / (maxPrice - minPrice);
-            var redValue = Math.round(200 * gradient); 
-            var greenValue = Math.round(200 - (200 * gradient)); 
-            var color = 'rgba(' + redValue + ',' + greenValue + ',0,0.8)';
+            var blackValue = Math.round(255 * (1 - gradient)); // Helles Grau bis Schwarz
+            var color = 'rgba(' + blackValue + ',' + blackValue + ',' + blackValue + ',0.8)'; // Helles Grau bis Schwarz
             backgroundColors.push(color);
         }
-
+    
         myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -311,13 +309,13 @@ $(document).ready(function () {
                             generateLabels: function (chart) {
                                 return [{
                                     text: 'Price: Cheap',
-                                    fillStyle: 'rgba(0, 200, 0, 0.8)', 
-                                    strokeStyle: 'rgba(0, 200, 0, 0.8)',
+                                    fillStyle: 'rgba(200, 200, 200, 0.8)', // Helles Grau
+                                    strokeStyle: 'rgba(200, 200, 200, 0.8)',
                                     lineWidth: 1
                                 }, {
                                     text: 'Price: expensive',
-                                    fillStyle: 'rgba(200, 0, 0, 0.8)',
-                                    strokeStyle: 'rgba(200, 0, 0, 0.8)',
+                                    fillStyle: 'rgba(0, 0, 0, 0.8)', // Schwarz
+                                    strokeStyle: 'rgba(0, 0, 0, 0.8)',
                                     lineWidth: 1
                                 }];
                             }
@@ -326,10 +324,11 @@ $(document).ready(function () {
                 }
             }
         });
-
+    
         $('#myChart').show();
         $('#dataList').hide();
     }
+    
 
     function createCustomerBarChart(labels, data) {
         var ctx = document.getElementById('myChart').getContext('2d');
