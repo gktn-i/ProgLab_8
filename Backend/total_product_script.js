@@ -11,7 +11,7 @@ function fetchChartData() {
     fetch('Backend/get_chart_data.php')
         .then(response => response.json())
         .then(data => {
-            console.log('Fetched chart data:', data); 
+            console.log('Fetched chart data:', data);  // Check the data in the console
             chartData = data;
             populateCategoryDropdown(data.categories);
             createCharts();
@@ -117,8 +117,6 @@ function fetchOrdersPerYearForCategory(category) {
     fetch(`Backend/get_orders_per_year.php?category=${category}`)
         .then(response => response.json())
         .then(data => {
-            console.log('Fetched orders per year data:', data);  
-            ordersPerYearChart.data.labels = data.years;
             ordersPerYearChart.data.datasets[0].data = data.ordersPerYear;
             ordersPerYearChart.update();
         })
@@ -130,43 +128,53 @@ function getFilteredData(category) {
         return chartData;
     }
 
-    const filteredData = {
-        categories: chartData.categories,
-        ordersPerCategory: chartData.ordersPerCategory.map((val, idx) => chartData.categories[idx] === category ? val : 0),
-        totalRevenue: chartData.totalRevenue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
-        averageOrderValue: chartData.averageOrderValue.map((val, idx) => chartData.categories[idx] === category ? val : 0),
-    };
+    const filteredOrdersPerCategory = chartData.categories.map((cat, index) => {
+        if (cat === category) {
+            return chartData.ordersPerCategory[index];
+        }
+        return 0;
+    });
 
-    return filteredData;
+    const filteredAverageOrderValue = chartData.categories.map((cat, index) => {
+        if (cat === category) {
+            return chartData.averageOrderValue[index];
+        }
+        return 0;
+    });
+
+    return {
+        ordersPerCategory: filteredOrdersPerCategory,
+        averageOrderValue: filteredAverageOrderValue
+    };
+}
+
+function fetchYears() {
+    fetch('Backend/get_years.php')
+        .then(response => response.json())
+        .then(data => {
+            displayMostSoldProductsTable();
+        })
+        .catch(error => console.error('Error fetching years:', error));
 }
 
 function displayMostSoldProductsTable(category = 'all') {
     const tableContainer = document.getElementById('mostSoldProductsTableContainer');
-    tableContainer.innerHTML = ''; // Clear the existing table
-
-    const years = chartData.years;
-    const mostSoldProducts = chartData.mostSoldProducts;
-
-    if (!mostSoldProducts) {
-        tableContainer.innerHTML = '<p>No data available for the selected category.</p>';
-        return;
-    }
+    tableContainer.innerHTML = '';
 
     const table = document.createElement('table');
-    table.classList.add('table');
+    table.classList.add('most-sold-products-table');
 
     const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th>Year</th><th>Product Name</th><th>Orders</th>';
-    thead.appendChild(headerRow);
+    thead.innerHTML = '<tr><th>Year</th><th>Product</th><th>Orders</th></tr>';
     table.appendChild(thead);
 
     const tbody = document.createElement('tbody');
 
+    const years = Object.keys(chartData.mostSoldProducts);
     if (category === 'all') {
         let allProducts = {};
         years.forEach(year => {
-            const yearData = mostSoldProducts[year];
+            const yearData = chartData.mostSoldProducts[year];
             if (yearData) {
                 Object.keys(yearData).forEach(cat => {
                     yearData[cat].forEach(product => {
@@ -193,11 +201,14 @@ function displayMostSoldProductsTable(category = 'all') {
 
     } else {
         years.forEach(year => {
-            const yearData = mostSoldProducts[year];
+            const yearData = chartData.mostSoldProducts[year];
             if (yearData && yearData[category]) {
                 const topProducts = yearData[category].sort((a, b) => b.orders - a.orders).slice(0, 3);
-                topProducts.forEach(product => {
+                topProducts.forEach((product, index) => {
                     const row = document.createElement('tr');
+                    if (index === 0) {
+                        row.classList.add('highlighted-row');
+                    }
                     row.innerHTML = `<td>${year}</td><td>${product.name}</td><td>${product.orders}</td>`;
                     tbody.appendChild(row);
                 });
@@ -207,41 +218,6 @@ function displayMostSoldProductsTable(category = 'all') {
 
     table.appendChild(tbody);
     tableContainer.appendChild(table);
-}
-
-
-
-
-function fetchYears() {
-    fetch('Backend/get_years.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateYearDropdown(data);
-        })
-        .catch(error => {
-            console.error('Error fetching years:', error);
-        });
-}
-
-function populateYearDropdown(years) {
-    const yearSelect = document.getElementById('yearSelect');
-    yearSelect.innerHTML = ''; // Clear existing options
-    years.forEach(year => {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    });
-
-   
-    if (years.length > 0) {
-        fetchMostOrderedProduct(years[0]);
-    }
 }
 
 function filterProducts() {
@@ -259,7 +235,7 @@ function filterProducts() {
 
 function displayProducts(products) {
     var productList = document.getElementById('productList');
-    productList.innerHTML = ''; // Clear product list
+    productList.innerHTML = '';
 
     products.forEach(product => {
         var productCard = document.createElement('div');

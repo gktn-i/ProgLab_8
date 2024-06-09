@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Products</title>
-    <link rel="stylesheet" href="styles.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Backend/total_product_script.js" defer></script>
     <style>
-        /* Ihr vorhandenes CSS */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -25,9 +24,20 @@
             justify-content: center;
         }
 
+
+        .highlighted-row {
+            background-color: #666666;
+            color: #fff;
+        
+        }
+
+        .highlighted-row td {
+            border-radius: 8px;
+        }
+
         .product-card {
             margin: 20px;
-            padding: 10px;
+            padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -38,16 +48,15 @@
             min-width: 200px;
             max-width: 300px;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .product-card h2 {
-            font-size: 18px;
+            font-size: 24px;
             margin: 10px 0;
         }
 
         .product-card p {
-            font-size: 1.2em;
+            font-size: 18px;
             color: #333;
         }
 
@@ -56,16 +65,16 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.5em;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 20px;
+            right: 20px;
             transition: background-color 0.3s;
         }
 
@@ -73,10 +82,10 @@
             background-color: #1b4332;
         }
 
-        .product-info {
-            display: none;
-            margin-top: 10px;
-            text-align: left;
+        .product-card p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
         }
 
         .section-container {
@@ -91,10 +100,9 @@
             flex: 1;
             background-color: #fff;
             border-radius: 10px;
-            padding: 10px;
-            margin: 10px;
+            padding: 20px;
+            margin: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            height: 500px;
             max-width: 600px;
             border: 1px solid #666666;
             margin-top: 5px;
@@ -103,17 +111,31 @@
 
         .dropdown-container {
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 20px;
         }
 
         .dropdown-select {
-            padding: 10px;
+            padding: 15px;
             border: none;
             border-radius: 5px;
             background-color: #2d6a4f;
             color: white;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
+        }
+
+
+
+        #mostSoldProductsTableContainer table tbody td {
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        #mostSoldProductsTableContainer table th,
+        #mostSoldProductsTableContainer table td {
+            padding: 5px 65px;
+            font-size: 18px;
+            word-spacing: 5px;
         }
     </style>
 </head>
@@ -136,7 +158,6 @@
 
     <div class="dropdown-container">
         <select id="categorySelect" class="dropdown-select">
-            <!-- Options werden dynamisch von JavaScript hinzugefügt -->
         </select>
     </div>
 
