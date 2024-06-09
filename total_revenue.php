@@ -22,6 +22,7 @@
             height: 400px;
             text-align: center;
             margin-bottom: 20px;
+            font-size: 20px;
         }
 
         .dropdown-container {
@@ -41,25 +42,57 @@
             box-sizing: border-box;
             padding: 10px;
             border: 1px solid #666;
-            border-radius: 3px;
+            border-radius: 8px;
+            background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: 5px;
+            margin: 10px;
+            margin-bottom: 20px;
         }
 
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0;
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
         }
+
+        .section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .store-details-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #storeDetailChart {
+            max-width: 600px;
+            max-height: 400px;
+        }
+
+
+
+        .chart-container1 {
+            width: 65%;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+
+        }
+
+        .chart-center {
+            margin: 0 auto;
+      
+        }
+        
     </style>
 </head>
 
 <body>
     <?php include 'Navbar.php'; ?>
-
     <div class="container">
         <div class="section">
-            <div class="chart-container">
+            <div class="chart-container1 chart-center">
                 <div class="title">Total Revenue by Year</div>
                 <canvas id="revenueChart"></canvas>
             </div>
@@ -82,8 +115,12 @@
                 <canvas id="monthlyRevenueChart"></canvas>
             </div>
         </div>
-    </div>
 
+        <div class="section store-details-section">
+            <h2>Store Details</h2>
+            <canvas id="storeDetailChart"></canvas>
+        </div>
+    </div>
 </body>
 
 </html>
