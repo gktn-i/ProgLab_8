@@ -26,7 +26,7 @@ $(document).ready(function () {
                         data = data[0];
                     }
                     $('#totalOrders').text(data.totalOrders);
-                    $('#totalRevenue').text(`$${parseFloat(data.totalRevenue).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`);
+                    $('#totalRevenue').text(`$${parseFloat(data.totalRevenue).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`);
                     $('#totalCustomers').text(data.totalCustomers);
                     $('#totalProducts').text(data.totalProducts);
                 }
@@ -59,7 +59,7 @@ $(document).ready(function () {
             url: "Backend/get_category_turnover.php",
             dataType: "json",
             success: function (data) {
-                requestCategoryandturnover = data; 
+                requestCategoryandturnover = data;
                 updateDisplay($('#filter_options1').val(), selectedRadio);
             },
             error: function (xhr, status, error) {
@@ -71,7 +71,7 @@ $(document).ready(function () {
     function showStackedBarChart(data) {
         var ctx = document.getElementById('myChart').getContext('2d');
 
-       
+
         var labels = [];
         var categories = {};
 
@@ -88,10 +88,10 @@ $(document).ready(function () {
             });
         });
         var categoryColors = {
-            Classic: 'rgba(255, 99, 132, 0.8)', 
-            Specialty: 'rgba(54, 162, 235, 0.8)', 
-            Vegetarian: 'rgba(255, 206, 86, 0.8)' 
-            
+            Classic: 'rgba(255, 99, 132, 0.8)',
+            Specialty: 'rgba(54, 162, 235, 0.8)',
+            Vegetarian: 'rgba(255, 206, 86, 0.8)'
+
         };
         var datasets = [];
         for (var category in categories) {
@@ -209,6 +209,7 @@ $(document).ready(function () {
             }
         });
     }
+    
 
     function showListData(data) {
         var listItems = "";
@@ -279,9 +280,8 @@ $(document).ready(function () {
         for (var i = 0; i < data.length; i++) {
             var price = prices[i];
             var gradient = (price - minPrice) / (maxPrice - minPrice);
-
-            var redValue = Math.round(255 * gradient);
-            var greenValue = Math.round(255 - (255 * gradient));
+            var redValue = Math.round(200 * gradient); 
+            var greenValue = Math.round(200 - (200 * gradient)); 
             var color = 'rgba(' + redValue + ',' + greenValue + ',0,0.8)';
             backgroundColors.push(color);
         }
@@ -311,13 +311,13 @@ $(document).ready(function () {
                             generateLabels: function (chart) {
                                 return [{
                                     text: 'Price: Cheap',
-                                    fillStyle: 'rgba(0, 255, 0, 0.8)', // Hellgrün
-                                    strokeStyle: 'rgba(0, 255, 0, 0.8)',
+                                    fillStyle: 'rgba(0, 200, 0, 0.8)', 
+                                    strokeStyle: 'rgba(0, 200, 0, 0.8)',
                                     lineWidth: 1
                                 }, {
                                     text: 'Price: expensive',
-                                    fillStyle: 'rgba(255, 0, 0, 0.8)', // Dunkelrot
-                                    strokeStyle: 'rgba(255, 0, 0, 0.8)',
+                                    fillStyle: 'rgba(200, 0, 0, 0.8)',
+                                    strokeStyle: 'rgba(200, 0, 0, 0.8)',
                                     lineWidth: 1
                                 }];
                             }
@@ -525,6 +525,11 @@ $(document).ready(function () {
         else {
             fetchData();
         }
+        console.log("Calling fetchloadStores function...");
+        fetchloadStores();
+
+
+
     });
     // Initial fetch
     fetchData();
@@ -532,5 +537,9 @@ $(document).ready(function () {
     fetchGeneralStatistics();
     fetchorderbyresturant();
     fetchCategoryandTurnover();
+    
+
+
+
 });
 
