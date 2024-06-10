@@ -336,15 +336,13 @@
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-            <div class="form-group">
-                <label for="filter_options">Select Time Range</label>
-                <select id="filter_options" name="filter_options">
-                    <option value="all">ALL</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                    <option value="year">Year</option>
-                </select>
+            
+            <div class="time-group">
+                <input type="date" id="startDate" name="start-date">
+                <input type="date" id="endDate" name="end-date">
+                <button id="submitDateRange">Show Data</button>
             </div>
+
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
