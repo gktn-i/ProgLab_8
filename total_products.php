@@ -26,7 +26,7 @@
 
 
         .highlighted-row {
-            background-color: #666666;
+            background-color:#2d6a4f;
             color: #fff;
         
         }
