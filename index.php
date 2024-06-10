@@ -161,7 +161,7 @@
             font-weight: bold;
         }
 
-        .form-group {
+        .time-group {
             margin-bottom: 20px;
             flex-basis: 30%;
             padding: 20px;
@@ -297,6 +297,9 @@
             margin-bottom: 10px;
             margin-top: 10px;
         }
+
+
+        
     </style>
 </head>
 
@@ -337,11 +340,11 @@
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
             
-            <div class="time-group">
+           <!-- <div class="time-group">
                 <input type="date" id="startDate" name="start-date">
                 <input type="date" id="endDate" name="end-date">
                 <button id="submitDateRange">Show Data</button>
-            </div>
+            </div> -->
 
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
