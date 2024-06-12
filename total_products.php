@@ -107,6 +107,7 @@
             border: 1px solid #666666;
             margin-top: 5px;
             margin-bottom: 5px;
+            height: 410px;
         }
 
         .dropdown-container {
