@@ -8,7 +8,7 @@
     <title>Customer Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="Backend/total_customer.js"></script>
+    <script src="Backend/total_customers.js"></script>
 
 
     <script src="scripts.js" defer></script>
@@ -98,12 +98,14 @@
     <?php include 'Navbar.php'; ?>
 
     <div class="container">
+
         <div class="section">
-            <div class="chart-container1 chart-center">
+            <div class="chart-container">
                 <div class="title">Customer Segments</div>
-                <canvas id="BarChart"></canvas>
+                <canvas id="customerChart"></canvas>
             </div>
         </div>
+
 
         <div class="section">
             <div class="chart-container">

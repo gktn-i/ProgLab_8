@@ -1,12 +1,14 @@
 <?php
 include 'database.php';
-$mysqli = getConnection();
+$mysqli = require __DIR__ . "/database.php";
 
 // Umsatz pro Kunde berechnen
 $query = "SELECT customers.customerID, SUM(orders.total) AS total_spent
           FROM customers
           LEFT JOIN orders ON customers.customerID = orders.customerID
+          WHERE orders.total IS NOT NULL
           GROUP BY customers.customerID";
+
 $result = $mysqli->query($query);
 
 if (!$result) {
