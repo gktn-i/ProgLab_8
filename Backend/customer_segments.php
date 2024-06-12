@@ -39,7 +39,7 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 
-// Daten für die Visualisierung zurückgeben
+// Daten für die Visualisierung zurückgebenss
 $data = [
     'A' => $segment_A,
     'B' => $segment_B,
