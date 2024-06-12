@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('Backend/customer_segments.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
+    fetch('customer_segments.php')
+        .then(response => response.json())
         .then(data => {
             createChart(data);
         })
@@ -18,7 +13,7 @@ function createChart(data) {
     const labels = Object.keys(data);
     const values = Object.values(data).map(segment => segment.length);
 
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
