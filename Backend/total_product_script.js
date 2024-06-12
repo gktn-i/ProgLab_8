@@ -179,9 +179,9 @@ function displayMostSoldProductsTable(category = 'all') {
                 Object.keys(yearData).forEach(cat => {
                     yearData[cat].forEach(product => {
                         if (allProducts[product.name]) {
-                            allProducts[product.name] += product.orders;
+                            allProducts[product.name] += Number(product.orders);
                         } else {
-                            allProducts[product.name] = product.orders;
+                            allProducts[product.name] = Number(product.orders);
                         }
                     });
                 });
@@ -219,6 +219,7 @@ function displayMostSoldProductsTable(category = 'all') {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
 }
+
 
 function filterProducts() {
     var selectedSize = document.getElementById('sizeSelect').value;
