@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('customer_segments.php')
+    fetch('/Backend/customer_segments.php')
         .then(response => response.json())
         .then(data => {
             createChart(data);
