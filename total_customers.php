@@ -102,7 +102,7 @@
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Customer Segments</div>
+                <div class="title">Customers Segments</div>
                 <canvas id="customerChart"></canvas>
             </div>
         </div>
@@ -114,6 +114,6 @@
                 <canvas id="Piechart"></canvas>
             </div>
         </div>
-
+   
 </body>
 </html>

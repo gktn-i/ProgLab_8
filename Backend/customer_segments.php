@@ -1,6 +1,6 @@
 <?php
 include 'database.php';
-$mysqli = getConnection();
+$mysqli = require __DIR__ . "/database.php";
 
 // Umsatz pro Kunde berechnen
 $query = "SELECT customers.customerID, SUM(orders.total) AS total_spent
@@ -37,7 +37,7 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 
-// Daten für die Visualisierung zurückgebenss
+// Daten für die Visualisierung zurückgeben
 $data = [
     'A' => $segment_A,
     'B' => $segment_B,
