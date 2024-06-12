@@ -46,8 +46,8 @@ function createCharts() {
             datasets: [{
                 label: 'Orders per Category',
                 data: chartData.ordersPerCategory,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(45, 106, 79, 1)',
+                borderColor: 'rgba(45, 106, 79, 1)',
                 borderWidth: 1
             }]
         },
@@ -74,8 +74,8 @@ function createCharts() {
             datasets: [{
                 label: 'Orders per Year',
                 data: chartData.ordersPerYear,
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(45, 106, 79, 1)',
+                borderColor: 'rgba(45, 106, 79, 1)',
                 borderWidth: 1
             }]
         }
@@ -88,8 +88,8 @@ function createCharts() {
             datasets: [{
                 label: 'Average Order Value',
                 data: chartData.averageOrderValue,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(45, 106, 79, 1)',
+                borderColor: 'rgba(45, 106, 79, 1)',
                 borderWidth: 1
             }]
         }
@@ -179,9 +179,9 @@ function displayMostSoldProductsTable(category = 'all') {
                 Object.keys(yearData).forEach(cat => {
                     yearData[cat].forEach(product => {
                         if (allProducts[product.name]) {
-                            allProducts[product.name] += product.orders;
+                            allProducts[product.name] += Number(product.orders);
                         } else {
-                            allProducts[product.name] = product.orders;
+                            allProducts[product.name] = Number(product.orders);
                         }
                     });
                 });
@@ -219,6 +219,7 @@ function displayMostSoldProductsTable(category = 'all') {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
 }
+
 
 function filterProducts() {
     var selectedSize = document.getElementById('sizeSelect').value;

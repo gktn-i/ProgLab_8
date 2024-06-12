@@ -26,9 +26,9 @@
 
 
         .highlighted-row {
-            background-color: #666666;
+            background-color: #2d6a4f;
             color: #fff;
-        
+
         }
 
         .highlighted-row td {
@@ -107,6 +107,7 @@
             border: 1px solid #666666;
             margin-top: 5px;
             margin-bottom: 5px;
+            height: 410px;
         }
 
         .dropdown-container {
@@ -124,11 +125,11 @@
             cursor: pointer;
         }
 
-
-
         #mostSoldProductsTableContainer table tbody td {
-            padding: 10px;
+            padding: 5px 10px 5px 10px;
             font-size: 18px;
+            text-align: right;
+   
         }
 
         #mostSoldProductsTableContainer table th,
