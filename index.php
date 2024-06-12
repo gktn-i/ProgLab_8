@@ -74,6 +74,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        
         }
 
         .stat-content i {
@@ -184,6 +185,9 @@
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin-right: 20px;
+            border-color: #666;
+            border: 1px solid;
+
         }
 
         select {
