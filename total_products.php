@@ -126,10 +126,9 @@
 
         #mostSoldProductsTableContainer table tbody td {
             padding: 5px 10px 5px 10px;
-            /* Reduced left padding */
             font-size: 18px;
             text-align: right;
-            /* Align text to the right */
+   
         }
 
         #mostSoldProductsTableContainer table th,
