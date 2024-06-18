@@ -124,6 +124,7 @@ $(document).ready(function () {
 
 
 
+
     function fetchDataAndCreateChart(url, chartId, chartType, label, xAxisLabel, yAxisLabel, onClick) {
         $.getJSON(url)
             .done(function (data) {
