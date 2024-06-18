@@ -92,6 +92,8 @@
 
         }
 
+
+
     </style>
 </head>
 
@@ -103,17 +105,33 @@
         <div class="section">
             <div class="chart-container">
                 <div class="title">Customers Segments</div>
-                <canvas id="customerChart"></canvas>
+                <canvas id="chart1"></canvas>
             </div>
         </div>
 
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Customer Percentage</div>
-                <canvas id="Piechart"></canvas>
+                <div class="title">Average Customer</div>
+                <canvas id="chart2"></canvas>
             </div>
         </div>
-   
+
+
+        <div class="section">
+            <div class="chart-container">
+                <div class="title">Bla Bla</div>
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="chart-container">
+                <div class="title">Bla Bla</div>
+                <canvas id="chart4"></canvas>
+            </div>
+        </div>
+
+
 </body>
 </html>
