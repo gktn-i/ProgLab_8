@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-   
+
 
     <script src="scriptmap.js"></script>
 
@@ -74,7 +74,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        
+
         }
 
         .stat-content i {
@@ -302,8 +302,25 @@
             margin-top: 10px;
         }
 
+        .pie-chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
 
-        
+        }
+
+        .pie-chart-container canvas {
+            margin: 0 20px;
+
+        }
+
+        #store1-chart,
+        #store2-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -312,7 +329,7 @@
     <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
-    
+
 
 
 
@@ -343,8 +360,8 @@
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-            
-           <!-- <div class="time-group">
+
+            <!-- <div class="time-group">
                 <input type="date" id="startDate" name="start-date">
                 <input type="date" id="endDate" name="end-date">
                 <button id="submitDateRange">Show Data</button>
@@ -475,16 +492,26 @@
                             </div>
                         </div>
                     </div>
-                    <h1 class="page-title">Order Category Count</h1>
-
-                    <h1 class="page-titlename">Store 1</h1>
-                    <canvas id="store1PieChart" width="300" height="300"></canvas>
-                    <h1 class="page-titlename">Store 2</h1>
-                    <canvas id="store2PieChart" width="300" height="300"></canvas>
+                    <div class="total-revenue-container">
+                        <h1 class="page-title">Order Category Count</h1>
+                        <div class="pie-chart-container">
+                            <div id="store1-chart">
+                                <h1 class="page-titlename">Store 1</h1>
+                                <canvas id="store1PieChart" width="300" height="300"></canvas>
+                            </div>
+                            <div id="store2-chart">
+                                <h1 class="page-titlename">Store 2</h1>
+                                <canvas id="store2PieChart" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <canvas id="barChartStore" style="width: 600px; height: 300px; margin-top: 20px;"></canvas>
                     </div>
-
+                    <div class="sizecount">
+                        <h1 class="page-title">Best Selling Sizes</h1>
+                        <canvas id="sizeCountChart" style="width: 600px; height: 150px; margin-top: 20px;"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -494,7 +521,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/Backend/comp-script.js"></script>
-       
+        <script src="/Backend/comp-script2.js"></script>
+
     </body>
 
 </html>
