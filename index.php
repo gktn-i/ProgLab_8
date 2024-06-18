@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="Frontend/store_comp.css">
 
-    <script src="/Backend/comp-script2.js"></script>
+   
 
     <script src="scriptmap.js"></script>
 
@@ -494,7 +494,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/Backend/comp-script.js"></script>
-        <script src="/Backend/comp-script2.js"></script>
+       
     </body>
 
 </html>
