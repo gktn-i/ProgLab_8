@@ -1,5 +1,6 @@
-$(document).ready(function(){
-    $('.accordion-title').click(function(){
+
+$(document).ready(function () {
+    $('.accordion-title').click(function () {
         const section = $(this).closest('.comparison-section');
         section.toggleClass('open');
         section.toggleClass('closed');
@@ -100,7 +101,7 @@ async function fetchOrderCategoryCount(storeID) {
         };
 
         xhr.onload = function () {
-            console.log("XHR Success:", xhr.response); 
+            console.log("XHR Success:", xhr.response);
             if (xhr.status === 200) {
                 resolve(xhr.response);
             } else {
@@ -109,7 +110,7 @@ async function fetchOrderCategoryCount(storeID) {
         };
 
         xhr.onerror = function () {
-            console.error("XHR Network Error"); 
+            console.error("XHR Network Error");
             reject(new Error("Network error while fetching order category count"));
         };
 
@@ -119,7 +120,7 @@ async function fetchOrderCategoryCount(storeID) {
         };
 
         xhr.onloadend = function () {
-            console.log("AJAX request completed"); 
+            console.log("AJAX request completed");
         };
 
         xhr.send();
@@ -476,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const ctx = document.getElementById(canvasId).getContext('2d');
 
         if (Chart.getChart(ctx)) {
-            Chart.getChart(ctx).destroy(); 
+            Chart.getChart(ctx).destroy();
         }
 
         new Chart(ctx, {
@@ -500,15 +501,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function drawBarChart(canvasId, categories, store1Counts, store2Counts) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
-    
-   
-        canvas.width = 600; 
-        canvas.height = 350; 
-    
+
+
+        canvas.width = 600;
+        canvas.height = 350;
+
         if (Chart.getChart(ctx)) {
-            Chart.getChart(ctx).destroy(); 
+            Chart.getChart(ctx).destroy();
         }
-    
+
         new Chart(ctx, {
             type: 'bar',
             data: {
@@ -517,18 +518,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     {
                         label: 'Store 1',
                         data: store1Counts,
-                        backgroundColor: 'rgba(75, 192, 192, 0.8)', 
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
                     },
                     {
                         label: 'Store 2',
                         data: store2Counts,
-                        backgroundColor: 'rgba(153, 102, 255, 0.8)', 
+                        backgroundColor: 'rgba(153, 102, 255, 0.8)',
                     }
                 ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false, 
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true
@@ -537,44 +538,43 @@ document.addEventListener('DOMContentLoaded', function () {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Order Counts by Category'
                     }
                 }
             }
         });
     }
-   
+
     function updateCategoryCountChart(store1Data, store2Data) {
         const store1Categories = store1Data.map(item => item.Category);
         const store1Counts = store1Data.map(item => parseInt(item.orderCount));
-    
+
         const store2Categories = store2Data.map(item => item.Category);
         const store2Counts = store2Data.map(item => parseInt(item.orderCount));
-    
+
         const store1Colors = generateRandomColors(store1Categories.length);
         const store2Colors = generateRandomColors(store2Categories.length);
-    
+
         document.getElementById('store1PieChart').width = 300;
         document.getElementById('store1PieChart').height = 300;
         document.getElementById('store2PieChart').width = 300;
         document.getElementById('store2PieChart').height = 300;
-    
+
         drawPieChart('store1PieChart', store1Categories, store1Counts, store1Colors);
         drawPieChart('store2PieChart', store2Categories, store2Counts, store2Colors);
-    
+
         const allCategories = Array.from(new Set([...store1Categories, ...store2Categories]));
         const alignedStore1Counts = allCategories.map(cat => store1Categories.includes(cat) ? store1Counts[store1Categories.indexOf(cat)] : 0);
         const alignedStore2Counts = allCategories.map(cat => store2Categories.includes(cat) ? store2Counts[store2Categories.indexOf(cat)] : 0);
-    
+
         const canvas = document.getElementById('barChartStore');
         canvas.width = 600;
         canvas.height = 300;
-    
+
         drawBarChart('barChartStore', allCategories, alignedStore1Counts, alignedStore2Counts);
     }
-    document.getElementById('store2PieChart').width = 300; 
-    document.getElementById('store2PieChart').height = 300; 
-    document.getElementById('store1PieChart').style.marginRight = '10px'; 
+    document.getElementById('store2PieChart').width = 300;
+    document.getElementById('store2PieChart').height = 300;
+    document.getElementById('store1PieChart').style.marginRight = '10px';
     document.getElementById('store2PieChart').style.marginLeft = '10px';
 
 
