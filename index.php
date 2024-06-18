@@ -482,7 +482,7 @@
                     <h1 class="page-titlename">Store 2</h1>
                     <canvas id="store2PieChart" width="300" height="300"></canvas>
                     <div>
-                        <canvas id="barChartStore" style="width: 600px; height: 400px; margin-top: 20px;"></canvas>
+                        <canvas id="barChartStore" style="width: 600px; height: 300px; margin-top: 20px;"></canvas>
                     </div>
 
                 </div>
