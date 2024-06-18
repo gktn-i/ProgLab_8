@@ -92,13 +92,54 @@
 
         }
 
+        #time-filter button {
+            padding: 5px 10px;
+            border-color: #666666;
+            color: white;
+            border: 1px solid;
+            border-radius: 4px;
+            border-color: #666666;
+            cursor: pointer;
+            background-color: darkgreen;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        #time-filter button:hover {
+            background-color: green;
+        }
+
+        #time-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            width: 500px;
+            margin: 5px auto;
+            animation: fadeIn 1s ease-in;
+
+        }
 
 
     </style>
 </head>
 
 <body>
+
+
     <?php include 'Navbar.php'; ?>
+
+
+    <form id="time-filter">
+        <select id="year">
+            <option value="all">All</option>
+            <option value="A Customer">A Customer</option>
+            <option value="B Customer">B Customer</option>
+            <option value="C Customer">C Customer</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+
 
     <div class="container">
 
@@ -120,7 +161,7 @@
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Bla Bla</div>
+                <div class="title">Customer per store</div>
                 <canvas id="chart3"></canvas>
             </div>
         </div>

@@ -100,9 +100,17 @@ $(document).ready(function () {
         'line',
         'Average',
         'Months',
-        'Average Customers'
+        'Average orders per customer'
     );
 
+    fetchDataAndCreateChart3(
+        'Backend/customer_by_store.php',
+        'chart3',
+        'bar',
+        'customer',
+        'Stores',
+        'Customers'
+    );
 
 
 
@@ -162,6 +170,35 @@ $(document).ready(function () {
 
 
 
+    function fetchDataAndCreateChart3(url, chartId, chartType, label, xAxisLabel, yAxisLabel, onClick, value) {
+        $.getJSON(url)
+            .done(function (data) {
+                console.log(`Data fetched from ${url}:`, data);
+
+                if (!data || data.length === 0) {
+                    console.error(`No data received from ${url}`);
+                    return;
+                }
+
+
+                labels = data.map(item => item.city);
+                values = data.map(item => item.total_customers);
+
+
+
+                try {
+                    const ctx = document.getElementById(chartId).getContext('2d');
+                    createChart(ctx, chartType, labels, values, label, xAxisLabel, yAxisLabel, onClick,);
+                } catch (error) {
+                    console.error(`Failed to create chart for ${chartId}:`, error);
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error(`Failed to fetch data from ${url}:`, textStatus, errorThrown);
+            });
+    }
+
+
 
     function createChart(ctx, chartType, labels, values, label, xAxisLabel, yAxisLabel, onClick) {
         new Chart(ctx, {
@@ -173,19 +210,19 @@ $(document).ready(function () {
                     data: values,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
+                       /* 'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        'rgba(255, 159, 64, 0.2)' */
                     ],
                     borderColor: [
                         'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
+                     /*   'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)',
                         'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(255, 159, 64, 1)' */
                     ],
                     borderWidth: 1
                 }]
