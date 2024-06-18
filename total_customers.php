@@ -153,7 +153,7 @@
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Average Customer</div>
+                <div class="title">Average orders per customer</div>
                 <canvas id="chart2"></canvas>
             </div>
         </div>
@@ -168,7 +168,7 @@
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Bla Bla</div>
+                <div class="title">Customer per Month</div>
                 <canvas id="chart4"></canvas>
             </div>
         </div>

@@ -112,6 +112,16 @@ $(document).ready(function () {
         'Customers'
     );
 
+    fetchDataAndCreateChart4(
+        'Backend/customer_per_month.php',
+        'chart4',
+        'line',
+        'Avg customer',
+        'Months',
+        'Avg customer'
+    );
+
+
 
 
     function fetchDataAndCreateChart(url, chartId, chartType, label, xAxisLabel, yAxisLabel, onClick) {
@@ -198,6 +208,35 @@ $(document).ready(function () {
             });
     }
 
+
+
+    function fetchDataAndCreateChart4(url, chartId, chartType, label, xAxisLabel, yAxisLabel, onClick, value) {
+        $.getJSON(url)
+            .done(function (data) {
+                console.log(`Data fetched from ${url}:`, data);
+
+                if (!data || data.length === 0) {
+                    console.error(`No data received from ${url}`);
+                    return;
+                }
+
+
+                const labels = data.map(item => item.month);
+                const values = data.map(item => item.avg_customers_per_month);
+
+
+
+                try {
+                    const ctx = document.getElementById(chartId).getContext('2d');
+                    createChart(ctx, chartType, labels, values, label, xAxisLabel, yAxisLabel, onClick,);
+                } catch (error) {
+                    console.error(`Failed to create chart for ${chartId}:`, error);
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error(`Failed to fetch data from ${url}:`, textStatus, errorThrown);
+            });
+    }
 
 
     function createChart(ctx, chartType, labels, values, label, xAxisLabel, yAxisLabel, onClick) {
