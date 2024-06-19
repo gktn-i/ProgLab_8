@@ -111,7 +111,7 @@ $(document).ready(function () {
         'Stores',
         'Customers'
     );
-
+    /*
     fetchDataAndCreateChart4(
         'Backend/customer_per_month.php',
         'chart4',
@@ -121,7 +121,7 @@ $(document).ready(function () {
         'Avg customer'
     );
 
-
+    */
 
 
 
