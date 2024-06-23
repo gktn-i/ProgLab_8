@@ -15,6 +15,11 @@ if (isset($_GET['storeID'])) {
     // SQL-Abfrage für die Bestellanzahl eines bestimmten Stores
     $sql = "SELECT COUNT(*) AS orderCount FROM orders WHERE storeID = '$storeID'";
 
+ /*    $sql = "SELECT COUNT(*) AS totalProducts
+    FROM orderitems oi
+    JOIN orders o ON oi.orderID = o.orderID
+    WHERE o.storeID = ?"; */
+    
     // Abfrage ausführen
     $result = $mysqli->query($sql);
 

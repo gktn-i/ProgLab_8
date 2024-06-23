@@ -57,15 +57,20 @@ $(document).ready(function() {
                 ]
             },
             options: {
-                responsive: true,
                 scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            
+                        }
+                    },
                     y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Orders'
+                        }
                     }
                 }
             }
@@ -137,6 +142,86 @@ $(document).ready(function() {
         });
     }
 
+    async function fetchCategoryTotals(storeID1, storeID2) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `Backend/get_revenue_Category_comp.php?storeID1=${storeID1}&storeID2=${storeID2}`);
+            xhr.responseType = "json";
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    resolve(xhr.response);
+                } else {
+                    reject(new Error("Error fetching category totals: " + xhr.statusText));
+                }
+            };
+            xhr.onerror = function() {
+                reject(new Error("Network error while fetching category totals"));
+            };
+            xhr.send();
+        });
+    }
+
+    function updateCategoryTotalsChart(data, storeID1, storeID2) {
+        const store1Categories = data.filter(item => item.storeID === storeID1).map(item => item.Category);
+        const store1Totals = data.filter(item => item.storeID === storeID1).map(item => item.total_amount);
+
+        const store2Categories = data.filter(item => item.storeID === storeID2).map(item => item.Category);
+        const store2Totals = data.filter(item => item.storeID === storeID2).map(item => item.total_amount);
+
+        const allCategories = Array.from(new Set([...store1Categories, ...store2Categories]));
+        const alignedStore1Totals = allCategories.map(cat => store1Categories.includes(cat) ? store1Totals[store1Categories.indexOf(cat)] : 0);
+        const alignedStore2Totals = allCategories.map(cat => store2Categories.includes(cat) ? store2Totals[store2Categories.indexOf(cat)] : 0);
+
+        drawCategoryTotalsChart('categoryTotalsChart', allCategories, alignedStore1Totals, alignedStore2Totals);
+    }
+
+    function drawCategoryTotalsChart(canvasId, labels, store1Data, store2Data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        
+        if (Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy();
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Store 1',
+                        data: store1Data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    },
+                    {
+                        label: 'Store 2',
+                        data: store2Data,
+                        backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Dollar'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+  
+
     async function updateChartsOnSelection() {
         const store1Select = document.getElementById('store1Select');
         const store2Select = document.getElementById('store2Select');
@@ -150,6 +235,9 @@ $(document).ready(function() {
                 updateSizeCountChart(store1SizeData, store2SizeData);
 
                 updateOrderTimeChart(store1Select.value, store2Select.value);
+
+                const categoryTotalsData = await fetchCategoryTotals(store1Select.value, store2Select.value);
+                updateCategoryTotalsChart(categoryTotalsData, store1Select.value, store2Select.value);
             } catch (error) {
                 console.error("Error updating charts on selection: ", error);
             }
@@ -181,16 +269,20 @@ $(document).ready(function() {
             ]
         },
         options: {
-            responsive: true,
             scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        
+                    }
+                },
                 y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Orders'
+                    }
                 }
             }
         }
@@ -211,6 +303,45 @@ $(document).ready(function() {
                     label: 'Store 2 ',
                     data: [],
                     backgroundColor: 'rgba(153, 102, 255, 0.5)'
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Hour'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Orders'
+                    }
+                }
+            }
+        }
+    });
+
+    const categoryTotalsCtx = document.getElementById('categoryTotalsChart').getContext('2d');
+    new Chart(categoryTotalsCtx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Store 1',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    
+                },
+                {
+                    label: 'Store 2',
+                    data: [],
+                    backgroundColor: 'rgba(153, 102, 255, 0.8)',
                 }
             ]
         },

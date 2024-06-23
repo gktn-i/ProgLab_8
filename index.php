@@ -345,7 +345,7 @@
         }
 
         .comparison-section.open {
-            height: 3500px;
+            height: 3800px;
             overflow: visible;
         }
 
@@ -502,7 +502,7 @@
                     </div>
                 </div>
                 <div class="total-revenue-container">
-                    <h1 class="page-title">Order Category Count</h1>
+                    <h1 class="page-title">Best Selling Categorys</h1>
                     <div class="pie-chart-container">
                         <div id="store1-chart">
                             <h1 class="page-titlename">Store 1</h1>
@@ -517,6 +517,10 @@
                 <div>
                     <canvas id="barChartStore" style="width: 600px; height: 300px; margin-top: 20px;"></canvas>
                 </div>
+                <div class="besttime">
+                    <h1 class="page-title">Total turnover per category</h1>
+                    <canvas id="categoryTotalsChart" width="600" height="300"></canvas>
+                </div>
                 <div class="sizecount">
                     <h1 class="page-title">Best Selling Sizes</h1>
                     <canvas id="sizeCountChart" style="width: 600px; height: 150px; margin-top: 20px;"></canvas>
@@ -525,6 +529,7 @@
                     <h1 class="page-title">Best Ordering Time</h1>
                     <canvas id="ordertimeChart" width="600" height="300"></canvas>
                 </div>
+
             </div>
         </div>
     </div>

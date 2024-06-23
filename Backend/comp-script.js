@@ -539,16 +539,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                           
+                        }
+                    },
                     y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Orders'
+                        }
                     }
                 }
             }

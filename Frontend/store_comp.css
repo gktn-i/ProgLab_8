@@ -31,7 +31,7 @@ body {
 }
 
 .comparison-section.open {
-    height: auto;
+    height:5000px;
     border: 1px solid #666;
 }
 
