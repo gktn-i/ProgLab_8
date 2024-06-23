@@ -373,7 +373,6 @@
             background-color: #f9f9f9 !important;
             transition: border-color 0.3s ease !important;
         }
-        
     </style>
 </head>
 
@@ -382,7 +381,7 @@
     <div id="particles-js"></div>
 
     <?php include 'Navbar.php'; ?>
-
+    <div id="map"></div>
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
