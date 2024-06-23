@@ -1,16 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* General styles for sections */
 .comparison-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     height: 50px;
     overflow: hidden;
-    transition: height 0.5s ease, background-color 0.3s ease;
-    display: flex;
-    flex-direction: row;
-    background-color: #f0f0f0;
+    transition: height 0.5s ease;
 }
 
 .comparison-section.closed {
     height: 100px;
-    border: 1px solid;
-    border-color: #666;
+    border: 1px solid #666;
 }
 
 .comparison-section.closed:hover {
@@ -18,14 +31,8 @@
 }
 
 .comparison-section.open {
-    height: 3000px;
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #666;
-}
-
-.comparison-section.open:hover {
-    background-color: #ffffff;
+    height: auto;
+    border: 1px solid #666;
 }
 
 .comparison-section .accordion-content {
@@ -40,6 +47,7 @@
     cursor: pointer;
 }
 
+
 .comparison-section .accordion-icon {
     float: right;
 }
@@ -49,55 +57,15 @@
     max-height: 500px;
 }
 
-
-
-.comparison-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 10px auto;
-
-    padding: 50px;
-    width: 1295px;
-    height: 3000px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
+/* Filter and search bar */
 .date-filter {
-    margin-bottom: 50px;
-}
-
-
-
-.store-row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.store-container {
-    width: 40%;
-    margin: 0 5px;
-}
-
-.store-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.stores-container {
-    display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-.dropdown-wrapper {
-    position: relative;
+.date-filter label {
+    font-weight: bold;
 }
 
 .search-bar {
@@ -118,7 +86,11 @@
     box-sizing: border-box;
     width: 100%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+/* Dropdown */
+.dropdown-wrapper {
+    position: relative;
 }
 
 .dropdown-select {
@@ -131,38 +103,13 @@
     border-radius: 8px;
 }
 
-.chart-container {
-    width: 100%;
-    max-width: 800px;
+.dropdown-wrapper .dropdown-select option:hover {
+    background-color: #1b4332 !important;
+    color: #ffffff !important;
 }
-
-.store-label {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.dropdown-wrapper {
-    position: relative;
-}
-
-.dropdown-select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    margin-top: 5px;
-}
-
-.dropdown-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
-    font-size: 12px;
-}
-
 
 .dropdown-select[data-placeholder]::placeholder {
-    color: #ccc;
+    color: #1b4332;
 }
 
 .dropdown-select[data-placeholder] option {
@@ -173,8 +120,9 @@
     background-color: #eee;
 }
 
+/* Button */
 #applyFilter {
-    background-color: #5f635f;
+    background-color: #1b4332;
     color: white;
     border: none;
     border-radius: 8px;
@@ -189,74 +137,43 @@
 }
 
 #applyFilter:hover {
-    background-color: #0d4910;
+    background-color: #363636;
 }
 
+/* Labels */
 .font-weight-bold {
     font-weight: bold;
 }
 
-body {
-    font-family: Arial, sans-serif;
+.store-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.comparison-section {
-    padding: 20px;
-}
-
-.page-title {
-    text-align: center;
-}
-
+/* Containers and layout */
 .stores-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
 .store-row {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
     width: 100%;
 }
 
 .store-container {
     width: 45%;
-}
-
-.store-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.dropdown-wrapper {
-    position: relative;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-.dropdown-select {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.date-filter {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.date-filter label {
-    font-weight: bold;
+    margin: 0 5px;
 }
 
 .chart-container {
+    width: 100%;
+    max-width: 800px;
     margin-bottom: 20px;
 }
 
@@ -273,35 +190,20 @@ body {
 .total-revenue-item {
     width: 45%;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .total-revenue-item h3 {
     margin-bottom: 10px;
 }
 
-
-.page-titlename {
-    font-size: 20px;
-    top: 0;
-    left: 0;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-.total-revenue-item {
-    width: 45%;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-
 .total-revenue-item p {
     font-size: 1.5em;
     margin-top: 20px;
-    padding-left: 220px;
-    padding-right: 220px;
+    padding: 0 220px;
 }
 
+/* Best Seller */
 .best-seller {
     display: flex;
     justify-content: space-between;
@@ -311,14 +213,12 @@ body {
 .best-seller-item {
     width: 45%;
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
 }
 
 .best-seller-item h1 {
     font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .best-seller-item p {
@@ -326,12 +226,13 @@ body {
     margin-top: 20px;
 }
 
+/* Product Name */
 .product-name {
     font-size: 16px !important;
-    padding-left: 190px;
-    padding-right: 190px;
+    padding: 0 190px;
 }
 
+/* Monthly Turnover */
 .Monthly-turnover-by-category {
     display: flex;
     justify-content: space-between;
@@ -340,11 +241,9 @@ body {
 .Monthly-turnover-by-category-item {
     width: 45%;
     text-align: center;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
     display: inline-block;
     vertical-align: top;
-
 }
 
 #store1PieChart,
@@ -362,6 +261,7 @@ body {
     float: left;
 }
 
+/* Date Input */
 .date-input {
     padding: 10px;
     border: 2px solid #ccc;
@@ -374,7 +274,7 @@ body {
 }
 
 .date-input:focus {
-    border-color: #007bff;
+    border-color: #1b4332;
 }
 
 .label {
@@ -385,4 +285,14 @@ body {
 .end-date-label {
     margin-left: 20px;
     margin-right: 10px;
+}
+
+/* Page title */
+.page-title {
+    text-align: center;
+}
+
+.page-titlename {
+    font-size: 20px;
+    margin: 10px 0;
 }
