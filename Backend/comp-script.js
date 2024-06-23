@@ -1,16 +1,27 @@
-
 $(document).ready(function () {
+    function checkDropdowns() {
+        const store1Selected = $('#store1Select').val();
+        const store2Selected = $('#store2Select').val();
+        if (store1Selected && store2Selected) {
+            const section = $('.comparison-section');
+            section.addClass('open').removeClass('closed');
+            section.find('.accordion-title').addClass('active');
+            var accordionContent = section.find('.accordion-content');
+            accordionContent.addClass('show');
+            accordionContent.css('max-height', accordionContent.prop('scrollHeight') + 'px');
+        }
+    }
+
+    $('#store1Select, #store2Select').change(checkDropdowns);
+
     $('.accordion-title').click(function () {
         const section = $(this).closest('.comparison-section');
-        section.toggleClass('open');
-        section.toggleClass('closed');
-        $(this).toggleClass('active');
-        var accordionContent = $(this).next('.accordion-content');
-        accordionContent.toggleClass('show');
-        if (accordionContent.hasClass('show')) {
+        section.toggleClass('open closed');
+        var accordionContent = section.find('.accordion-content');
+        if (section.hasClass('open')) {
             accordionContent.css('max-height', accordionContent.prop('scrollHeight') + 'px');
         } else {
-            accordionContent.css('max-height', 0);
+            accordionContent.css('max-height', '0');
         }
     });
 });

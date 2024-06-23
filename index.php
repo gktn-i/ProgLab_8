@@ -321,6 +321,27 @@
             flex-direction: column;
             align-items: center;
         }
+
+        .comparison-section.closed {
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .comparison-section.open .store-row {
+            margin-bottom: 20px;
+        }
+
+        .comparison-section .accordion-content {
+            transition: max-height 0.3s ease;
+        }
+
+        .comparison-section .store-row {
+            margin-bottom: 10px;
+        }
+
+        .comparison-section .date-filter {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -330,43 +351,11 @@
 
     <?php include 'Navbar.php'; ?>
 
-
-
-
-    <!--  <div class="statistics">
-        <div class="stat-box">
-            <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
-            <p>Total Orders</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
-            <p>Total Revenue</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
-            <p>Total Customers</p>
-        </div>
-        <div class="stat-box">
-            <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
-            <p>Total Products</p>
-        </div>
-    </div> -->
-
-
-    <div id="map"></div>
-
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-
-            <!-- <div class="time-group">
-                <input type="date" id="startDate" name="start-date">
-                <input type="date" id="endDate" name="end-date">
-                <button id="submitDateRange">Show Data</button>
-            </div> -->
-
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
@@ -403,127 +392,120 @@
             <div id="chartContainer">
                 <canvas id="myChart"></canvas>
             </div>
-            <ul class="list-group" id="dataList">
+            <ul class="list-group" id="dataList"></ul>
+        </div>
+    </div>
 
-            </ul>
+    <div class="comparison-section closed">
+        <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
+        <h1 class="store-label">Select the Stores </span></h1>
+        <div class="store-row">
+            <div class="store-container">
+                <span class="store-label">Store 1:</span>
+                <div class="dropdown-wrapper">
+                    <input type="text" id="store1Search" class="search-input" placeholder="Search...">
+                    <select id="store1Select" class="dropdown-select" data-placeholder="Choose a Store"></select>
+                </div>
+            </div>
+            <div class="store-container">
+                <span class="store-label">Store 2:</span>
+                <div class="dropdown-wrapper">
+                    <input type="text" id="store2Search" class="search-input" placeholder="Search...">
+                    <select id="store2Select" class="dropdown-select" data-placeholder="Choose a Store"></select>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-content">
+            <div class="comparison-section">
+                <div class="date-filter">
+                    <label for="startDate" class="label">Start Date:</label>
+                    <input type="date" id="startDate" class="date-input">
+                    <label for="endDate" class="label end-date-label">End Date:</label>
+                    <input type="date" id="endDate" class="date-input">
+                    <button id="applyFilter">Apply</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <div class="total-revenue-container">
+                    <h1 class="page-title">Total Revenue</h1>
+                    <div class="total-revenue">
+                        <div class="total-revenue-item">
+                            <h1 class="page-titlename">Store 1</h1>
+                            <p id="totalRevenueStore1">$0.00</p>
+                        </div>
+                        <div class="total-revenue-item">
+                            <h1 class="page-titlename">Store 2</h1>
+                            <p id="totalRevenueStore2">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-revenue-container">
+                    <h1 class="page-title">Best Seller product</h1>
+                    <div class="best-seller">
+                        <div class="best-seller-item">
+                            <h1 class="page-titlename">Store 1</h1>
+                            <p id="bestsellerproduct1" class="product-name"> Top 1</p>
+                            <p id="bestsellerproduct2" class="product-name"> Top 2</p>
+                            <p id="bestsellerproduct3" class="product-name"> Top 3</p>
+                        </div>
+                        <div class="best-seller-item">
+                            <h1 class="page-titlename">Store 2</h1>
+                            <p id="bestsellerproduct4" class="product-name"> Top 1</p>
+                            <p id="bestsellerproduct5" class="product-name"> Top 2</p>
+                            <p id="bestsellerproduct6" class="product-name"> Top 3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-revenue-container">
+                    <h1 class="page-title">Total Order </h1>
+                    <div class="total-revenue">
+                        <div class="total-revenue-item">
+                            <h1 class="page-titlename">Store 1</h1>
+                            <p id="totalordercountStore1" class="product-name">0</p>
+                        </div>
+                        <div class="total-revenue-item">
+                            <h1 class="page-titlename">Store 2</h1>
+                            <p id="totalordercountStore2" class="product-name">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-revenue-container">
+                    <h1 class="page-title">Order Category Count</h1>
+                    <div class="pie-chart-container">
+                        <div id="store1-chart">
+                            <h1 class="page-titlename">Store 1</h1>
+                            <canvas id="store1PieChart" width="300" height="300"></canvas>
+                        </div>
+                        <div id="store2-chart">
+                            <h1 class="page-titlename">Store 2</h1>
+                            <canvas id="store2PieChart" width="300" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <canvas id="barChartStore" style="width: 600px; height: 300px; margin-top: 20px;"></canvas>
+                </div>
+                <div class="sizecount">
+                    <h1 class="page-title">Best Selling Sizes</h1>
+                    <canvas id="sizeCountChart" style="width: 600px; height: 150px; margin-top: 20px;"></canvas>
+                </div>
+                <div class="sizecount">
+                    <h1 class="page-title">Best Ordering Time</h1>
+                    <canvas id="ordertime"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
 
-    <body>
+    <!-- JavaScript-Dateien einbinden -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/Backend/comp-script.js"></script>
+    <script src="/Backend/comp-script2.js"></script>
 
-
-
-        <div class="comparison-section closed">
-            <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
-            <div class="accordion-content">
-                <div class="comparison-section">
-
-                    <div class="stores-container">
-                        <div class="store-row">
-                            <div class="store-container">
-                                <span class="store-label">Store 1:</span>
-                                <div class="dropdown-wrapper">
-                                    <input type="text" id="store1Search" class="search-input" placeholder="Search...">
-                                    <select id="store1Select" class="dropdown-select"
-                                        data-placeholder="Choose a Store"></select>
-                                </div>
-                            </div>
-                            <div class="store-container">
-                                <span class="store-label">Store 2:</span>
-                                <div class="dropdown-wrapper">
-                                    <input type="text" id="store2Search" class="search-input" placeholder="Search...">
-                                    <select id="store2Select" class="dropdown-select"
-                                        data-placeholder="Choose a Store"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="date-filter">
-                        <label for="startDate" class="label">Start Date:</label>
-                        <input type="date" id="startDate" class="date-input">
-                        <label for="endDate" class="label end-date-label">End Date:</label>
-                        <input type="date" id="endDate" class="date-input">
-                        <button id="applyFilter">Apply</button>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="comparisonChart"></canvas>
-                    </div>
-                    <div class="total-revenue-container">
-                        <h1 class="page-title">Total Revenue</h1>
-                        <div class="total-revenue">
-                            <div class="total-revenue-item">
-                                <h1 class="page-titlename">Store 1</h1>
-                                <p id="totalRevenueStore1">$0.00</p>
-                            </div>
-                            <div class="total-revenue-item">
-                                <h1 class="page-titlename">Store 2</h1>
-                                <p id="totalRevenueStore2">$0.00</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="total-revenue-container">
-                        <h1 class="page-title">Best Seller product</h1>
-                        <div class="best-seller">
-                            <div class="best-seller-item">
-                                <h1 class="page-titlename">Store 1</h1>
-                                <p id="bestsellerproduct1" class="product-name"> Top 1</p>
-                                <p id="bestsellerproduct2" class="product-name"> Top 2</p>
-                                <p id="bestsellerproduct3" class="product-name"> Top 3</p>
-                            </div>
-                            <div class="best-seller-item">
-                                <h1 class="page-titlename">Store 2</h1>
-                                <p id="bestsellerproduct4" class="product-name"> Top 1</p>
-                                <p id="bestsellerproduct5" class="product-name"> Top 2</p>
-                                <p id="bestsellerproduct6" class="product-name"> Top 3</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="total-revenue-container">
-                        <h1 class="page-title">Total Order </h1>
-                        <div class="total-revenue">
-                            <div class="total-revenue-item">
-                                <h1 class="page-titlename">Store 1</h1>
-                                <p id="totalordercountStore1" class="product-name">0</p>
-                            </div>
-                            <div class="total-revenue-item">
-                                <h1 class="page-titlename">Store 2</h1>
-                                <p id="totalordercountStore2" class="product-name">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="total-revenue-container">
-                        <h1 class="page-title">Order Category Count</h1>
-                        <div class="pie-chart-container">
-                            <div id="store1-chart">
-                                <h1 class="page-titlename">Store 1</h1>
-                                <canvas id="store1PieChart" width="300" height="300"></canvas>
-                            </div>
-                            <div id="store2-chart">
-                                <h1 class="page-titlename">Store 2</h1>
-                                <canvas id="store2PieChart" width="300" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <canvas id="barChartStore" style="width: 600px; height: 300px; margin-top: 20px;"></canvas>
-                    </div>
-                    <div class="sizecount">
-                        <h1 class="page-title">Best Selling Sizes</h1>
-                        <canvas id="sizeCountChart" style="width: 600px; height: 150px; margin-top: 20px;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- JavaScript-Dateien einbinden -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="/Backend/comp-script.js"></script>
-        <script src="/Backend/comp-script2.js"></script>
-
-    </body>
+</body>
 
 </html>
 
