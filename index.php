@@ -327,6 +327,7 @@
             overflow: hidden;
         }
 
+
         .comparison-section.open .store-row {
             margin-bottom: 20px;
         }
@@ -341,6 +342,36 @@
 
         .comparison-section .date-filter {
             margin-top: 20px;
+        }
+
+        .comparison-section.open {
+            height: 3500px;
+            overflow: visible;
+        }
+
+        .total-revenue-container,
+        .sizecount,
+        .besttime {
+            margin-top: 20px;
+
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        .dropdown-select {
+            padding: 10px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 5px !important;
+            font-size: 16px !important;
+            background-color: #f9f9f9 !important;
+            transition: border-color 0.3s ease !important;
         }
     </style>
 </head>
@@ -490,9 +521,9 @@
                     <h1 class="page-title">Best Selling Sizes</h1>
                     <canvas id="sizeCountChart" style="width: 600px; height: 150px; margin-top: 20px;"></canvas>
                 </div>
-                <div class="sizecount">
+                <div class="besttime">
                     <h1 class="page-title">Best Ordering Time</h1>
-                    <canvas id="ordertime"></canvas>
+                    <canvas id="ordertimeChart" width="600" height="300"></canvas>
                 </div>
             </div>
         </div>

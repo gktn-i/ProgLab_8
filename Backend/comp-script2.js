@@ -66,26 +66,92 @@ $(document).ready(function() {
                 plugins: {
                     title: {
                         display: true,
-                       
                     }
                 }
             }
         });
     }
 
-    async function updateSizeCountOnSelection() {
+    function updateOrderTimeChart(storeID1, storeID2) {
+        fetch(`Backend/get_ordertime_comp.php?storeID1=${storeID1}&storeID2=${storeID2}`)
+            .then(response => response.json())
+            .then(data => {
+                var store1Data = new Array(24).fill(0);
+                var store2Data = new Array(24).fill(0);
+
+                data.forEach(function(row) {
+                    if (row.storeID === storeID1) {
+                        store1Data[row.orderHour] = row.orderCount;
+                    } else if (row.storeID === storeID2) {
+                        store2Data[row.orderHour] = row.orderCount;
+                    }
+                });
+
+                drawOrderTimeChart('ordertimeChart', store1Data, store2Data);
+            })
+            .catch(error => console.error('Error fetching order time data:', error));
+    }
+
+    function drawOrderTimeChart(canvasId, store1Data, store2Data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+
+        if (Chart.getChart(ctx)) {
+            Chart.getChart(ctx).destroy();
+        }
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [...Array(24).keys()], // Stunden von 0 bis 23
+                datasets: [
+                    {
+                        label: 'Store 1',
+                        data: store1Data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)'
+                    },
+                    {
+                        label: 'Store 2',
+                        data: store2Data,
+                        backgroundColor: 'rgba(153, 102, 255, 0.5)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Hours'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Orders'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    async function updateChartsOnSelection() {
         const store1Select = document.getElementById('store1Select');
         const store2Select = document.getElementById('store2Select');
 
         if (store1Select.value && store2Select.value) {
             try {
-                const [store1Data, store2Data] = await Promise.all([
+                const [store1SizeData, store2SizeData] = await Promise.all([
                     fetchSizeCount(store1Select.value),
                     fetchSizeCount(store2Select.value)
                 ]);
-                updateSizeCountChart(store1Data, store2Data);
+                updateSizeCountChart(store1SizeData, store2SizeData);
+
+                updateOrderTimeChart(store1Select.value, store2Select.value);
             } catch (error) {
-                console.error("Error fetching size count data for comparison: ", error);
+                console.error("Error updating charts on selection: ", error);
             }
         }
     }
@@ -93,11 +159,11 @@ $(document).ready(function() {
     const store1Select = document.getElementById('store1Select');
     const store2Select = document.getElementById('store2Select');
 
-    store1Select.addEventListener('change', updateSizeCountOnSelection);
-    store2Select.addEventListener('change', updateSizeCountOnSelection);
+    store1Select.addEventListener('change', updateChartsOnSelection);
+    store2Select.addEventListener('change', updateChartsOnSelection);
 
-    const ctx = document.getElementById('sizeCountChart').getContext('2d');
-    new Chart(ctx, {
+    const sizeCountCtx = document.getElementById('sizeCountChart').getContext('2d');
+    new Chart(sizeCountCtx, {
         type: 'bar',
         data: {
             labels: [],
@@ -124,9 +190,51 @@ $(document).ready(function() {
             plugins: {
                 title: {
                     display: true,
-                   
+                    
                 }
             }
         }
     });
+
+    const ordertimeCtx = document.getElementById('ordertimeChart').getContext('2d');
+    new Chart(ordertimeCtx, {
+        type: 'bar',
+        data: {
+            labels: [...Array(24).keys()], 
+            datasets: [
+                {
+                    label: 'Store 1 ',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)'
+                },
+                {
+                    label: 'Store 2 ',
+                    data: [],
+                    backgroundColor: 'rgba(153, 102, 255, 0.5)'
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Hour'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Orders'
+                    }
+                }
+            }
+        }
+    });
+
+    if (store1Select.value && store2Select.value) {
+        updateChartsOnSelection();
+    }
 });
