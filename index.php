@@ -429,7 +429,7 @@
 
     <div class="comparison-section closed">
         <h1 class="page-title accordion-title">Store Comparison <span class="accordion-icon"></span></h1>
-        <h1 class="store-label">Select the Stores or the comparison </span></h1>
+        <h1 class="store-label">Select the Stores for the comparison </span></h1>
         <div class="store-row">
             <div class="store-container">
                 <span class="store-label">Store 1:</span>
