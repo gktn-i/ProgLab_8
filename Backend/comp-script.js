@@ -1,16 +1,27 @@
-
 $(document).ready(function () {
+    function checkDropdowns() {
+        const store1Selected = $('#store1Select').val();
+        const store2Selected = $('#store2Select').val();
+        if (store1Selected && store2Selected) {
+            const section = $('.comparison-section');
+            section.addClass('open').removeClass('closed');
+            section.find('.accordion-title').addClass('active');
+            var accordionContent = section.find('.accordion-content');
+            accordionContent.addClass('show');
+            accordionContent.css('max-height', accordionContent.prop('scrollHeight') + 'px');
+        }
+    }
+
+    $('#store1Select, #store2Select').change(checkDropdowns);
+
     $('.accordion-title').click(function () {
         const section = $(this).closest('.comparison-section');
-        section.toggleClass('open');
-        section.toggleClass('closed');
-        $(this).toggleClass('active');
-        var accordionContent = $(this).next('.accordion-content');
-        accordionContent.toggleClass('show');
-        if (accordionContent.hasClass('show')) {
+        section.toggleClass('open closed');
+        var accordionContent = section.find('.accordion-content');
+        if (section.hasClass('open')) {
             accordionContent.css('max-height', accordionContent.prop('scrollHeight') + 'px');
         } else {
-            accordionContent.css('max-height', 0);
+            accordionContent.css('max-height', '0');
         }
     });
 });
@@ -239,14 +250,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     label: 'Store 1',
                     data: [],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                    borderColor: 'rgba(75, 192, 192, 0.8)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)'
                 },
                 {
                     label: 'Store 2',
                     data: [],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)'
+                    borderColor: 'rgba(153, 102, 255, 0.8)',
+                    backgroundColor: 'rgba(153, 102, 255, 0.8)'
                 }
             ]
         },
@@ -528,16 +539,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                           
+                        }
+                    },
                     y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Orders'
+                        }
                     }
                 }
             }
