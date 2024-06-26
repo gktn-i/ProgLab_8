@@ -34,13 +34,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1B4332;
+            /*  background-color: #1B4332 !important; */
         }
 
         body.dark-mode {
-            background-color: #121212;
-
+            background-color: #2c2c2c !important;
             color: #ffffff;
+        }
+
+        .right-section.dark-mode {
+            background-color: #1e1e1e;
         }
 
         .stat-box.dark-mode {
@@ -145,6 +148,10 @@
             list-style: none;
             max-height: 500px;
             overflow-y: auto;
+        }
+
+        .stat-box.dark-mode {
+            background-color: #1e1e1e;
         }
 
         .list-group-item {
@@ -398,21 +405,56 @@
         .button-container button:active {
             background-color: #1B4332;
         }
+
+        .dark-mode .list-group-item {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .left-section {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .right-section {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .form-group2 {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .comparison-section {
+            background-color: #1e1e1e;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .comparison-section:hover {
+            background-color: #1e1e1e;
+        }
     </style>
 </head>
 
 <body>
 
     <div id="particles-js"></div>
-
     <?php include 'Navbar.php'; ?>
     <div id="map"></div>
+
+
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-            
+
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
@@ -442,9 +484,7 @@
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
                     <label class="form-check-label" for="fifthRadio">Orders sorted by Stores</label>
                 </li>
-                <div class="button-container">
-                <button onclick="toggleDarkMode()">Dark Mode</button>
-            </div>
+
             </ul>
         </div>
         <div class="right-section">
@@ -568,11 +608,7 @@
     <script src="/Backend/comp-script.js"></script>
     <script src="/Backend/comp-script2.js"></script>
     <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const statBoxes = document.querySelectorAll('.stat-box');
-            statBoxes.forEach(box => box.classList.toggle('dark-mode'));
-        }
+
     </script>
 </body>
 

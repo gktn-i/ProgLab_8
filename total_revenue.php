@@ -82,9 +82,31 @@
 
         .chart-center {
             margin: 0 auto;
-      
+
         }
-        
+
+        .dark-mode .section {
+            background-color: #333;
+            border-color: #555;
+            color: white;
+        }
+
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: #ccc;
+        }
+
+        .dark-mode .container {
+            background-color: #1e1e1e;
+            color: #ccc;
+            border-color: #444;
+        }
+
+        .dark-mode .section {
+            background-color: #333;
+            border-color: #555;
+            color: white;
+        }
     </style>
 </head>
 
