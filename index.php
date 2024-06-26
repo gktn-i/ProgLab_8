@@ -29,16 +29,18 @@
                 opacity: 1;
             }
         }
+       
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #1B4332;
         }
 
         body.dark-mode {
             background-color: #121212;
+          
             color: #ffffff;
         }
 
@@ -112,8 +114,6 @@
 
 
         }
-
-
 
         .left-section {
             flex-basis: 30%;

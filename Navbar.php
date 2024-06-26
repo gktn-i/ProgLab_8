@@ -21,7 +21,7 @@
             }
         }
         .navbar {
-
+            background-color: #1B4332;
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
@@ -162,7 +162,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid d-flex justify-content-center">
             <a href="index.php?page=start" class="navbar-brand">
-                <img src="Frontend/img/AD Logo2.png" alt="" class="navimg" style="height: 90px; width: 90px;">
+                <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 90px; width: 90px;">
             </a>
 
     </nav>
