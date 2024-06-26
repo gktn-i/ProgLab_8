@@ -168,7 +168,7 @@
 
         <div class="section">
             <div class="chart-container">
-                <div class="title">Customer per Month</div>
+                <div class="title">Average Customer per Month</div>
                 <canvas id="chart4"></canvas>
             </div>
         </div>

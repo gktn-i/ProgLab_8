@@ -86,6 +86,7 @@ function createChart2(data) {
 */
 
 $(document).ready(function () {
+    /*
     fetchDataAndCreateChart1(
         'Backend/customer_segments.php',
         'chart1',
@@ -94,6 +95,8 @@ $(document).ready(function () {
         'Segment',
         'Anzahl Kunden'
     );
+
+     */
     fetchDataAndCreateChart(
         'Backend/get_customer_orders.php',
         'chart2',
@@ -111,7 +114,7 @@ $(document).ready(function () {
         'Stores',
         'Customers'
     );
-    /*
+    
     fetchDataAndCreateChart4(
         'Backend/customer_per_month.php',
         'chart4',
@@ -121,7 +124,7 @@ $(document).ready(function () {
         'Avg customer'
     );
 
-    */
+    
 
 
 
@@ -223,7 +226,7 @@ $(document).ready(function () {
 
 
                 const labels = data.map(item => item.month);
-                const values = data.map(item => item.avg_customers_per_month);
+                const values = data.map(item => item.customers_per_month);
 
 
 
