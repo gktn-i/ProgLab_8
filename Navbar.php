@@ -8,10 +8,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Order</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-         @keyframes fadeIn {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
             }
@@ -20,8 +21,9 @@
                 opacity: 1;
             }
         }
+
         .navbar {
-            background-color: #1B4332;
+            /*  background-color: #1B4332; */
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
@@ -59,6 +61,11 @@
             margin-top: 5px;
             margin-right: 15px;
         }
+
+
+
+
+
 
         .navimg {
             height: 80px;
@@ -153,6 +160,29 @@
             background-color: #f2f2f2;
 
         }
+
+        .dark-mode .stat-box {
+            background-color: #1e1e1e;
+            color: #ccc;
+            border-color: #444;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1B4332;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 
@@ -186,11 +216,51 @@
             <p>Total Products</p>
         </a>
     </div>
+    <div class="button-container">
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+    </div>
 
 
     <?php
     /* echo ' <h1>' . $_GET['page'] . ' </h1>'; */
     ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                enableDarkMode();
+            }
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => box.classList.toggle('dark-mode'));
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.removeItem('darkMode');
+            }
+        }
+
+        function enableDarkMode() {
+            document.body.classList.add('dark-mode');
+
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => box.classList.add('dark-mode'));
+        }
+
+        function disableDarkMode() {
+            document.body.classList.remove('dark-mode');
+
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => box.classList.remove('dark-mode'));
+
+            localStorage.removeItem('darkMode');
+        }
+    </script>
 </body>
 
 </html>

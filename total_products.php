@@ -14,6 +14,12 @@
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: white;
         }
 
         .container {
@@ -24,11 +30,9 @@
             justify-content: center;
         }
 
-
         .highlighted-row {
             background-color: #2d6a4f;
             color: #fff;
-
         }
 
         .highlighted-row td {
@@ -50,6 +54,11 @@
             transition: all 0.3s ease;
         }
 
+        .dark-mode .product-card {
+            background-color: #333;
+            border-color: #555;
+        }
+
         .product-card h2 {
             font-size: 24px;
             margin: 10px 0;
@@ -58,6 +67,10 @@
         .product-card p {
             font-size: 18px;
             color: #333;
+        }
+
+        .dark-mode .product-card p {
+            color: #ccc;
         }
 
         .info-button {
@@ -110,6 +123,11 @@
             height: 410px;
         }
 
+        .dark-mode .section {
+            background-color: #333;
+            border-color: #555;
+        }
+
         .dropdown-container {
             text-align: center;
             margin-bottom: 20px;
@@ -125,11 +143,14 @@
             cursor: pointer;
         }
 
+        .dark-mode .dropdown-select {
+            background-color: #1b4332;
+        }
+
         #mostSoldProductsTableContainer table tbody td {
             padding: 5px 10px 5px 10px;
             font-size: 18px;
             text-align: right;
-   
         }
 
         #mostSoldProductsTableContainer table th,
@@ -138,11 +159,38 @@
             font-size: 18px;
             word-spacing: 5px;
         }
+
+        .dark-mode #mostSoldProductsTableContainer table th,
+        .dark-mode #mostSoldProductsTableContainer table td {
+            color: #ccc;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .dark-mode-toggle {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #2d6a4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            background-color: #1b4332;
+        }
     </style>
 </head>
 
 <body>
     <?php include 'Navbar.php'; ?>
+
+   
 
     <h1 style="text-align: center; margin: 20px 0; font-size: 20px;">Productlist</h1>
     <div class="dropdown-container">
@@ -178,6 +226,24 @@
             <canvas id="averageOrderValueChart"></canvas>
         </section>
     </div>
+
+    <script>
+        // Check the local storage for dark mode preference on page load
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.removeItem('darkMode');
+            }
+        }
+    </script>
 </body>
 
 </html>
