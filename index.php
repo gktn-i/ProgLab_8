@@ -38,8 +38,7 @@
         }
 
         body.dark-mode {
-            background-color: #121212;
-
+            background-color: #2c2c2c;
             color: #ffffff;
         }
 
@@ -145,6 +144,9 @@
             list-style: none;
             max-height: 500px;
             overflow-y: auto;
+        }
+        .stat-box.dark-mode {
+            background-color: #1e1e1e;
         }
 
         .list-group-item {
@@ -404,15 +406,16 @@
 <body>
 
     <div id="particles-js"></div>
-
     <?php include 'Navbar.php'; ?>
     <div id="map"></div>
+
+
     <div class="container">
         <div class="left-section">
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
-            
+
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
@@ -443,8 +446,8 @@
                     <label class="form-check-label" for="fifthRadio">Orders sorted by Stores</label>
                 </li>
                 <div class="button-container">
-                <button onclick="toggleDarkMode()">Dark Mode</button>
-            </div>
+                    <button onclick="toggleDarkMode()">Dark Mode</button>
+                </div>
             </ul>
         </div>
         <div class="right-section">
