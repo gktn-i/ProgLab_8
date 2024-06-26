@@ -29,7 +29,6 @@
                 opacity: 1;
             }
         }
-       
 
         body {
             font-family: Arial, sans-serif;
@@ -40,7 +39,7 @@
 
         body.dark-mode {
             background-color: #121212;
-          
+
             color: #ffffff;
         }
 
@@ -373,6 +372,32 @@
             background-color: #f9f9f9 !important;
             transition: border-color 0.3s ease !important;
         }
+
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1B4332;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: darkslategrey;
+        }
+
+        .button-container button:active {
+            background-color: #1B4332;
+        }
     </style>
 </head>
 
@@ -387,6 +412,7 @@
             <?php if (isset($error_message)): ?>
                 <p style="color: red;"><?php echo $error_message; ?></p>
             <?php endif; ?>
+            
             <div class="form-group2">
                 <label for="filter_options">Theme</label>
                 <select id="filter_options1" name="filter_options1">
@@ -416,6 +442,9 @@
                     <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fifthRadio">
                     <label class="form-check-label" for="fifthRadio">Orders sorted by Stores</label>
                 </li>
+                <div class="button-container">
+                <button onclick="toggleDarkMode()">Dark Mode</button>
+            </div>
             </ul>
         </div>
         <div class="right-section">
@@ -534,13 +563,17 @@
         </div>
     </div>
 
-
-    <!-- JavaScript-Dateien einbinden -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/Backend/comp-script.js"></script>
     <script src="/Backend/comp-script2.js"></script>
-
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => box.classList.toggle('dark-mode'));
+        }
+    </script>
 </body>
 
 </html>
