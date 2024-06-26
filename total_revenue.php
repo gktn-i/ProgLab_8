@@ -86,7 +86,7 @@
         }
 
         .dark-mode .section {
-            background-color: #333;
+            background-color: #1e1e1e;
             border-color: #555;
             color: white;
         }
@@ -97,16 +97,12 @@
         }
 
         .dark-mode .container {
-            background-color: #1e1e1e;
+            background-color: #2c2c2c;
             color: #ccc;
             border-color: #444;
         }
 
-        .dark-mode .section {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
+    
     </style>
 </head>
 

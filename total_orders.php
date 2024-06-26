@@ -173,7 +173,7 @@
             height: 200px !important;
         }
         .dark-mode .section {
-            background-color: #333;
+            background-color: #1e1e1e;
             border-color: #555;
             color: white;
         }
@@ -189,11 +189,7 @@
             border-color: #444;
         }
 
-        .dark-mode .section {
-            background-color: #333;
-            border-color: #555;
-            color: white;
-        }
+     
     </style>
 </head>
 
