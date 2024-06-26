@@ -179,12 +179,12 @@
         }
 
         .dark-mode {
-            background-color: #1e1e1e;
+            background-color: #2c2c2c;
             color: #ccc;
         }
 
         .dark-mode .container {
-            background-color: #1e1e1e;
+            background-color: #2c2c2c;
             color: #ccc;
             border-color: #444;
         }

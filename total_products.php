@@ -18,7 +18,7 @@
         }
 
         .dark-mode {
-            background-color: #121212;
+            background-color: #2c2c2c;
             color: white;
         }
 
@@ -124,7 +124,7 @@
         }
 
         .dark-mode .section {
-            background-color: #333;
+            background-color: #1e1e1e;
             border-color: #555;
         }
 
