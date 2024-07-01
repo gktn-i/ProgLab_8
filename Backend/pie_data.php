@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -37,25 +36,27 @@ WITH Customer_Revenue AS (
     FROM Cumulative
 )
 SELECT 
-    ABC_Segment, 
-    COUNT(customerID) AS Total_Customers,
-    ROUND(SUM(Revenue), 2) AS Total_Revenue,
-    ROUND(100 * COUNT(customerID) / (SELECT COUNT(*) FROM customers), 0) AS Percentage_of_Customers,
+    ABC_Segment,
     ROUND(100 * SUM(Revenue) / (SELECT SUM(total) FROM orders), 2) AS Percentage_of_Revenue
 FROM ABC_Analysis
 GROUP BY ABC_Segment;
 ";
 
-$result = $mysqli->query($query);
+$result = mysqli_query($mysqli, $query);
 $data = [];
 if ($result) {
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = [
+            "ABC_Segment" => $row["ABC_Segment"],
+            "Percentage_of_Revenue" => $row["Percentage_of_Revenue"]
+        ];
     }
 } else {
     $data['error'] = "Query failed: " . $mysqli->error;
 }
 
+header('Content-Type: application/json');
 echo json_encode($data);
+
 $mysqli->close();
 ?>

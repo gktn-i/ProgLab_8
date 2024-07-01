@@ -121,7 +121,7 @@
 
 
         <div class="section">
-            <h2></h2>
+            <h2>Pie</h2>
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
             </div>
