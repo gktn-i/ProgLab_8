@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.json();
         })
         .then(data => {
-            console.log('Data fetched:', data); // Debugging: Ausgabe der Daten in der Konsole
+            console.log('Data fetched:', data); // Debugging: Ausgabe der Daten in der Konsoles
 
             const labels = data.map(item => item.ABC_Segment);
             const customerCounts = data.map(item => item.Total_Customers);
