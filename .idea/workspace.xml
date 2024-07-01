@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="added some functionsee">
-      <change afterPath="$PROJECT_DIR$/total_customers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_06_24,_16_32_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_06_24,_16_36_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_06_24__16_32__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_06_24__16_36__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/total_customers_data.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/total_customers_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/total_customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/total_customers.php" afterDir="false" />
-    </list>
+    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="Added new logik for total_customers_data.php" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +94,7 @@
       <workItem from="1718639788654" duration="12336000" />
       <workItem from="1718720340996" duration="4410000" />
       <workItem from="1718724762226" duration="130000" />
-      <workItem from="1719852127888" duration="307000" />
+      <workItem from="1719852127888" duration="1175000" />
     </task>
     <task id="LOCAL-00001" summary="added some functions">
       <option name="closed" value="true" />
@@ -137,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718724694260</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added new logik for total_customers_data.php">
+      <option name="closed" value="true" />
+      <created>1719852690050</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719852690052</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +157,7 @@
     <MESSAGE value="added some functions" />
     <MESSAGE value="added some functionsee" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="Added new logik for total_customers_data.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new logik for total_customers_data.php" />
   </component>
 </project>
