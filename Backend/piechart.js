@@ -14,10 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const ctx2 = document.getElementById('chart2').getContext('2d');
             new Chart(ctx2, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
                     labels: labels,
-                    
                     datasets: [{
                         label: 'Percentage of Revenue',
                         data: percentages,

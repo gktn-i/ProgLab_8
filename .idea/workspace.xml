@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="added some functionsee">
-      <change afterPath="$PROJECT_DIR$/Backend/pie_data.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/piechart.js" afterDir="false" />
+    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="added file for pie">
+      <change afterPath="$PROJECT_DIR$/Backend/barchart2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/total_customers_data.php" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/total_customers_data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/piechart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/piechart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/total_customers.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/total_customers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/total_customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/total_customers.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,8 +81,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
-        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+        <option value="bundled-js-predefined-d6986cc7102b-cec29f6fc0a3-JavaScript-PS-242.18071.27" />
+        <option value="bundled-php-predefined-a98d8de5180a-d6acee4cb394-com.jetbrains.php.sharedIndexes-PS-242.18071.27" />
       </set>
     </attachedChunks>
   </component>
@@ -106,6 +106,8 @@
       <workItem from="1718720340996" duration="4410000" />
       <workItem from="1718724762226" duration="130000" />
       <workItem from="1719852127888" duration="307000" />
+      <workItem from="1719862646593" duration="734000" />
+      <workItem from="1719863406816" duration="2150000" />
     </task>
     <task id="LOCAL-00001" summary="added some functions">
       <option name="closed" value="true" />
@@ -147,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719858688429</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added file for pie">
+      <option name="closed" value="true" />
+      <created>1719860360200</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719860360200</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,7 +168,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/total_customers_page" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -169,6 +191,7 @@
     <MESSAGE value="added some functionsee" />
     <MESSAGE value="test" />
     <MESSAGE value="added new logik" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new logik" />
+    <MESSAGE value="added file for pie" />
+    <option name="LAST_COMMIT_MESSAGE" value="added file for pie" />
   </component>
 </project>

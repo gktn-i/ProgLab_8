@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Backend/total_customers.js"></script>
     <script src="Backend/piechart.js"></script>
+    <script src="Backend/barchart2.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,9 +105,9 @@
     <form id="time-filter">
         <select id="year">
             <option value="all">All</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
+            <option value="2020">A</option>
+            <option value="2021">B</option>
+            <option value="2022">C</option>
         </select>
         <button type="submit">Filter</button>
     </form>
@@ -114,7 +116,7 @@
 
     <div class="container">
         <div class="section">
-            <h2>Total Customers per Month</h2>
+            <h2>Revenue by Customer Segments</h2>
             <div class="chart-container">
                 <canvas id="chart1"></canvas>
             </div>
@@ -122,7 +124,7 @@
 
 
         <div class="section">
-            <h2>Pie</h2>
+            <h2>Percentage of Customer Segments</h2>
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
             </div>
@@ -130,7 +132,7 @@
 
 
         <div class="section">
-            <h2>T</h2>
+            <h2>Customers in Segments</h2>
             <div class="chart-container">
                 <canvas id="chart3"></canvas>
             </div>
