@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Backend/total_customers.js"></script>
+    <script src="Backend/piechart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;

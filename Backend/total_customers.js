@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     fetch('Backend/total_customers_data.php')
         .then(response => {
@@ -12,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const customerCounts = data.map(item => item.Total_Customers);
             const revenues = data.map(item => item.Total_Revenue);
 
-            const ctx = document.getElementById('chart1').getContext('2d');
-            new Chart(ctx, {
+            const ctx1 = document.getElementById('chart1').getContext('2d');
+            new Chart(ctx1, {
                 type: 'bar',
                 data: {
                     labels: labels,

@@ -12,11 +12,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const labels = data.map(item => item.ABC_Segment);
             const percentages = data.map(item => item.Percentage_of_Revenue);
 
-            const ctx = document.getElementById('chart2').getContext('2d');
-            new Chart(ctx, {
+            const ctx2 = document.getElementById('chart2').getContext('2d');
+            new Chart(ctx2, {
                 type: 'pie',
                 data: {
                     labels: labels,
+                    
                     datasets: [{
                         label: 'Percentage of Revenue',
                         data: percentages,
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         tooltip: {
                             callbacks: {
                                 label: function(tooltipItem) {
-                                    return `${labels[tooltipItem.index]}: ${percentages[tooltipItem.index]}%`;
+                                    return `${labels[tooltipItem.dataIndex]}: ${percentages[tooltipItem.dataIndex]}%`;
                                 }
                             }
                         }
