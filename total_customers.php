@@ -34,6 +34,25 @@
             border-color: #666666;
             margin: 5px;
         }
+
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+
+
     </style>
 </head>
 
@@ -42,8 +61,16 @@
 
 
     <div class="container">
+
         <div class="section">
+            <h2>Customer Segments</h2>
+            <div class="chart-container">
+                <canvas id="chart1"></canvas>
+            </div>
         </div>
+
+
+
         <div class="section">
         </div>
         <div class="section">
