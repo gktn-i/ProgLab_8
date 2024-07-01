@@ -1,9 +1,13 @@
 
-
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('total_customers_data.php')
-        .then(response => response.json())
+    fetch('Backend/total_customers_data.php')
+        .then(response => {
+            console.log('Response status:', response.status); // Debugging: Ausgabe des Response-Status
+            return response.json();
+        })
         .then(data => {
+            console.log('Data fetched:', data); // Debugging: Ausgabe der Daten in der Konsole
+
             const labels = data.map(item => item.ABC_Segment);
             const customerCounts = data.map(item => item.Total_Customers);
             const revenues = data.map(item => item.Total_Revenue);

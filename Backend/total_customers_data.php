@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -13,7 +13,7 @@ if ($mysqli->connect_errno) {
 
 
 $query = "
-   WITH Customer_Revenue AS (
+WITH Customer_Revenue AS (
     SELECT 
         o.customerID, 
         ROUND(SUM(o.total), 2) AS Revenue
@@ -47,7 +47,8 @@ SELECT
     ROUND(100 * SUM(Revenue) / (SELECT SUM(total) FROM orders), 2) AS Percentage_of_Revenue
 FROM ABC_Analysis
 GROUP BY ABC_Segment;
-";
+"
+   ;
 
 $result = mysqli_query($mysqli, $query);
 $data = [];
@@ -58,6 +59,12 @@ if ($result) {
 } else {
     $data['error'] = "Query failed: " . $mysqli->error;
 }
+
+// debugging
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+
 
 echo json_encode($data);
 $mysqli->close();

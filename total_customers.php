@@ -6,6 +6,8 @@
 
     <title>Total Customers</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Backend/total_customers.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -117,26 +119,32 @@
             </div>
         </div>
 
+
         <div class="section">
-            <h2>Average Customers per Month</h2>
+            <h2></h2>
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
             </div>
         </div>
 
+
         <div class="section">
-            <h2>Total Customers per Store</h2>
+            <h2>T</h2>
             <div class="chart-container">
                 <canvas id="chart3"></canvas>
             </div>
         </div>
 
+
+
         <div class="section">
-            <h2>Average orders per Customers</h2>
+            <h2>T</h2>
             <div class="chart-container">
                 <canvas id="chart4"></canvas>
             </div>
         </div>
+
+
     </div>
 
 
