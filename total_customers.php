@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Total Customers</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Backend/total_customers.js"></script>
+    <script src="Backend/piechart.js"></script>
+    <script src="Backend/barchart2.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,6 +40,61 @@
             border-color: #666666;
             margin: 5px;
         }
+
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        #time-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            width: 500px;
+            margin: 5px auto;
+            animation: fadeIn 1s ease-in;
+
+        }
+
+        #time-filter select {
+            padding: 5px;
+            margin-right: 10px;
+            width: 80px;
+            border: 1px solid;
+            border-radius: 4px;
+            border-color: #666666;
+        }
+
+        #time-filter button {
+            padding: 5px 10px;
+            border-color: #666666;
+            color: white;
+            border: 1px solid;
+            border-radius: 4px;
+            border-color: #666666;
+            cursor: pointer;
+            background-color: darkgreen;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        #time-filter button:hover {
+            background-color: green;
+        }
+
+
+
     </style>
 </head>
 
@@ -41,18 +102,57 @@
     <?php include 'Navbar.php'; ?>
 
 
+    <form id="time-filter">
+        <select id="year">
+            <option value="all">All</option>
+            <option value="2020">A</option>
+            <option value="2021">B</option>
+            <option value="2022">C</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+
+
     <div class="container">
         <div class="section">
+            <h2>Revenue by Customer Segments</h2>
+            <div class="chart-container">
+                <canvas id="chart1"></canvas>
+            </div>
         </div>
+
+
         <div class="section">
+            <h2>Percentage of Customer Segments</h2>
+            <div class="chart-container">
+                <canvas id="chart2"></canvas>
+            </div>
         </div>
+
+
         <div class="section">
+            <h2>Customers in Segments</h2>
+            <div class="chart-container">
+                <canvas id="chart3"></canvas>
+            </div>
         </div>
+
+
+
         <div class="section">
+            <h2>T</h2>
+            <div class="chart-container">
+                <canvas id="chart4"></canvas>
+            </div>
         </div>
+
+
     </div>
 
-    
+
+
+
 </body>
 
 </html>
