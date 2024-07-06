@@ -28,6 +28,7 @@
             height: 900px;
             animation: fadeIn 1s ease-in;
             justify-content: space-between;
+            text-align: center;
         }
 
         .section {
@@ -109,9 +110,11 @@
             color: #ccc;
             border-color: #444;
         }
-
-
-
+        .title {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+       
     </style>
 </head>
 
@@ -133,7 +136,7 @@
 
     <div class="container">
         <div class="section">
-            <h2>Revenue by Customer Segments</h2>
+            <div class="title">Revenue by Customer Segments</div>
             <div class="chart-container">
                 <canvas id="chart1"></canvas>
             </div>
@@ -141,7 +144,8 @@
 
 
         <div class="section">
-            <h2>Percentage of Customer Segments</h2>
+        <div class="title">Percentage of Customer Segments</div>
+            
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
             </div>
@@ -149,7 +153,8 @@
 
 
         <div class="section">
-            <h2>Customers in Segments</h2>
+        <div class="title">Customers in Segments</div>
+            
             <div class="chart-container">
                 <canvas id="chart3"></canvas>
             </div>
@@ -158,7 +163,7 @@
 
 
         <div class="section">
-            <h2>T</h2>
+        <div class="title">T</div>
             <div class="chart-container">
                 <canvas id="chart4"></canvas>
             </div>
