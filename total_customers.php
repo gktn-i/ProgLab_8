@@ -93,6 +93,23 @@
             background-color: green;
         }
 
+        .dark-mode .section {
+            background-color: #1e1e1e;
+            border-color: #555;
+            color: white;
+        }
+
+        .dark-mode {
+            background-color: #2c2c2c;
+            color: #ccc;
+        }
+
+        .dark-mode .container {
+            background-color: #2c2c2c;
+            color: #ccc;
+            border-color: #444;
+        }
+
 
 
     </style>
