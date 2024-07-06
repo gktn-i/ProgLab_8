@@ -25,7 +25,7 @@
             max-width: 1300px;
             margin: 50px auto;
             margin-bottom: 2%;
-            height: 800px;
+            height: 900px;
             animation: fadeIn 1s ease-in;
             justify-content: space-between;
         }
