@@ -177,7 +177,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid d-flex justify-content-center">
-            <a href="index.php?page=start" class="navbar-brand">
+            <a href="index.php?page=start" class="navbar-brand" id="logo">
                 <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 90px; width: 90px;">
             </a>
         </div>
@@ -221,6 +221,10 @@
                     box.classList.add('selected-stat-box');
                     localStorage.setItem('selectedStatBoxId', box.id);
                 });
+            });
+
+            document.getElementById('logo').addEventListener('click', () => {
+                localStorage.removeItem('selectedStatBoxId');
             });
         });
 
