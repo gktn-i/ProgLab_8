@@ -1,8 +1,5 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <script src="Backend/script.js"></script>
     <meta charset="UTF-8">
@@ -16,14 +13,12 @@
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
         }
 
         .navbar {
-            /*  background-color: #1B4332; */
             border-radius: 5px;
             margin: 20px;
             backdrop-filter: blur(200px);
@@ -33,8 +28,6 @@
         .navbar-brand {
             margin: 0;
         }
-
-
 
         .search-bar {
             width: 30%;
@@ -48,7 +41,6 @@
 
         .navbar img {
             width: 40px;
-
         }
 
         .white-img {
@@ -61,11 +53,6 @@
             margin-top: 5px;
             margin-right: 15px;
         }
-
-
-
-
-
 
         .navimg {
             height: 80px;
@@ -125,7 +112,6 @@
             border-color: #666;
             transition: transform 0.3s ease-in-out;
             text-decoration: none;
-
         }
 
         .stat-content {
@@ -144,7 +130,7 @@
             margin: 0;
             font-size: 24px;
             color: darkgreen;
-            user-select: none
+            user-select: none;
         }
 
         .stat-box p {
@@ -152,13 +138,12 @@
             font-size: 18px;
             color: #666;
             font-weight: bold;
-            user-select: none
+            user-select: none;
         }
 
         .stat-box:hover {
             transform: translateY(-5px);
             background-color: #f2f2f2;
-
         }
 
         .dark-mode .stat-box {
@@ -183,35 +168,34 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
+        .selected-stat-box {
+            box-shadow: 0px 0px 15px 5px #1B4332;
+        }
     </style>
 </head>
-
 <body>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid d-flex justify-content-center">
             <a href="index.php?page=start" class="navbar-brand">
                 <img src="Frontend/img/AD Logo.png" alt="" class="navimg" style="height: 90px; width: 90px;">
             </a>
-
+        </div>
     </nav>
-
-
     <div class="statistics">
-        <a href="total_orders.php" class="stat-box">
+        <a href="total_orders.php" class="stat-box" id="totalOrdersBox">
             <h2><i class='bx bxs-user-detail'></i> <span id="totalOrders">0</span></h2>
             <p>Total Orders</p>
         </a>
-        <a href="total_revenue.php" class="stat-box">
+        <a href="total_revenue.php" class="stat-box" id="totalRevenueBox">
             <h2><i class='bx bxs-dollar-circle'></i> <span id="totalRevenue">$0.00</span></h2>
             <p>Total Revenue</p>
         </a>
-        <a href="total_customers.php" class="stat-box">
+        <a href="total_customers.php" class="stat-box" id="totalCustomersBox">
             <h2><i class='bx bxs-group'></i> <span id="totalCustomers">0</span></h2>
             <p>Total Customers</p>
         </a>
-        <a href="total_products.php" class="stat-box">
+        <a href="total_products.php" class="stat-box" id="totalProductsBox">
             <h2><i class='bx bxs-box'></i> <span id="totalProducts">0</span></h2>
             <p>Total Products</p>
         </a>
@@ -219,17 +203,25 @@
     <div class="button-container">
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
     </div>
-
-
-    <?php
-    /* echo ' <h1>' . $_GET['page'] . ' </h1>'; */
-    ?>
-
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             if (localStorage.getItem('darkMode') === 'enabled') {
                 enableDarkMode();
             }
+
+            const selectedStatBoxId = localStorage.getItem('selectedStatBoxId');
+            if (selectedStatBoxId) {
+                document.getElementById(selectedStatBoxId).classList.add('selected-stat-box');
+            }
+
+            const statBoxes = document.querySelectorAll('.stat-box');
+            statBoxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    statBoxes.forEach(box => box.classList.remove('selected-stat-box'));
+                    box.classList.add('selected-stat-box');
+                    localStorage.setItem('selectedStatBoxId', box.id);
+                });
+            });
         });
 
         function toggleDarkMode() {
@@ -262,5 +254,4 @@
         }
     </script>
 </body>
-
 </html>
