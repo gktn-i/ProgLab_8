@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.json();
         })
         .then(data => {
-            console.log('Data fetched:', data); // Debugging: Ausgabe der Daten in der Konsoles
+            console.log('Data fetched:', data); // Debugging: Ausgabe der Daten in der Konsole
 
             const labels = data.map(item => item.ABC_Segment);
             const customerCounts = data.map(item => item.Total_Customers);
-
+            const itemCounts = data.map(item => item.Total_Items);
 
             const ctx3 = document.getElementById('chart3').getContext('2d');
             new Chart(ctx3, {
@@ -17,14 +17,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 data: {
                     labels: labels,
                     datasets: [
-                          {
-                              label: 'Total Customers',
-                              data: customerCounts,
-                              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                              borderColor: 'rgba(54, 162, 235, 1)',
-                              borderWidth: 1
-                          },
-
+                        {
+                            label: 'Total Customers',
+                            data: customerCounts,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Total Items',
+                            data: itemCounts,
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1
+                        }
                     ]
                 },
                 options: {

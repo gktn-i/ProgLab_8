@@ -8,9 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Backend/total_customers.js"></script>
-    <script src="Backend/piechart.js"></script>
-    <script src="Backend/barchart2.js"></script>
-    <script src="Backend/chart4.js"></script>
+    <script src="Backend/customer_chart2.js"></script>
+    <script src="Backend/customer_chart3.js"></script>
+    <script src="Backend/customer_chart4.js"></script>
+    <script src="Backend/customer_chart5.js"></script>
 
     <style>
         body {
@@ -123,15 +124,6 @@
     <?php include 'Navbar.php'; ?>
 
 
-    <form id="time-filter">
-        <select id="year">
-            <option value="all">All</option>
-            <option value="2020">A</option>
-            <option value="2021">B</option>
-            <option value="2022">C</option>
-        </select>
-        <button type="submit">Filter</button>
-    </form>
 
 
 
@@ -145,7 +137,7 @@
 
 
         <div class="section">
-        <div class="title">Percentage of Customer Segments</div>
+        <div class="title">Percentage of Revenue in Segments</div>
             
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
@@ -164,11 +156,27 @@
 
 
         <div class="section">
-        <div class="title">T</div>
+        <div class="title">Revenue Customer comparison</div>
             <div class="chart-container">
                 <canvas id="chart4"></canvas>
             </div>
         </div>
+
+
+        <div class="section">
+            <div class="title">T</div>
+            <div class="chart-container">
+                <canvas id="chart5"></canvas>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="title">T</div>
+            <div class="chart-container">
+                <canvas id="chart6"></canvas>
+            </div>
+        </div>
+
 
 
     </div>
