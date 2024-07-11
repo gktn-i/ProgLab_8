@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('Backend/pie_data.php')
+    fetch('Backend/total_customers_data.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         label: 'Percentage of Revenue',
                         data: percentages,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
                             'rgba(54, 162, 235, 0.8)',
                             'rgba(255, 206, 86, 0.8)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
+                            'rgba(75, 192, 192, 0.8)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)'
                         ],

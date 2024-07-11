@@ -10,6 +10,7 @@
     <script src="Backend/total_customers.js"></script>
     <script src="Backend/piechart.js"></script>
     <script src="Backend/barchart2.js"></script>
+    <script src="Backend/chart4.js"></script>
 
     <style>
         body {

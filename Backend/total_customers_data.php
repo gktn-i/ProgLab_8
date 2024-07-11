@@ -13,37 +13,53 @@ $query = "
 WITH Customer_Revenue AS (
     SELECT 
         o.customerID, 
-        ROUND(SUM(o.total), 2) AS Revenue
+        ROUND(SUM(o.total), 2) AS Revenue,
+        SUM(o.nItems) AS Total_Items
     FROM orders o
     GROUP BY o.customerID
-), Cumulative AS (
+), Ranked_Customers AS (
     SELECT 
-        DENSE_RANK() OVER(ORDER BY Revenue DESC) AS Customer_Rank_By_Revenue,
         customerID,
         Revenue,
-        SUM(Revenue) OVER(ORDER BY Revenue DESC) AS Cumulative_Revenue,
-        SUM(Revenue) OVER() AS Total_Revenue,
-        ROUND(100 * SUM(Revenue) OVER(ORDER BY Revenue DESC) / SUM(Revenue) OVER(), 2) AS Cumulative_Percentage_of_Revenue
+        Total_Items,
+        SUM(Revenue) OVER (ORDER BY Revenue DESC) AS Cumulative_Revenue,
+        SUM(Total_Items) OVER (ORDER BY Revenue DESC) AS Cumulative_Items,
+        SUM(Revenue) OVER () AS Total_Revenue,
+        SUM(Total_Items) OVER () AS Overall_Items,
+        ROUND(100.0 * SUM(Revenue) OVER (ORDER BY Revenue DESC) / SUM(Revenue) OVER (), 2) AS Cumulative_Percentage_of_Revenue,
+        ROW_NUMBER() OVER (ORDER BY Revenue DESC) AS Revenue_Rank,
+        COUNT(*) OVER () AS Total_Customers,
+        ROUND(100.0 * ROW_NUMBER() OVER (ORDER BY Revenue DESC) / COUNT(*) OVER (), 2) AS Cumulative_Percentage_of_Customers
     FROM Customer_Revenue
 ), ABC_Analysis AS (
     SELECT 
-        Customer_Rank_By_Revenue, 
-        customerID, 
-        Revenue, 
-        Cumulative_Revenue, 
-        Total_Revenue, 
+        customerID,
+        Revenue,
+        Total_Items,
+        Cumulative_Revenue,
+        Cumulative_Items,
+        Total_Revenue,
+        Overall_Items,
         Cumulative_Percentage_of_Revenue,
-        IF(Cumulative_Percentage_of_Revenue < 40, 'A', IF(Cumulative_Percentage_of_Revenue < 70, 'B', 'C')) AS ABC_Segment
-    FROM Cumulative
+        Cumulative_Percentage_of_Customers,
+        CASE 
+            WHEN Cumulative_Percentage_of_Revenue <= 80 THEN 'A'
+            WHEN Cumulative_Percentage_of_Revenue <= 95 THEN 'B'
+            ELSE 'C'
+        END AS ABC_Segment
+    FROM Ranked_Customers
 )
 SELECT 
     ABC_Segment, 
     COUNT(customerID) AS Total_Customers,
     ROUND(SUM(Revenue), 2) AS Total_Revenue,
-    ROUND(100 * COUNT(customerID) / (SELECT COUNT(*) FROM customers), 0) AS Percentage_of_Customers,
-    ROUND(100 * SUM(Revenue) / (SELECT SUM(total) FROM orders), 2) AS Percentage_of_Revenue
+    SUM(Total_Items) AS Total_Items,
+    ROUND(100.0 * COUNT(customerID) / (SELECT COUNT(customerID) FROM Customer_Revenue), 2) AS Percentage_of_Customers,
+    ROUND(100.0 * SUM(Revenue) / (SELECT SUM(total) FROM orders), 2) AS Percentage_of_Revenue,
+    ROUND(100.0 * SUM(Total_Items) / (SELECT SUM(nItems) FROM orders), 2) AS Percentage_of_Items
 FROM ABC_Analysis
-GROUP BY ABC_Segment;
+GROUP BY ABC_Segment
+ORDER BY FIELD(ABC_Segment, 'A', 'B', 'C');
 ";
 
 $result = $mysqli->query($query);
