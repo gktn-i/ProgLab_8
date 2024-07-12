@@ -1,14 +1,17 @@
 <?php
-$mysqli = require __DIR__ . "/database.php"; 
+$mysqli = require __DIR__ . "/database.php";
 
 $conn = $mysqli;
 
 // Query to retrieve the total revenue by store for the years 2020, 2021, 2022
 $sql = "SELECT storeID, SUM(total) as total_revenue
-        FROM orders
-        WHERE YEAR(orderDate) IN (2020, 2021, 2022)
-        GROUP BY storeID
-        ORDER BY storeID";
+FROM orders
+WHERE YEAR(orderDate) IN (2020, 2021, 2022)
+GROUP BY storeID
+ORDER BY total_revenue DESC
+LIMIT 15";
+
+
 
 $result = $conn->query($sql);
 

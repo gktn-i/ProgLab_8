@@ -68,10 +68,7 @@ $(document).ready(function () {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right'
-                    }
+                   
                 },
                 scales: {
                     y: {
