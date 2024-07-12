@@ -12,6 +12,8 @@
     <script src="Backend/customer_chart3.js"></script>
     <script src="Backend/customer_chart4.js"></script>
     <script src="Backend/customer_chart5.js"></script>
+    <script src="Backend/customer_chart6.js"></script>
+
 
     <style>
         body {
@@ -116,7 +118,10 @@
             font-size: 18px;
             margin-bottom: 20px;
         }
-       
+
+
+
+
     </style>
 </head>
 
@@ -137,7 +142,7 @@
 
 
         <div class="section">
-        <div class="title">Percentage of Revenue in Segments</div>
+        <div class="title">Segmentation by percentage of revenue</div>
             
             <div class="chart-container">
                 <canvas id="chart2"></canvas>
@@ -146,7 +151,7 @@
 
 
         <div class="section">
-        <div class="title">Customers in Segments</div>
+        <div class="title">Segment percentages</div>
             
             <div class="chart-container">
                 <canvas id="chart3"></canvas>
@@ -156,26 +161,16 @@
 
 
         <div class="section">
-        <div class="title">Revenue Customer comparison</div>
+        <div class="title">Rush Hours</div>
             <div class="chart-container">
                 <canvas id="chart4"></canvas>
             </div>
         </div>
 
 
-        <div class="section">
-            <div class="title">T</div>
-            <div class="chart-container">
-                <canvas id="chart5"></canvas>
-            </div>
-        </div>
 
-        <div class="section">
-            <div class="title">T</div>
-            <div class="chart-container">
-                <canvas id="chart6"></canvas>
-            </div>
-        </div>
+
+
 
 
 

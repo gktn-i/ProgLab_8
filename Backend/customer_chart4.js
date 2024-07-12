@@ -1,48 +1,40 @@
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('Backend/total_customers_data.php')
+    fetch('Backend/time_data.php')
         .then(response => response.json())
         .then(data => {
             console.log(data); // Debugging: Ausgabe der Daten in der Konsole
 
-            const labels = data.map(item => item.ABC_Segment);
+            const labels = data.map(item => item.Hour + ':00');
+            const customerCounts = data.map(item => item.CustomerCount);
 
-            const percentageRevenue = data.map(item => item.Percentage_of_Revenue);
-            const percentageCustomers = data.map(item => item.Percentage_of_Customers);
-
-            const ctx = document.getElementById('chart4').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
+            const ctx4 = document.getElementById('chart4').getContext('2d');
+            new Chart(ctx4, {
+                type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [
-                        {
-                            label: 'Percentage of Revenue',
-                            data: percentageRevenue,
-                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Percentage of Customers',
-                            data: percentageCustomers,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Number of Customers',
+                        data: customerCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
                 },
                 options: {
                     scales: {
                         x: {
-                            stacked: false // Bars are not stacked, but placed side by side
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Hour of the Day (5-18 closed)'
+                            }
                         },
                         y: {
                             beginAtZero: true,
-                            max: 100, // Set the maximum value of the y-axis to 100
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
+                            title: {
+                                display: true,
+                                text: 'Number of Customers'
                             }
                         }
                     },
@@ -50,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         tooltip: {
                             callbacks: {
                                 label: function(tooltipItem) {
-                                    return tooltipItem.raw + '%';
+                                    return tooltipItem.raw + ' customers';
                                 }
                             }
                         }

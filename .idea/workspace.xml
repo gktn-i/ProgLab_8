@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="fixed bug in abc">
-      <change afterPath="$PROJECT_DIR$/Backend/customer_chart5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/time_data.php" afterDir="false" />
+    <list default="true" id="01b7ad15-7c83-449a-987e-87ccb08a1c70" name="Changes" comment="added time chart">
+      <change afterPath="$PROJECT_DIR$/Backend/customer_chart6.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/barchart2.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/chart4.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/pie_data.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/piechart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/customer_chart3.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/customer_chart4.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/customer_chart5.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/customer_chart5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/total_customers.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/total_customers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/total_customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/total_customers.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +110,8 @@
       <workItem from="1719852127888" duration="307000" />
       <workItem from="1719862646593" duration="734000" />
       <workItem from="1719863406816" duration="2758000" />
-      <workItem from="1720693789112" duration="11961000" />
+      <workItem from="1720693789112" duration="12863000" />
+      <workItem from="1720786713447" duration="6623000" />
     </task>
     <task id="LOCAL-00001" summary="added some functions">
       <option name="closed" value="true" />
@@ -177,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720721974226</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added time chart">
+      <option name="closed" value="true" />
+      <created>1720725041501</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720725041501</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +222,7 @@
     <MESSAGE value="added file for pie" />
     <MESSAGE value="changed chart2" />
     <MESSAGE value="fixed bug in abc" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bug in abc" />
+    <MESSAGE value="added time chart" />
+    <option name="LAST_COMMIT_MESSAGE" value="added time chart" />
   </component>
 </project>
